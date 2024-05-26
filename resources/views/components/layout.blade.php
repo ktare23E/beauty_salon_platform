@@ -13,27 +13,6 @@
         @vite('resources/js/app.js')
     </head>
     <body class="">
-        <x-nav>
-            <div class="flex-shrink-0">
-                <a href="/" class="text-md">Beauty Salon Platform</a>
-            </div>
-            <div class="space-x-5">
-                <a href="/" class="">Home</a>
-                <a href="/about" class="">About</a>
-                <a href="/services" class="">Services</a>
-                <a href="/contact" class="">Contact</a>
-            </div>
-            <div class="space-x-4">
-                <a href="/login" class="">Login</a>
-                <a href="/register" class="">Register</a>
-            </div>
-        </x-nav>
-        <div class="diagonal-bg flex items-center justify-center min-h-screen">
-            <div class="text-center">
-                <h1 class="text-4xl font-bold">Le Beauté Just For You</h1>
-                <p class="mt-4">Scroll down for some magic.</p>
-            </div>
-            <img src="{{asset('imgs/model.jpg')}}" alt="" class="model rounded-xl">
-        </div>
+        {{$slot}}
     </body>
 </html>

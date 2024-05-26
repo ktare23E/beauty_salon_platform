@@ -1,3 +1,3 @@
-<div class="h-10 bg-transparent fixed flex justify-around w-full items-center">
+<div class="h-10 bg-transparent fixed flex justify-between w-full items-center px-6">
     {{$slot}}
 </div>
