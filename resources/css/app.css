@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities
+@tailwind utilities;
+
+.diagonal-bg {
+    background: linear-gradient(35deg, #f5e9de 50%, #fcdada 50%);
+}
+
+.model {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 75%;
+    object-fit: cover;
+}
