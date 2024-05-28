@@ -1,21 +1,21 @@
 <x-layout>
-    <x-nav>
+    <x-nav class="">
         <div class="flex-shrink-0">
-            <a href="/" class="text-md">Beauty Salon Platform</a>
+            <a href="/" class="text-md text-white">Beauty Salon Platform</a>
         </div>
-        <div class="space-x-5">
+        <div class="space-x-5 text-white">
             <a href="/" class="">Home</a>
             <a href="/about" class="">About</a>
             <a href="/services" class="">Services</a>
             <a href="/contact" class="">Contact</a>
         </div>
-        <div class="space-x-4">
+        <div class="space-x-4 text-white">
             <a href="{{route('login.create')}}" class="">Login</a>
             <a href="{{route('login.store')}}" class="">Register</a>
         </div>
     </x-nav>
     <div class="w-full h-screen bg-cover bg-no-repeat bg-left bg-fixed flex items-center justify-around" style="background-image: url({{ asset('imgs/salon.jpg') }})">
-            <div class="text-center">
+            <div class="text-center text-white">
                 <h1 class="text-4xl font-semibold leading-tight">
                     Welcome to Beauty Salon Platform
                 </h1>
