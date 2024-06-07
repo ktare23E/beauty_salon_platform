@@ -10,7 +10,7 @@
             <a href="/contact" class="">Contact</a>
         </div>
         <div class="space-x-4 text-white">
-            <a href="{{route('login.create')}}" class="">Login</a>
+            <a href="{{route('login')}}" class="">Login</a>
             <a href="{{route('register.index')}}" class="">Register</a>
         </div>
     </x-nav>
