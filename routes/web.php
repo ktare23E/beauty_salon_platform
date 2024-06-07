@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -29,9 +30,8 @@ Route::middleware(['auth'])->group(function () {
     })->name('business_admin.index');
 });
 
-// Route::get('/register', function () {
-//     return view('auth.register');
-// })->name('login.store');
+Route::get('/register',[RegisterController::class, 'create']);
+Route::post('/register',[RegisterController::class, 'store'])->name('register.create');
 
 // Route::get('/admin', function () {
 //     return view('admin.index');
