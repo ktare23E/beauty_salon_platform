@@ -8,5 +8,9 @@
 </head>
 <body>
     Hello Business Admin
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
 </body>
 </html>

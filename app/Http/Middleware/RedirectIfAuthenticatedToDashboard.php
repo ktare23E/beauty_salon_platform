@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Illuminate\Support\Facades\Auth;
 class RedirectIfAuthenticatedToDashboard
 {
     /**
@@ -15,6 +15,15 @@ class RedirectIfAuthenticatedToDashboard
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if(Auth::check()){
+            if(Auth::user()->user_type == 'user'){
+                return redirect()->route('user.index');
+            }elseif(Auth::user()->user_type == 'business_admin'){
+                return redirect()->route('business_admin.index');
+            }else if(Auth::user()->user_type == 'admin'){
+                return redirect()->route('admin.index');
+            }
+        }
         return $next($request);
     }
 }

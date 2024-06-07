@@ -8,5 +8,10 @@
 </head>
 <body>
     <h1>Hello User</h1>
+    {{-- logout --}}
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
 </body>
 </html>

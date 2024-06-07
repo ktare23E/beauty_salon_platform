@@ -11,7 +11,7 @@
         </div>
         <div class="space-x-4 text-white">
             <a href="{{route('login.create')}}" class="">Login</a>
-            <a href="{{route('login.store')}}" class="">Register</a>
+            <a href="{{route('register.index')}}" class="">Register</a>
         </div>
     </x-nav>
     <div class="w-full h-screen bg-cover bg-no-repeat bg-left bg-fixed flex items-center justify-around" style="background-image: url({{ asset('imgs/salon.jpg') }})">
