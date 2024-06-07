@@ -33,16 +33,19 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/register',[RegisterController::class, 'create'])->name('register.index');
-Route::post('/register',[RegisterController::class, 'store'])->name('register.create');
+Route::post('/register',[RegisterController::class, 'store'])->name('register.store');
+
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+
 
 Route::middleware([RedirectIfAuthenticatedToDashboard::class])->group(function () {
     // Login route
-    Route::get('/login', [LoginController::class, 'index'])->name('login');
-    Route::post('/login', [LoginController::class, 'store'])->name('login.create');
+    Route::get('/login', [LoginController::class, 'index'])->name('login.create');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
     // Register route
     Route::get('/register', [RegisterController::class, 'create'])->name('register.index');
-    Route::post('/register', [RegisterController::class, 'store'])->name('register.create');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 });
 
 // Route::get('/admin', function () {

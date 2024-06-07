@@ -4,7 +4,7 @@
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <x-forms.form-heading>Create an Account</x-forms.form-heading>
-                    <x-forms.form method="POST" action="{{ route('register.create') }}" enctype="multipart/form-data">
+                    <x-forms.form method="POST" action="{{ route('register.store') }}" enctype="multipart/form-data">
                         <div class="grid grid-cols-2 gap-2">
                             <div>
                                 <x-forms.input label="First Name" name="first_name"/>
