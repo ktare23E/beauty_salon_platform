@@ -20,9 +20,9 @@ class RedirectIfAuthenticatedToDashboard
                 return redirect()->route('user.index');
             }elseif(Auth::user()->user_type == 'business_admin'){
                 return redirect()->route('business_admin.index');
-            }else if(Auth::user()->user_type == 'admin'){
-                return redirect()->route('admin.index');
             }
+                return redirect()->route('admin.index');
+            
         }
         return $next($request);
     }
