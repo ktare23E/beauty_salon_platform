@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\RedirectIfAuthenticatedToDashboard;
+
 
 Route::get('/', function () {
     return view('index');
@@ -26,13 +28,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('user.index');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
-    Route::get('/admin', function () {
-        $user = Auth::user();
-        if($user->user_type != 'admin'){
-            abort('403');
-        }
-        return view('admin.index');
-    })->name('admin.index');
+    Route::get('/admin',[UserController::class,'index'])->name('admin.index');
 
     Route::get('/business_admin', function () {
         $user = Auth::user();

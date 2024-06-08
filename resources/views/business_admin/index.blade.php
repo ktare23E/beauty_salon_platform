@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    Hello Business Admin
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
-</body>
-</html>
+<x-layout>
+    <div class="w-full h-full grid grid-cols-[15%,1fr] gap-2 bg-[#f6f6f9]">
+        <div class=" flex bg-gray-100 h-screen rounded-tr-md">
+            <x-aside>
+                
+            </x-aside>
+        </div>
+        <main class="w-full">
+            <h1 class="text-2xl font-semibold mt-3">Business Admin Dashboard</h1>
+            
+        </main>
+    </div>
+    <script>
+        
+    </script>
+</x-layout>

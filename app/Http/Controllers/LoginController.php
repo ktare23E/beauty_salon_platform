@@ -22,12 +22,11 @@ class LoginController extends Controller
 
         if(!Auth::attempt($validatedRequest)){
             throw ValidationException::withMessages([
-                'email' => 'Sorry, those credentials does not exist.'
+                'password' => 'Sorry, those credentials does not exist.'
             ]);
         }
         
         if(Auth::attempt($validatedRequest)){
-
             //check user type and redirect accordingly
             if(Auth::user()->user_type == 'user'){
                 return redirect()->route('user.index');

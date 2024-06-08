@@ -48,7 +48,7 @@ export default {
     'Segoe UI Symbol', 
     'Noto Color Emoji'
   ],
-    'openSans' : ['Open Sans', 'sans-serif'],
+    'Poppins' : ['Poppins', 'sans-serif'],
     }
   },
   plugins: [],
