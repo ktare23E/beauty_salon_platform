@@ -6,7 +6,7 @@
             </x-aside>
         </div>
         <main class="ml-17rem w-full">
-            <h1 class="text-2xl font-semibold mt-3">Requirement</h1>
+            <h1 class="text-2xl font-semibold mt-3">Salon</h1>
             <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md hover:shadow-xl transition-all mx-auto">
                 
             </div>

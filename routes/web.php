@@ -7,6 +7,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\RedirectIfAuthenticatedToDashboard;
+use App\Http\Controllers\Admin\SalonController;
+use App\Http\Controllers\Admin\RequirementController;
 
 
 Route::get('/', function () {
@@ -31,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
     Route::get('/user_list',[UserController::class,'index'])->name('admin.user_list');
+    Route::get('/requirement_list',[RequirementController::class,'index'])->name('admin.requirement_list');
+    Route::get('/salon_list',[SalonController::class,'index'])->name('admin.salon_list');
 
     Route::get('/business_admin', function () {
         $user = Auth::user();
