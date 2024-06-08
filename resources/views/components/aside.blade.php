@@ -1,4 +1,4 @@
-<aside class="flex w-full max-w-xs p-4 bg-gray-800">
+<aside class="flex w-[17rem] max-w-xs p-4 bg-gray-800 fixed top-0 left-0 bottom-0">
     <ul class="flex flex-col w-full justify-between">
         
         <div class="nav_container">

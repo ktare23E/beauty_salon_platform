@@ -5,7 +5,7 @@
 
             </x-aside>
         </div>
-        <main class="w-full">
+        <main class="ml-17rem w-full">
             <h1 class="text-2xl font-semibold mt-3">Dashboard</h1>
             <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md hover:shadow-xl transition-all mx-auto">
                 <div class="table_container">
