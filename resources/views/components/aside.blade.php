@@ -100,9 +100,9 @@
         </div>
         <div>
             <li class="my-px">
-                <form action="{{route('logout')}}" method="POST"
-                    class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-500 hover:bg-gray-700">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="w-full">
                     @csrf
+                    <button type="submit" class="flex flex-row items-center h-12 px-4 w-full rounded-lg text-gray-500 hover:bg-gray-700">
                         <span class="flex items-center justify-center text-lg text-red-400">
                             <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
@@ -111,9 +111,10 @@
                                 </path>
                             </svg>
                         </span>
-                        <button class="ml-3">Logout</button>
+                        <span class="ml-3">Logout</span>
+                    </button>
                 </form>
-            </li>
+            </li>            
         </div>
     </ul>
 </aside>

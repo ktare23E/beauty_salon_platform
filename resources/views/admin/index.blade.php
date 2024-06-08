@@ -2,7 +2,7 @@
     <div class="w-full h-full grid grid-cols-[15%,1fr] gap-2 bg-[#f6f6f9]">
         <div class=" flex bg-gray-100 h-screen rounded-tr-md">
             <x-aside>
-                
+
             </x-aside>
         </div>
         <main class="w-full">
@@ -22,6 +22,9 @@
                                     Email
                                 </x-table.thead>
                                 <x-table.thead>
+                                    User Type
+                                </x-table.thead>
+                                <x-table.thead>
                                     Action
                                 </x-table.thead>
                             </tr>
@@ -37,6 +40,9 @@
                                 </x-table.td>
                                 <x-table.td>
                                     {{$user->email}}
+                                </x-table.td>
+                                <x-table.td class="capitalize">
+                                    {{($user->user_type == 'business_admin') ? 'Business Admin' : $user->user_type }}
                                 </x-table.td>
                                 <x-table.td>
                                     <x-table.button-action>edit</x-table.button-action>
