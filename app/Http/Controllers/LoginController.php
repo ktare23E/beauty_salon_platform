@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -14,12 +15,18 @@ class LoginController extends Controller
     }
 
     public function store(Request $request){
-        $validatedData = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+        $validatedRequest = request()->validate([
+            'email' => ['required','email'],
+            'password' => ['required'],
         ]);
 
-        if(Auth::attempt($validatedData)){
+        if(!Auth::attempt($validatedRequest)){
+            throw ValidationException::withMessages([
+                'email' => 'Sorry, those credentials does not exist.'
+            ]);
+        }
+        
+        if(Auth::attempt($validatedRequest)){
 
             //check user type and redirect accordingly
             if(Auth::user()->user_type == 'user'){
