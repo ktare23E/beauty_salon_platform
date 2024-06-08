@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -28,7 +29,8 @@ Route::middleware(['auth'])->group(function () {
     })->name('user.index');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
-    Route::get('/admin',[UserController::class,'index'])->name('admin.index');
+    Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
+    Route::get('/user_list',[UserController::class,'index'])->name('admin.user_list');
 
     Route::get('/business_admin', function () {
         $user = Auth::user();
