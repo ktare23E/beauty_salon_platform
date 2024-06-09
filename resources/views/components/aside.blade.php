@@ -1,9 +1,9 @@
-<aside class="flex w-[17rem] max-w-xs p-4 bg-gray-800 fixed top-0 left-0 bottom-0">
+<aside class="flex w-[12rem] max-w-xs p-4 bg-gray-800 fixed top-0 left-0 bottom-0">
     <ul class="flex flex-col w-full justify-between">
         
         <div class="nav_container">
             <li class="my-px mb-10">
-                <h1 class="font-bold text-center text-white text-2xl">Beauty Salon Platform</h1>
+                <h1 class="font-bold text-center text-white text-xl">Beauty Salon Platform</h1>
             </li>
             <div class="space-y-3">
                 @if(auth()->user()->user_type == 'admin')

@@ -1,6 +1,6 @@
 <x-layout>
     <div class="w-full h-full grid grid-cols-[15%,1fr] gap-2 bg-[#f6f6f9]">
-        <div class=" flex bg-gray-100 h-screen rounded-tr-md">
+        <div class=" flex  h-screen rounded-tr-md">
             <x-aside>
 
             </x-aside>
