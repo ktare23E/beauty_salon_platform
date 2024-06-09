@@ -12,11 +12,15 @@ class UserController extends Controller
     //
 
     public function index(){
-        $userList = User::all();
+        $businessAdmins = User::where('user_type', 'business_admin')->get();
+        $clients = User::where('user_type', 'user')->get();
         $user = Auth::user();
         if($user->user_type != 'admin'){
             abort('403');
         }
-        return view('admin.user_list', compact('userList'));
+        return view('admin.user_list', [
+            'clients' => $clients,
+            'businessAdmins' => $businessAdmins
+        ]);
     }
 }

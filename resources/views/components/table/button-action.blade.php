@@ -11,4 +11,4 @@
 
 @endphp
 
-<button {{$attributes(['class' => $class])}}>{{$slot}}</button>
+<a {{$attributes(['class' => $class])}}>{{$slot}}</a>

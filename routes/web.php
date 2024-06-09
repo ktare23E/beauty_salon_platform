@@ -33,7 +33,16 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
     Route::get('/user_list',[UserController::class,'index'])->name('admin.user_list');
+
     Route::get('/requirement_list',[RequirementController::class,'index'])->name('admin.requirement_list');
+    Route::get('/create_requirement',[RequirementController::class,'create'])->name('admin.create_requirement');
+    Route::post('/create_requirement',[RequirementController::class,'store'])->name('admin.store_requirement');
+   
+
+    Route::get('/requirement/edit/{requirement}',[RequirementController::class,'edit'])->name('admin.edit_requirement');
+    Route::patch('/update_requirement/{requirement}',[RequirementController::class,'update'])->name('admin.update_requirement');
+
+
     Route::get('/salon_list',[SalonController::class,'index'])->name('admin.salon_list');
 
     Route::get('/business_admin', function () {
