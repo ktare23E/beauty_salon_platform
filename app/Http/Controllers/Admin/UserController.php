@@ -12,6 +12,7 @@ class UserController extends Controller
     //
 
     public function index(){
+
         $businessAdmins = User::where('user_type', 'business_admin')->get();
         $clients = User::where('user_type', 'user')->get();
         $user = Auth::user();

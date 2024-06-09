@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/salon_list',[SalonController::class,'index'])->name('admin.salon_list');
+    Route::get('/salon/{business}',[SalonController::class,'show'])->name('admin.show_salon');
 
     Route::get('/business_admin', function () {
         $user = Auth::user();

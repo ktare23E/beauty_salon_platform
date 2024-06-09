@@ -26,6 +26,9 @@
                                         Contact Info
                                     </x-table.thead>
                                     <x-table.thead>
+                                        Status
+                                    </x-table.thead>
+                                    <x-table.thead>
                                         Action
                                     </x-table.thead>
                                 </tr>
@@ -42,11 +45,14 @@
                                     <x-table.td>
                                         {{$salon->address}}
                                     </x-table.td>
-                                        <x-table.td>
+                                    <x-table.td>
                                         {{$salon->contact_info}}
                                     </x-table.td>
+                                    <x-table.td class="text-red-500">
+                                        {{$salon->status}}
+                                    </x-table.td>
                                     <x-table.td>
-                                        <x-table.button-action>edit</x-table.button-action>
+                                        <x-table.button-action href="{{route('admin.show_salon',$salon->id)}}" >view</x-table.button-action>
                                     </x-table.td>
                                 </tr>
                                 @endforeach
@@ -75,6 +81,9 @@
                                         Contact Info
                                     </x-table.thead>
                                     <x-table.thead>
+                                        Status
+                                    </x-table.thead>
+                                    <x-table.thead>
                                         Action
                                     </x-table.thead>
                                 </tr>
@@ -93,6 +102,9 @@
                                     </x-table.td>
                                         <x-table.td>
                                         {{$salon->contact_info}}
+                                    </x-table.td>
+                                    <x-table.td class="text-green-500">
+                                        {{$salon->status}}
                                     </x-table.td>
                                     <x-table.td>
                                         <x-table.button-action>edit</x-table.button-action>
