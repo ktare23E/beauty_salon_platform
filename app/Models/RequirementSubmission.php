@@ -10,12 +10,12 @@ class RequirementSubmission extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'requirement_id', 'submission_details', 'status',
+        'business_id', 'requirement_id', 'submission_details', 'status',
     ];
 
-    public function user()
+    public function business()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Business::class);
     }
 
     public function requirement()

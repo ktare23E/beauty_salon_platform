@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Business;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\RequirementSubmission;
 
 class SalonController extends Controller
 {
@@ -24,9 +25,12 @@ class SalonController extends Controller
 
     public function show(Business $business){
         // $business = Business::with('user')->find($business->id);
+        $business = Business::findOrFail($business->id);
+        $requirements = $business->requirements;
 
         return view('admin.salon.show',[
-            'business' => $business
+            'business' => $business,
+            'requirements' => $requirements
         ]);
     }
 }

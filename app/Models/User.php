@@ -52,9 +52,6 @@ class User extends Authenticatable
         return $this->hasMany(Business::class);
     }
 
-    public function requirementSubmission(){
-        return $this->hasMany(RequirementSubmission::class);
-    }
 
     public function bookings(){
         return $this->hasMany(Booking::class);

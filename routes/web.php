@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\RedirectIfAuthenticatedToDashboard;
 use App\Http\Controllers\Admin\SalonController;
 use App\Http\Controllers\Admin\RequirementController;
+use App\Http\Controllers\Admin\RequirementSubmissionController;
 
 
 Route::get('/', function () {
@@ -37,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/requirement_list',[RequirementController::class,'index'])->name('admin.requirement_list');
     Route::get('/create_requirement',[RequirementController::class,'create'])->name('admin.create_requirement');
     Route::post('/create_requirement',[RequirementController::class,'store'])->name('admin.store_requirement');
+
+    Route::get('/requirement_submission/{id}',[RequirementSubmissionController::class,'show'])->name('requirement_submission');
    
 
     Route::get('/requirement/edit/{requirement}',[RequirementController::class,'edit'])->name('admin.edit_requirement');
