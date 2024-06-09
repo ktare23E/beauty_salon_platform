@@ -46,7 +46,7 @@ class RequirementController extends Controller
             'status' => 'required',
         ]);
 
-        Requirement::where('id',$requirement->id)->update($validateData);
+        $requirement->update($validateData);
 
         return redirect()->route('admin.requirement_list');
     }
