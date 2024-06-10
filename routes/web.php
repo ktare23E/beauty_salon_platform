@@ -40,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/create_requirement',[RequirementController::class,'store'])->name('admin.store_requirement');
 
     Route::get('/requirement_submission/{id}',[RequirementSubmissionController::class,'show'])->name('requirement_submission');
+    Route::patch('/requirement_submission/{requirement_submission}',[RequirementSubmissionController::class,'update'])->name('update_requirement_submission');
+
    
 
     Route::get('/requirement/edit/{requirement}',[RequirementController::class,'edit'])->name('admin.edit_requirement');

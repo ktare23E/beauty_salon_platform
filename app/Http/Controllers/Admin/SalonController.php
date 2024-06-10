@@ -24,9 +24,11 @@ class SalonController extends Controller
     }
 
     public function show(Business $business){
-        // $business = Business::with('user')->find($business->id);
+
         $business = Business::findOrFail($business->id);
         $requirements = $business->requirements;
+
+
 
         return view('admin.salon.show',[
             'business' => $business,

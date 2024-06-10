@@ -1,6 +1,6 @@
 <div id="view_requirement_submission" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 w-full h-full bg-black bg-opacity-30 backdrop-blur-sm">
     <div class="flex items-center justify-center min-h-full">
-        <div class="content_container relative bg-[#fff] p-[1.8rem] rounded-md">
+        <div class="content_container relative bg-[#fff] p-[1.8rem] rounded-md max-w-[90%] max-h-[90vh] w-[50%] h-[650px] mx-auto my-auto">
             <div class="top flex align-center justify-between border-b border-black">
                 <h3 class="requirement_name font-bold font text-xl"></h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="view_requirement_submission">
@@ -10,12 +10,9 @@
                     <span class="sr-only">Close modal</span>
                 </button>
             </div>
-            <div class="student_information w-full">
-                <h1 class="test_data">Hello</h1>
-                <div class="left flex flex-col gap-1 items-center justify-center">
-                    <div class="img_container">
-                        <img src="" class="img_submission block h-48 w-48 rounded-full object-cover" alt="">
-                    </div>
+            <div class="student_information w-full h-full flex justify-center items-center">
+                <div class="img_container w-full h-full flex justify-center items-center my-auto">
+                    <img src="" class="img_submission block h-[90%] w-full object-contain rounded-md" alt="">
                 </div>
             </div>
         </div>

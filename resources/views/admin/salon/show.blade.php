@@ -55,24 +55,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($requirements as $requirement)
+                                @foreach ($requirements as $requirement_submission)
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <x-table.td>
-                                            {{ $requirement->requirement->requirement_name }}
+                                            {{ $requirement_submission->requirement->requirement_name }}
+                                        </x-table.td>
+                                        <x-table.td class="text-red-500">
+                                            {{ $requirement_submission->status }}
                                         </x-table.td>
                                         <x-table.td>
-                                            {{ $requirement->status }}
-                                        </x-table.td>
-                                        <x-table.td>
-                                            <button onclick='openViewModal({{$requirement->id}},"view_requirement_submission")'>view</button>
+                                            <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" onclick='openViewModal({{$requirement_submission->id}},"view_requirement_submission")'>view</button>
+                                            <button class="px-2 py-1 text-white rounded-sm bg-green-600 text-sm font-normal" form="update_requirement_submission_{{ $requirement_submission->id }}">approve</button>
                                         </x-table.td>
                                     </tr>
+                                    <form action="{{route('update_requirement_submission',$requirement_submission->id)}}" method="POST" id="update_requirement_submission_{{ $requirement_submission->id }}">
+                                        @csrf
+                                        @method('PATCH')
+                                    </form>
                                 @endforeach
                             </tbody>
                         </x-table.table>
                     </div>
                 </div>
             </div>
+    
         </main>
     </div>
     <script>
