@@ -55,7 +55,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($requirements as $requirement_submission)
+                                @forelse ($requirements as $requirement_submission)
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <x-table.td>
                                             {{ $requirement_submission->requirement->requirement_name }}
@@ -72,7 +72,11 @@
                                         @csrf
                                         @method('PATCH')
                                     </form>
-                                @endforeach
+                                @empty
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td colspan="3" class="text-center py-3">No requirement submissions available</td>
+                                </tr>
+                                @endforelse
                             </tbody>
                         </x-table.table>
                     </div>
