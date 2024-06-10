@@ -60,17 +60,19 @@
                                         <x-table.td>
                                             {{ $requirement_submission->requirement->requirement_name }}
                                         </x-table.td>
-                                        <x-table.td class="text-red-500">
+                                        <x-table.td class="{{ $requirement_submission->status == 'declined' ? 'text-red-500':'text-yellow-500'}}">
                                             {{ $requirement_submission->status }}
                                         </x-table.td>
                                         <x-table.td>
                                             <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" onclick='openViewModal({{$requirement_submission->id}},"view_requirement_submission")'>view</button>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-green-600 text-sm font-normal" form="update_requirement_submission_{{ $requirement_submission->id }}">approve</button>
+                                            <button class="px-2 py-1 text-white rounded-sm bg-green-600 text-sm font-normal" onclick='updateSubmissionStatus({{$requirement_submission->id}},"approved")'>approve</button>
+                                            <button class="px-2 py-1 text-white rounded-sm bg-red-600 text-sm font-normal" onclick='updateSubmissionStatus({{$requirement_submission->id}},"declined")'>decline</button>
                                         </x-table.td>
                                     </tr>
                                     <form action="{{route('update_requirement_submission',$requirement_submission->id)}}" method="POST" id="update_requirement_submission_{{ $requirement_submission->id }}">
                                         @csrf
                                         @method('PATCH')
+                                        <input type="hidden" name="status" id="status_{{ $requirement_submission->id }}" value="">
                                     </form>
                                 @empty
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -132,5 +134,11 @@
             });
             $('#' + modal).toggleClass('hidden');
         }
+
+        function updateSubmissionStatus(id,status){
+            $('#status_' + id).val(status);
+            $('#update_requirement_submission_' + id).submit();
+        }
+
     </script>
 </x-layout>

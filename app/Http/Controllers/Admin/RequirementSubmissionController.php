@@ -25,10 +25,10 @@ class RequirementSubmissionController extends Controller
         }
     }
 
-    public function update(RequirementSubmission $requirement_submission){
+    public function update(RequirementSubmission $requirement_submission,Request $request){
      // Step 1: Update the status of the RequirementSubmission to "approve"
         $requirement_submission->update([
-            'status' => 'approved'
+            'status' => $request->status
         ]);
 
         // Step 2: Get the business_id from the requirement_submission
@@ -45,6 +45,8 @@ class RequirementSubmissionController extends Controller
             $business->update([
                 'status' => 'approved'
             ]);
+
+            return redirect()->route('admin.salon_list');
         }
 
         return redirect()->route('admin.show_salon',$business_id);

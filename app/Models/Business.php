@@ -23,7 +23,7 @@ class Business extends Model
         return $this->hasMany(Service::class);
     }
 
-    public function requirements(){
+    public function requirementsSubmission(){
         return $this->hasMany(RequirementSubmission::class);
     }
 

@@ -26,7 +26,7 @@ class SalonController extends Controller
     public function show(Business $business){
 
         $business = Business::findOrFail($business->id);
-        $requirements = $business->requirements()->where('status','pending')->get();
+        $requirements = $business->requirementsSubmission()->whereNot('status','approved')->get();
 
 
 
