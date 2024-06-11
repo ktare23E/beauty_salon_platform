@@ -12,9 +12,15 @@
                 <h1 class="text-2xl font-bold">Business Salon Information</h1>
                 <div class="flex items-center justify-center px-10">
                     <div class="w-full sm:w-1/2  bg-[#fff] rounded-md hover:shadow-lg transition-all">
-                        <div class="mt-10 mb-5  px-5 ">
-                            <h1>Hello {{ $business->business_name }}</h1>
-                            <h1>Owner: {{ $business->user->first_name . ' ' . $business->user->last_name }}</h1>
+                        <div class="flex justify-between w-full">
+                            <div class="mt-10 mb-5  px-5 ">
+                                <h1><span class="font-bold ">Business Name:</span> {{ $business->business_name }}</h1>
+                                <h1><span class="font-bold ">Owner:</span>  {{ $business->user->first_name . ' ' . $business->user->last_name }}</h1>
+                            </div>
+                            <div class="mt-10 mb-5  px-5 ">
+                                <h1><span class="font-bold ">Address:</span> {{ $business->address }}</h1>
+                                <h1><span class="font-bold ">Contact:</span> {{ $business->contact_info}}</h1>
+                            </div>
                         </div>
                         <div class="flex justify-center px-5 ">
                             <div class="border-b-2 border-gray-500 w-full"></div>
@@ -24,12 +30,6 @@
                                 school. I'm seeking an
                                 internship where I can apply my skills in content creation and increase my experience in
                                 digital marketing."</p>
-                        </div>
-                        <div class="flex justify-center gap-4 p-5">
-                            <button
-                                class="py-3 bg-indigo-500 font-semibold text-white w-1/4 rounded-xl hover:bg-indigo-600">Follow</button>
-                            <button
-                                class="py-3 bg-pink-500 font-semibold text-white w-1/4 rounded-xl hover:bg-pink-600">Subscribe</button>
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,8 @@
             });
         }
 
-        closeModal('view_requirement_submission')
+        closeModal('view_requirement_submission');
+
         function openViewModal(id,modal){
             $.ajax({
                 url: "{{ url('/requirement_submission') }}/" + id,
