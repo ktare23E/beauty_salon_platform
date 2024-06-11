@@ -124,10 +124,13 @@
                 type: 'GET',
                 success: function(response) {
                     console.log(response);
-                    let image = response.data.submission.submission_details
+                    let image = response.data.submission.submission_details;
+                    let assetUrl = "{{ asset('storage/') }}"; // Retrieve asset URL from Blade template
+
                     $('.test_data').html(response.data.submission.submission_details);
                     $('.requirement_name').html(response.data.requirement.requirement_name);
-                    $('.img_submission').attr('src', "{{ asset('imgs/') }}" + '/' + image);
+                    $('.img_submission').attr('src', assetUrl + '/' + image);
+
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);

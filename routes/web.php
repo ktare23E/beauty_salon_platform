@@ -10,7 +10,7 @@ use App\Http\Middleware\RedirectIfAuthenticatedToDashboard;
 use App\Http\Controllers\Admin\SalonController;
 use App\Http\Controllers\Admin\RequirementController;
 use App\Http\Controllers\Admin\RequirementSubmissionController;
-
+use App\Http\Controllers\BusinessAdmin\BusinessAdminSalonController;
 
 Route::get('/', function () {
     return view('index');
@@ -30,6 +30,8 @@ Route::middleware(['auth'])->group(function () {
         }
         return view('user.index');
     })->name('user.index');
+
+
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
     Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
@@ -58,6 +60,10 @@ Route::middleware(['auth'])->group(function () {
         }
         return view('business_admin.index');
     })->name('business_admin.index');
+
+    Route::get('/salon',[BusinessAdminSalonController::class,'index'])->name('business_admin.salon');
+    Route::get('/create_salon',[BusinessAdminSalonController::class,'create'])->name('business_admin.create_salon');
+    Route::post('/create_salon',[BusinessAdminSalonController::class,'store'])->name('business_admin.store_business');
 });
 
 Route::get('/register',[RegisterController::class, 'create'])->name('register.index');
