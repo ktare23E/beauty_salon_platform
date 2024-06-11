@@ -21,6 +21,7 @@
                                     placeholder=" " required />
                                 <label for="floating_email"
                                     class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Business Name</label>
+                                    <x-forms.error></x-forms.error>
                             </div>
                             <div class="relative z-0 w-full mb-5 group">
                                 <input type="text" name="address" id="address"
@@ -28,6 +29,8 @@
                                     placeholder=" " required />
                                 <label for="floating_email"
                                     class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Address</label>
+                                    <x-forms.error></x-forms.error>
+
                             </div>
                             <div class="relative z-0 w-full mb-5 group">
                                 <input type="text" name="contact_info" id="contact_info"
@@ -35,6 +38,7 @@
                                     placeholder=" " required />
                                 <label for="floating_email"
                                     class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Contact Number</label>
+                                <x-forms.error></x-forms.error>
                             </div>
                             
                             @foreach ($requirements as $requirement)
@@ -44,6 +48,8 @@
                                     <label for="example1" class="mb-1 block text-sm font-medium text-gray-700">Upload file</label>
                                     <input type="hidden" value="{{$requirement->id}}" name="requirement_id">
                                     <input name="files[{{ $requirement->id }}][]" id="file_{{ $requirement->id }}" type="file" class="mt-2 block w-full text-sm file:mr-4 file:rounded-sm file:border-0 file:bg-teal-500 file:py-1 file:px-2 file:text-sm file:font-normal file:text-white hover:file:bg-teal-700 focus:outline-none disabled:pointer-events-none disabled:opacity-60" />
+                                    <x-forms.error :error="$errors->first('files.'.$requirement->id.'.*')" />
+
                                 </div>
                             </div>
                             @endforeach

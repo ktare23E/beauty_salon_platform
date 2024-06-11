@@ -7,13 +7,21 @@ use App\Models\Requirement;
 use App\Models\Business;
 use App\Models\RequirementSubmission;
 use Illuminate\Http\Request;
+use App\Models\User;
+
+
 
 class BusinessAdminSalonController extends Controller
 {
     //
 
     public function index(){
-        return view('business_admin.salon.index');
+        $userWithBusinesses = User::with('businesses')->find(auth()->user()->id);
+        
+
+        return view('business_admin.salon.index',[
+            'userWithBusinesses' => $userWithBusinesses,
+        ]);
     }
 
 
@@ -44,6 +52,8 @@ class BusinessAdminSalonController extends Controller
         // Validate file data
         $request->validate([
             'files.*.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ], [
+            'files.*.*.required' => 'At least one image file is required.',
         ]);
     
         // Iterate through the uploaded files and store them
@@ -64,6 +74,14 @@ class BusinessAdminSalonController extends Controller
     
         // Redirect after successful operation
         return redirect()->route('business_admin.salon');
+    }
+
+    public function show(Business $business){
+        // $business->all();
+
+        return view('business_admin.salon.show',[
+            'business' => $business,
+        ]);
     }
     
 }
