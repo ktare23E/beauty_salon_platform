@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BusinessAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Models\ServiceVariant;
 
 class ServiceVariantController extends Controller
 {
@@ -13,7 +14,7 @@ class ServiceVariantController extends Controller
     public function show(Service $service){
         //retrieve all the service variant of the service
         $serviceVariants = $service->variants;
-        
+
         return view('business_admin.service_variants.service_variant_list',[
             'service' => $service,
             'serviceVariants' => $serviceVariants,
@@ -23,6 +24,12 @@ class ServiceVariantController extends Controller
     public function create(Service $service){
         return view('business_admin.service_variants.create_service_variant',[
             'service' => $service,
+        ]);
+    }
+
+    public function edit(ServiceVariant $serviceVariant){
+        return view('business_admin.service_variants.edit_service_variant',[
+            'serviceVariant' => $serviceVariant,
         ]);
     }
 
