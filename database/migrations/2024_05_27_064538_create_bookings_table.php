@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Service::class)->constrained()->cascadeOnDelete();
             $table->timestamp('booking_date');
+            $table->decimal('total_price', 10, 2);
             $table->enum('status', ['pending', 'approved', 'declined'])->default('pending');
             $table->timestamps();
         });

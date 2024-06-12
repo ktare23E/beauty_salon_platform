@@ -51,7 +51,7 @@
                                             {{ $service->status }}
                                         </x-table.td>
                                         <x-table.td>
-                                            {{ $service->price }}
+                                            {{ '₱'.$service->price }}
                                         </x-table.td>
                                         <x-table.td>
                                             <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" >view</button>
@@ -59,7 +59,7 @@
                                     </tr>
                                 @empty
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td colspan="3" class="text-center py-3">No requirement submissions available</td>
+                                    <td colspan="3" class="text-center py-3">No services yet</td>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -76,10 +76,13 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <x-table.thead>
-                                        Requirement
+                                        First Name
                                     </x-table.thead>
                                     <x-table.thead>
-                                        Status
+                                        Last Name
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Address
                                     </x-table.thead>
                                     <x-table.thead>
                                         Action
@@ -101,11 +104,6 @@
                                             <button class="px-2 py-1 text-white rounded-sm bg-red-600 text-sm font-normal" onclick='updateSubmissionStatus({{$requirement_submission->id}},"declined")'>decline</button>
                                         </x-table.td>
                                     </tr>
-                                    <form action="{{route('update_requirement_submission',$requirement_submission->id)}}" method="POST" id="update_requirement_submission_{{ $requirement_submission->id }}">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="status" id="status_{{ $requirement_submission->id }}" value="">
-                                    </form>
                                 @empty
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td colspan="3" class="text-center py-3">No requirement submissions available</td>

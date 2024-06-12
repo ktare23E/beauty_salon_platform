@@ -18,9 +18,16 @@ class Booking extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function service()
+    public function serviceVariants()
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsToMany(ServiceVariant::class,'booking_service_variants')->withTimestamps();
+
+    }
+
+    public function packages()
+    {
+        return $this->belongsToMany(Package::class, 'booking_packages')
+                    ->withTimestamps();
     }
 
     public function payments()

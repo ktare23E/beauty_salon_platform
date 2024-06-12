@@ -10,7 +10,7 @@ class Service extends Model
     use HasFactory;
 
     protected $fillable = [
-        'business_id', 'service_name', 'description', 'price', 'status'
+        'business_id', 'service_name', 'description'
     ];
 
     public function business()
@@ -18,13 +18,18 @@ class Service extends Model
         return $this->belongsTo(Business::class);
     }
 
-    public function bookings()
-    {
-        return $this->hasMany(Booking::class);
-    }
+    // public function bookings()
+    // {
+    //     return $this->hasMany(Booking::class);
+    // }
 
     public function images()
     {
         return $this->hasMany(ImageService::class);
+    }
+
+    public function variants()
+    {
+        return $this->hasMany(ServiceVariant::class);
     }
 }
