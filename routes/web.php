@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SalonController;
 use App\Http\Controllers\Admin\RequirementController;
 use App\Http\Controllers\Admin\RequirementSubmissionController;
 use App\Http\Controllers\BusinessAdmin\BusinessAdminSalonController;
+use App\Http\Controllers\BusinessAdmin\ServiceController;
 
 Route::get('/', function () {
     return view('index');
@@ -51,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/salon_list',[SalonController::class,'index'])->name('admin.salon_list');
-    Route::get('/salon/{business}',[SalonController::class,'show'])->name('admin.show_salon');
+    Route::get('/admin_salon/{business}',[SalonController::class,'show'])->name('admin.show_salon');
 
     Route::get('/business_admin', function () {
         $user = Auth::user();
@@ -63,6 +64,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/salon',[BusinessAdminSalonController::class,'index'])->name('business_admin.salon');
     Route::get('/create_salon',[BusinessAdminSalonController::class,'create'])->name('business_admin.create_salon');
+
+    Route::get('/create_service/{business}',[ServiceController::class,'create'])->name('create_service');
+
 
     Route::post('/create_salon',[BusinessAdminSalonController::class,'store'])->name('business_admin.store_business');
 

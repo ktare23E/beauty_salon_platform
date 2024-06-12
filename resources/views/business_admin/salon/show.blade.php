@@ -11,8 +11,8 @@
             <div class="mt-24">
                 <h1 class="font-bold text-2xl">Services</h1>
                 <div class="w-full">
-                    <a href="">
-                        <button class="py-1 px-2 bg-black text-white rounded-sm">Create Service</button>
+                    <a href="{{route('create_service',$business->id)}}" >
+                        <button class="py-1 px-2  rounded-sm {{$business->status == 'pending' ? 'bg-gray-200 text-gray-500' : 'bg-black text-white'}}" {{$business->status == 'pending' ? 'disabled' : ''}}>Create Service</button>
                     </a>
                 </div>
                 <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md hover:shadow-xl transition-all mx-auto mt-10">

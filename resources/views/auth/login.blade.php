@@ -10,11 +10,12 @@
                                 <x-forms.input label="Email" type="email" name="email"/>
                             </div>
                         </div>
-                        <div class="grid grid-cols-1">
+                        <div class="grid grid-cols-1 mb-10">
                             <div>
                                 <x-forms.input label="Password" name="password" type="password" />
                             </div>
                         </div>
+                        <a href="{{route('register.index')}}" class="text-sm text-blue-600 mt-10">Create an account</a>
                         <x-forms.button>Login</x-forms.button>
                     </x-forms.form>
                 </div>

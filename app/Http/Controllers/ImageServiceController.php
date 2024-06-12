@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
-use App\Http\Requests\StoreServiceRequest;
-use App\Http\Requests\UpdateServiceRequest;
+use App\Models\ImageService;
+use App\Http\Requests\StoreImageServiceRequest;
+use App\Http\Requests\UpdateImageServiceRequest;
 
-class ServiceController extends Controller
+class ImageServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreServiceRequest $request)
+    public function store(StoreImageServiceRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Service $service)
+    public function show(ImageService $imageService)
     {
         //
     }
@@ -43,7 +43,7 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Service $service)
+    public function edit(ImageService $imageService)
     {
         //
     }
@@ -51,7 +51,7 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateServiceRequest $request, Service $service)
+    public function update(UpdateImageServiceRequest $request, ImageService $imageService)
     {
         //
     }
@@ -59,7 +59,7 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Service $service)
+    public function destroy(ImageService $imageService)
     {
         //
     }
