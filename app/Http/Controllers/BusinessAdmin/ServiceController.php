@@ -63,4 +63,24 @@ class ServiceController extends Controller
 
         return redirect()->route('show_business',$business->id);
     }
+
+    public function edit(Service $service){
+        return view('business_admin.service.edit_service',[
+            'service' => $service,
+        ]);
+    }
+
+    public function update(Request $request, Service $service){
+        $request->validate([
+            'service_name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $service->update([
+            'service_name' => $request->service_name,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('show_business',$service->business->id);
+    }
 }

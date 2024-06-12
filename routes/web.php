@@ -67,6 +67,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/create_salon',[BusinessAdminSalonController::class,'create'])->name('business_admin.create_salon');
 
     Route::get('/create_service/{business}',[ServiceController::class,'create'])->name('create_service');
+    Route::get('/edit_service/{service}',[ServiceController::class,'edit'])->name('edit_service');
+    Route::patch('/update_service/{service}',[ServiceController::class,'update'])->name('update_service');
     Route::post('/store/{business}',[ServiceController::class,'store'])->name('store_service');
 
     Route::get('/service_variant_list/{service}',[ServiceVariantController::class,'show'])->name('service_variant_list');

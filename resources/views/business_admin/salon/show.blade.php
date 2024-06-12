@@ -43,6 +43,7 @@
                                         </x-table.td>
                                         <x-table.td>
                                             <x-table.button-action href="{{route('service_variant_list',$service->id)}}">view</x-table.button-action>
+                                            <x-table.button-action href="{{route('edit_service',$service->id)}}">edit</x-table.button-action>
                                         </x-table.td>
                                     </tr>
                                 @empty
