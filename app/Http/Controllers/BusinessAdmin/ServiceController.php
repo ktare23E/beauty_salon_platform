@@ -22,7 +22,6 @@ class ServiceController extends Controller
         
         $request->validate([
             'service_name' => 'required',
-            'price' => 'required',
             'description' => 'required',
         ]);
 
@@ -30,9 +29,7 @@ class ServiceController extends Controller
         $service = $business->services()->create([
             'service_name' => $request->service_name,
             'business_id' => $business->id,
-            'price' => $request->price,
             'description' => $request->description,
-            'status' => 'active',
         ]);
 
 

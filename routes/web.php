@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\RequirementController;
 use App\Http\Controllers\Admin\RequirementSubmissionController;
 use App\Http\Controllers\BusinessAdmin\BusinessAdminSalonController;
 use App\Http\Controllers\BusinessAdmin\ServiceController;
+use App\Http\Controllers\BusinessAdmin\ServiceVariantController;
 
 Route::get('/', function () {
     return view('index');
@@ -67,6 +68,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/create_service/{business}',[ServiceController::class,'create'])->name('create_service');
     Route::post('/store/{business}',[ServiceController::class,'store'])->name('store_service');
+
+    Route::get('/service_variant_list/{service}',[ServiceVariantController::class,'show'])->name('service_variant_list');
+    Route::get('/create_service_variant/{service}',[ServiceVariantController::class,'create'])->name('create_service_variant');
+    Route::post('/store_service_variant/{service}',[ServiceVariantController::class,'store'])->name('store_service_variant');
+
 
 
     Route::post('/create_salon',[BusinessAdminSalonController::class,'store'])->name('business_admin.store_business');

@@ -15,7 +15,7 @@
                         </div>
                         <div class="grid grid-cols-2 gap-2">
                             <div>
-                                <x-forms.input label="Email" type="email" name="email"/>
+                                <x-forms.input class="-mt-[0.20rem]" label="Email" type="email" name="email"/>
                             </div>
                             <div>
                                 <x-forms.select label="User Type" name="user_type">
@@ -39,5 +39,5 @@
                 </div>
             </div>
         </div>
-      </section>
+    </section>
 </x-layout>

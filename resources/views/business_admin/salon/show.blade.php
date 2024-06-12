@@ -28,12 +28,6 @@
                                         Description
                                     </x-table.thead>
                                     <x-table.thead>
-                                        Status
-                                    </x-table.thead>
-                                    <x-table.thead>
-                                        Price
-                                    </x-table.thead>
-                                    <x-table.thead>
                                         Action
                                     </x-table.thead>
                                 </tr>
@@ -48,13 +42,7 @@
                                             {{ $service->description }}
                                         </x-table.td>
                                         <x-table.td>
-                                            {{ $service->status }}
-                                        </x-table.td>
-                                        <x-table.td>
-                                            {{ '₱'.$service->price }}
-                                        </x-table.td>
-                                        <x-table.td>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" >view</button>
+                                            <x-table.button-action href="{{route('service_variant_list',$service->id)}}">view</x-table.button-action>
                                         </x-table.td>
                                     </tr>
                                 @empty
