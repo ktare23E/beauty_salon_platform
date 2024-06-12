@@ -22,10 +22,16 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <x-table.thead>
-                                        Requirement
+                                        Service Name
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Description
                                     </x-table.thead>
                                     <x-table.thead>
                                         Status
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Price
                                     </x-table.thead>
                                     <x-table.thead>
                                         Action
@@ -33,31 +39,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @forelse ($requirements as $requirement_submission)
+                                @forelse ($services as $service)
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <x-table.td>
-                                            {{ $requirement_submission->requirement->requirement_name }}
-                                        </x-table.td>
-                                        <x-table.td class="{{ $requirement_submission->status == 'declined' ? 'text-red-500':'text-yellow-500'}}">
-                                            {{ $requirement_submission->status }}
+                                            {{ $service->service_name }}
                                         </x-table.td>
                                         <x-table.td>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" onclick='openViewModal({{$requirement_submission->id}},"view_requirement_submission")'>view</button>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-green-600 text-sm font-normal" onclick='updateSubmissionStatus({{$requirement_submission->id}},"approved")'>approve</button>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-red-600 text-sm font-normal" onclick='updateSubmissionStatus({{$requirement_submission->id}},"declined")'>decline</button>
+                                            {{ $service->description }}
+                                        </x-table.td>
+                                        <x-table.td>
+                                            {{ $service->status }}
+                                        </x-table.td>
+                                        <x-table.td>
+                                            {{ $service->price }}
+                                        </x-table.td>
+                                        <x-table.td>
+                                            <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" >view</button>
                                         </x-table.td>
                                     </tr>
-                                    <form action="{{route('update_requirement_submission',$requirement_submission->id)}}" method="POST" id="update_requirement_submission_{{ $requirement_submission->id }}">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="status" id="status_{{ $requirement_submission->id }}" value="">
-                                    </form>
                                 @empty
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td colspan="3" class="text-center py-3">No requirement submissions available</td>
                                 </tr>
                                 @endforelse
-                            </tbody> --}}
+                            </tbody>
                         </x-table.table>
                     </div>
                 </div>

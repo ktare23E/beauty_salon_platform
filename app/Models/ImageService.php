@@ -10,4 +10,9 @@ class ImageService extends Model
     use HasFactory;
 
     protected $fillable = ['service_id', 'path'];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }

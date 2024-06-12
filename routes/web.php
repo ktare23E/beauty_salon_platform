@@ -66,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/create_salon',[BusinessAdminSalonController::class,'create'])->name('business_admin.create_salon');
 
     Route::get('/create_service/{business}',[ServiceController::class,'create'])->name('create_service');
+    Route::post('/store/{business}',[ServiceController::class,'store'])->name('store_service');
 
 
     Route::post('/create_salon',[BusinessAdminSalonController::class,'store'])->name('business_admin.store_business');

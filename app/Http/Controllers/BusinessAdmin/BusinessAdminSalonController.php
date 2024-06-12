@@ -77,10 +77,11 @@ class BusinessAdminSalonController extends Controller
     }
 
     public function show(Business $business){
-        // $business->all();
+        $services = $business->services;
 
         return view('business_admin.salon.show',[
             'business' => $business,
+            'services' => $services
         ]);
     }
     
