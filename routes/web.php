@@ -71,8 +71,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/service_variant_list/{service}',[ServiceVariantController::class,'show'])->name('service_variant_list');
     Route::get('/create_service_variant/{service}',[ServiceVariantController::class,'create'])->name('create_service_variant');
-    Route::get('/edit_service_variant/{serviceVariant}',[ServiceVariantController::class,'edit'])->name('edit_service_variant');
     Route::post('/store_service_variant/{service}',[ServiceVariantController::class,'store'])->name('store_service_variant');
+    Route::get('/edit_service_variant/{serviceVariant}',[ServiceVariantController::class,'edit'])->name('edit_service_variant');
+    Route::patch('/update_service_variant/{serviceVariant}',[ServiceVariantController::class,'update'])->name('update_service_variant');
+
 
 
 

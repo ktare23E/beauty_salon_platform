@@ -52,4 +52,22 @@ class ServiceVariantController extends Controller
         return redirect()->route('service_variant_list',$service->id);
 
     }
+
+    public function update(Request $request, ServiceVariant $serviceVariant){
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'status' => 'required',
+        ]);
+
+        $serviceVariant->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('service_variant_list',$serviceVariant->service_id);
+    }
 }
