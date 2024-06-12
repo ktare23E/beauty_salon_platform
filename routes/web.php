@@ -11,8 +11,10 @@ use App\Http\Controllers\Admin\SalonController;
 use App\Http\Controllers\Admin\RequirementController;
 use App\Http\Controllers\Admin\RequirementSubmissionController;
 use App\Http\Controllers\BusinessAdmin\BusinessAdminSalonController;
+use App\Http\Controllers\BusinessAdmin\PackageController;
 use App\Http\Controllers\BusinessAdmin\ServiceController;
 use App\Http\Controllers\BusinessAdmin\ServiceVariantController;
+
 
 Route::get('/', function () {
     return view('index');
@@ -65,6 +67,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/salon',[BusinessAdminSalonController::class,'index'])->name('business_admin.salon');
     Route::get('/create_salon',[BusinessAdminSalonController::class,'create'])->name('business_admin.create_salon');
+    Route::post('/create_salon',[BusinessAdminSalonController::class,'store'])->name('business_admin.store_business');
+
+    Route::get('/salon/{business}',[BusinessAdminSalonController::class,'show'])->name('show_business');
+
+    Route::get('/create_package/{business}',[PackageController::class,'create'])->name('create_package');
+
 
     Route::get('/create_service/{business}',[ServiceController::class,'create'])->name('create_service');
     Route::get('/edit_service/{service}',[ServiceController::class,'edit'])->name('edit_service');
@@ -79,10 +87,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-
-    Route::post('/create_salon',[BusinessAdminSalonController::class,'store'])->name('business_admin.store_business');
-
-    Route::get('/salon/{business}',[BusinessAdminSalonController::class,'show'])->name('show_business');
 });
 
 Route::get('/register',[RegisterController::class, 'create'])->name('register.index');
