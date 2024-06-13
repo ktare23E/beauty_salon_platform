@@ -13,7 +13,7 @@
                 </div>
                 <div class="bg-[#fff] p-[2rem] border w-[50%] rounded-md hover:shadow-xl transition-all mt-3 mx-auto">
                     <div class="table_container">
-                        <form class="max-w-md mx-auto" method="POST" action="">
+                        <form class="max-w-md mx-auto" method="POST" action="{{route('store_package')}}">
                             @csrf
                             <div class="relative z-0 w-full mb-5 group">
                                 <input type="text" name="package_name" id="package_name"
@@ -57,9 +57,8 @@
                                             <div>
                                                 @forelse ($service->variants as $variant)
                                                     <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 my-3  hover:bg-indigo-300 cursor-pointer ">
-                                                        <input type="radio" name="variant">
-                                                        <input type="hidden" name="{{$variant->id}}" id="{{$variant->id}}">
-                                                    <i class="pl-2">{{$variant->name}}</i>
+                                                        <input type="radio" name="service_variant_{{$service->id}}" value="{{$variant->id}}">
+                                                        <i class="pl-2">{{$variant->name}}</i>
                                                     </label>
                                                 @empty
                                                     <p>No variants yet.</p>

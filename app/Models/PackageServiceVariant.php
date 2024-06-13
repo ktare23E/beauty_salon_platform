@@ -9,4 +9,8 @@ class PackageServiceVariant extends Model
 {
     use HasFactory;
     protected $table = 'package_service_variants';
+    protected $fillable = [
+        'package_id',
+        'service_variant_id',
+    ];
 }

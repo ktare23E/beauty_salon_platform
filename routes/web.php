@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/salon/{business}',[BusinessAdminSalonController::class,'show'])->name('show_business');
 
     Route::get('/create_package/{business}',[PackageController::class,'create'])->name('create_package');
+    Route::post('/store_package',[PackageController::class,'store'])->name('store_package');
 
 
     Route::get('/create_service/{business}',[ServiceController::class,'create'])->name('create_service');
