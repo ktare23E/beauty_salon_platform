@@ -108,7 +108,7 @@
                                     </tr>
                                 @empty
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <td colspan="3" class="text-center py-3">No services yet</td>
+                                        <td colspan="5" class="text-center py-3">No services yet</td>
                                     </tr>
                                 @endforelse
                             </tbody>
