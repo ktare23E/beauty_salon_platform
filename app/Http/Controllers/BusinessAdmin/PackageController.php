@@ -127,6 +127,36 @@ class PackageController extends Controller
     }
 
     public function update(Request $request, Package $package){
-        dd($request->all());
+            $request->validate([
+            'package_name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'required|string|max:255',
+            'status' => 'required'
+        ]);
+
+        $package->update([
+            'package_name' => $request->package_name,
+            'price' => $request->price,
+            'description' => $request->description,
+            'status' => $request->status
+        ]);
+
+        $package->serviceVariants()->detach();
+
+        $selectedVariantsId = [];
+
+        foreach ($request->all() as $key => $value) {
+            // Check if the key starts with 'variant_'
+            if (strpos($key, 'service_variant_') === 0) {
+                // Extract the service ID from the key
+                $serviceId = str_replace('service_variant_', '', $key);
+                $variantId = $value;
+    
+                // Store the selected variant in the array
+                $selectedVariantsId[] = $variantId;
+            }
+        }
+
+        $package->serviceVariants()->attach($selectedVariantsId);
     }
 }
