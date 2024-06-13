@@ -78,5 +78,22 @@
             </div>
         </main>
     </div>
+    <script>
+        //remove radio checked attribute if clicked again
+        $(document).ready(function() {
+            $('input[type="radio"]').click(function() {
+                var $radio = $(this);
 
+                // If this radio is already checked, uncheck it
+                if ($radio.data('waschecked') == true) {
+                    $radio.prop('checked', false);
+                    $radio.data('waschecked', false);
+                } else {
+                    // All other radios in this group need to be set to waschecked false
+                    $('input[name="' + $radio.attr('name') + '"]').data('waschecked', false);
+                    $radio.data('waschecked', true);
+                }
+            });
+        });
+    </script>
 </x-layout>
