@@ -86,18 +86,24 @@
                                     </x-table.thead>
                                 </tr>
                             </thead>
-                            {{-- <tbody>
-                                @forelse ($services as $service)
+                            <tbody>
+                                @forelse ($packages as $package)
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <x-table.td>
-                                            {{ $service->service_name }}
+                                            {{ $package->package_name }}
                                         </x-table.td>
                                         <x-table.td>
-                                            {{ $service->description }}
+                                            {{ $package->description }}
                                         </x-table.td>
                                         <x-table.td>
-                                            <x-table.button-action href="{{route('service_variant_list',$service->id)}}">view</x-table.button-action>
-                                            <x-table.button-action href="{{route('edit_service',$service->id)}}">edit</x-table.button-action>
+                                            ₱{{ number_format($package->price , 2)}}
+                                        </x-table.td>
+                                        <x-table.td>
+                                            {{ $package->status }}
+                                        </x-table.td>
+                                        <x-table.td>
+                                            <x-table.button-action href="{{route('view_package',$package->id)}}">view</x-table.button-action>
+                                            <x-table.button-action href="{{route('edit_service',$package->id)}}">edit</x-table.button-action>
                                         </x-table.td>
                                     </tr>
                                 @empty
@@ -105,7 +111,7 @@
                                         <td colspan="3" class="text-center py-3">No services yet</td>
                                     </tr>
                                 @endforelse
-                            </tbody> --}}
+                            </tbody>
                         </x-table.table>
                     </div>
                 </div>
@@ -213,5 +219,6 @@
             $('#myTable').DataTable();
             $('#myTable2').DataTable();
         } );
+
     </script>
 </x-layout>

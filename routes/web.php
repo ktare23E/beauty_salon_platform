@@ -73,6 +73,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/create_package/{business}',[PackageController::class,'create'])->name('create_package');
     Route::post('/store_package',[PackageController::class,'store'])->name('store_package');
+    Route::get('/view_package/{package}',[PackageController::class,'show'])->name('view_package');
+    Route::get('/edit_package/{package}',[PackageController::class,'show'])->name('edit_package');
 
 
     Route::get('/create_service/{business}',[ServiceController::class,'create'])->name('create_service');

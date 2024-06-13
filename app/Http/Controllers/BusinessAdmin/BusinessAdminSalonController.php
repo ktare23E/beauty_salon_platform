@@ -82,56 +82,58 @@ class BusinessAdminSalonController extends Controller
     }
 
     public function show(Business $business){
-        // $services = $business->services;
+
+        // Load the services and their variants for the business
+        $business->load('services.variants');
+
+        // Collect all variant IDs for the business's services
+        $serviceVariantIds = $business->services->flatMap(function ($service) {
+            return $service->variants->pluck('id');
+        });
+
+        // // Fetch the packages associated with these variants
+        $packages = Package::whereHas('serviceVariants', function ($query) use ($serviceVariantIds) {
+            $query->whereIn('service_variant_id', $serviceVariantIds);
+        })->distinct()->get();
+
+        $services = $business->services;
  
 
-        // return view('business_admin.salon.show',[
-        //     'business' => $business,
-        //     'services' => $services
-        // ]);
+        return view('business_admin.salon.show',[
+            'business' => $business,
+            'services' => $services,
+            'packages' => $packages
+        ]);
 
-        //   Load services with variants and their packageServiceVariants
-        // $business->load('services.variants.packageServiceVariants.package');
-
-        // // Initialize an empty array to collect the package service variants
-        // $data = [];
-        // // Loop through services, variants, and their packageServiceVariants to collect data
-        // foreach ($business->services as $service) {
-        //     foreach ($service->variants as $variant) {
-        //         foreach ($variant->packageServiceVariants as $packageServiceVariant) {
-        //             //retrieve first or 1 package 
-        //             $data[] = $packageServiceVariant->package;
-        //         }
-        //     }
+        // $services = Service::where('business_id',$business->id)->get();
+        // $service_id = [];
+        // foreach($services as $service){
+        //     $service_id[] = $service->id;
         // }
-        $services = Service::where('business_id',$business->id)->get();
-        $service_id = [];
-        foreach($services as $service){
-            $service_id[] = $service->id;
-        }
 
-        $ServiceVariants = ServiceVariant::whereIn('service_id',$service_id)->get();
-        $service_variant_id = [];
+        // $ServiceVariants = ServiceVariant::whereIn('service_id',$service_id)->get();
+        // $service_variant_id = [];
 
-        foreach($ServiceVariants as $variant){
-            $service_variant_id[] = $variant->id;
-        }
+        // foreach($ServiceVariants as $variant){
+        //     $service_variant_id[] = $variant->id;
+        // }
 
-        $packageServices = PackageServiceVariant::whereIn('service_variant_id',$service_variant_id)->get();
+        // $packageServices = PackageServiceVariant::whereIn('service_variant_id',$service_variant_id)->get();
 
-        $package_id = [];
+        // $package_id = [];
 
-        foreach($packageServices as $packServces){
-            $package_id[] = $packServces->package_id;
-        }
+        // foreach($packageServices as $packServces){
+        //     $package_id[] = $packServces->package_id;
+        // }
 
-        $packageData = Package::whereIn('id',$package_id)->get();
-        return $packageData;
+        // $packageData = Package::whereIn('id',$package_id)->get();
+        // return $packageData;
         // return view('business_admin.salon.show', [
         //     'business' => $business,
         //     'services' => $business->services,
         //     'packageServiceVariants' => $packageServiceVariants,
         // ]);
+
     }
     
 }

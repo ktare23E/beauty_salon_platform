@@ -61,5 +61,16 @@ class PackageController extends Controller
 
         // return redirect()->route('show_business', $request->business_id);
     }
+
+    public function show(Package $package){
+        $package->load('serviceVariants.service');
+
+        // Return the package with its service variants and the related services
+
+        return view('business_admin.packages.show',[
+            'package' => $package,
+            'service_variants' => $package->serviceVariants
+        ]);
+    }
     
 }
