@@ -21,6 +21,10 @@ Route::get('/', function () {
 })->name('dashboard');
 
 
+Route::get('/salon_try', function () {
+    return view('salon');
+})->name('salon_try');
+
 
 // Route::get('/login', [LoginController::class, 'index'])->name('login');
 
@@ -38,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
+
+    //Admin
     Route::get('/admin',[DashboardController::class,'index'])->name('admin.index');
     Route::get('/user_list',[UserController::class,'index'])->name('admin.user_list');
 
