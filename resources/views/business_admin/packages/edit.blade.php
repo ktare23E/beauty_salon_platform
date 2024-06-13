@@ -45,6 +45,14 @@
                                 <x-forms.error></x-forms.error>
                             </div>
                             <div class="relative z-0 w-full mb-5 group">
+                                <label for="underline_select" class="sr-only">Status</label>
+                                <select id="status" name="status" required class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                    <option disabled>Choose a status</option>
+                                    <option value="active" {{$package->status === 'active' ? 'selected' : ''}}>Active</option>
+                                    <option value="inactive" {{$package->status === 'inactive' ? 'selected' : ''}}>Inactive</option>
+                                </select>
+                            </div>
+                            <div class="relative z-0 w-full mb-5 group">
                                 <h1 class="font-bold">Select Services:</h1>
                             </div>
                             <div class="relative z-0 w-full mb-5 group space-y-3">
@@ -58,7 +66,7 @@
                                             <div>
                                                 @forelse ($service->variants as $variant)
                                                     <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 my-3  hover:bg-indigo-300 cursor-pointer ">
-                                                        <input type="radio" name="service_variant_{{$service->id}}" value="{{$variant->id}}"
+                                                        <input type="radio" name="service_variant_{{$service->id}}" value="{{$variant->id}}" class="service_variant_{{$service->id}}"
                                                             @foreach ($package_service_variants as $service_variant)
                                                                 {{$service_variant->id == $variant->id ? 'checked' : ''}}
                                                             @endforeach
@@ -83,5 +91,22 @@
             </div>
         </main>
     </div>
+    <script>
+        //remove radio checked attribute if clicked again
+        $(document).ready(function() {
+            $('input[type="radio"]').click(function() {
+                var $radio = $(this);
 
+                // If this radio is already checked, uncheck it
+                if ($radio.data('waschecked') == true) {
+                    $radio.prop('checked', false);
+                    $radio.data('waschecked', false);
+                } else {
+                    // All other radios in this group need to be set to waschecked false
+                    $('input[name="' + $radio.attr('name') + '"]').data('waschecked', false);
+                    $radio.data('waschecked', true);
+                }
+            });
+        });
+    </script>
 </x-layout>

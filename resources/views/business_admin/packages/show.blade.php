@@ -62,5 +62,5 @@
             </div>
         </main>
     </div>
-
+    
 </x-layout>
