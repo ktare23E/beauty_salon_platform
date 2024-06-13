@@ -103,7 +103,7 @@
                                         </x-table.td>
                                         <x-table.td>
                                             <x-table.button-action href="{{route('view_package',$package->id)}}">view</x-table.button-action>
-                                            <x-table.button-action href="{{route('edit_service',$package->id)}}">edit</x-table.button-action>
+                                            <x-table.button-action href="{{route('edit_package',$package->id)}}">edit</x-table.button-action>
                                         </x-table.td>
                                     </tr>
                                 @empty

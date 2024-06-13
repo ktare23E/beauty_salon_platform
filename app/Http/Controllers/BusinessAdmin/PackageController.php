@@ -127,7 +127,7 @@ class PackageController extends Controller
     }
 
     public function update(Request $request, Package $package){
-            $request->validate([
+        $request->validate([
             'package_name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'description' => 'required|string|max:255',
@@ -158,5 +158,7 @@ class PackageController extends Controller
         }
 
         $package->serviceVariants()->attach($selectedVariantsId);
+
+        // return redirect()->route('show_business', $request->business_id);
     }
 }
