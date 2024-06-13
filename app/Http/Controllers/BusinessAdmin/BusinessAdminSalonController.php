@@ -5,9 +5,14 @@ namespace App\Http\Controllers\BusinessAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\Requirement;
 use App\Models\Business;
+use App\Models\Package;
+use App\Models\PackageServiceVariant;
 use App\Models\RequirementSubmission;
+use App\Models\Service;
+use App\Models\ServiceVariant;
 use Illuminate\Http\Request;
 use App\Models\User;
+
 
 
 
@@ -77,12 +82,56 @@ class BusinessAdminSalonController extends Controller
     }
 
     public function show(Business $business){
-        $services = $business->services;
+        // $services = $business->services;
+ 
 
-        return view('business_admin.salon.show',[
-            'business' => $business,
-            'services' => $services
-        ]);
+        // return view('business_admin.salon.show',[
+        //     'business' => $business,
+        //     'services' => $services
+        // ]);
+
+        //   Load services with variants and their packageServiceVariants
+        // $business->load('services.variants.packageServiceVariants.package');
+
+        // // Initialize an empty array to collect the package service variants
+        // $data = [];
+        // // Loop through services, variants, and their packageServiceVariants to collect data
+        // foreach ($business->services as $service) {
+        //     foreach ($service->variants as $variant) {
+        //         foreach ($variant->packageServiceVariants as $packageServiceVariant) {
+        //             //retrieve first or 1 package 
+        //             $data[] = $packageServiceVariant->package;
+        //         }
+        //     }
+        // }
+        $services = Service::where('business_id',$business->id)->get();
+        $service_id = [];
+        foreach($services as $service){
+            $service_id[] = $service->id;
+        }
+
+        $ServiceVariants = ServiceVariant::whereIn('service_id',$service_id)->get();
+        $service_variant_id = [];
+
+        foreach($ServiceVariants as $variant){
+            $service_variant_id[] = $variant->id;
+        }
+
+        $packageServices = PackageServiceVariant::whereIn('service_variant_id',$service_variant_id)->get();
+
+        $package_id = [];
+
+        foreach($packageServices as $packServces){
+            $package_id[] = $packServces->package_id;
+        }
+
+        $packageData = Package::whereIn('id',$package_id)->get();
+        return $packageData;
+        // return view('business_admin.salon.show', [
+        //     'business' => $business,
+        //     'services' => $business->services,
+        //     'packageServiceVariants' => $packageServiceVariants,
+        // ]);
     }
     
 }

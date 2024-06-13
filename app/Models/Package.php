@@ -20,4 +20,6 @@ class Package extends Model
     {
         return $this->belongsToMany(ServiceVariant::class,'package_service_variants')->withTimestamps();
     }
+
+
 }

@@ -65,7 +65,7 @@
                 </div>
                 <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md hover:shadow-xl transition-all mx-auto mt-10">
                     <div class="table_container">
-                        <x-table.table id="myTable">
+                        <x-table.table id="myTable2">
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
@@ -76,11 +76,17 @@
                                         Package Description
                                     </x-table.thead>
                                     <x-table.thead>
+                                        Price
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Status
+                                    </x-table.thead>
+                                    <x-table.thead>
                                         Action
                                     </x-table.thead>
                                 </tr>
                             </thead>
-                            <tbody>
+                            {{-- <tbody>
                                 @forelse ($services as $service)
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <x-table.td>
@@ -99,7 +105,7 @@
                                         <td colspan="3" class="text-center py-3">No services yet</td>
                                     </tr>
                                 @endforelse
-                            </tbody>
+                            </tbody> --}}
                         </x-table.table>
                     </div>
                 </div>

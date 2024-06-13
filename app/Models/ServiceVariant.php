@@ -17,4 +17,9 @@ class ServiceVariant extends Model
     {
         return $this->belongsTo(Service::class);
     }
+
+    public function packageServiceVariants()
+    {
+        return $this->hasMany(PackageServiceVariant::class);
+    }
 }
