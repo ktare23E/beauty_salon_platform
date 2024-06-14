@@ -37,9 +37,9 @@ return [
         ],
         'uploads' => [
             'driver' => 'local',
-            'root' => public_path('storage/uploads'),
-            'url' => env('APP_URL').'/storage/uploads',
-            'visibility' => 'public',
+            'root' => public_path('storage/uploads'), // Specify the root directory for uploads
+            'url' => env('APP_URL').'/storage/uploads', // URL used to access files via the web
+            'visibility' => 'public', // Public visibility means files are accessible via URL
         ],
         'public' => [
             'driver' => 'local',
