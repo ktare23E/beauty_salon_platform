@@ -25,6 +25,10 @@ Route::get('/salon_try', function () {
     return view('salon');
 })->name('salon_try');
 
+Route::get('/test', function () {
+    return view('view');
+})->name('test');
+
 Route::get('/map', function () {
     return view('map');
 })->name('map');
