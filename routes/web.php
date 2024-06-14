@@ -25,6 +25,9 @@ Route::get('/salon_try', function () {
     return view('salon');
 })->name('salon_try');
 
+Route::get('/map', function () {
+    return view('map');
+})->name('map');
 
 // Route::get('/login', [LoginController::class, 'index'])->name('login');
 
