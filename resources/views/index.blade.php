@@ -4,7 +4,7 @@
             <a href="/" class="text-md text-white">Beauty Salon Platform</a>
         </div>
         <div class="space-x-5 text-white">
-            <a href="/" class="">Home</a>
+            <a href="{{route('dashboard')}}" class="">Home</a>
             <a href="{{route('test')}}" class="">About</a>
             <a href="{{route('salon_try')}}" class="">Salons</a>
             <a href="/contact" class="">Contact</a>

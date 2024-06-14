@@ -2,7 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
 .diagonal-bg {
     background: linear-gradient(35deg, #f5e9de 50%, #fcdada 50%);
 }
+
 

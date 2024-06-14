@@ -14,7 +14,7 @@ use App\Http\Controllers\BusinessAdmin\BusinessAdminSalonController;
 use App\Http\Controllers\BusinessAdmin\PackageController;
 use App\Http\Controllers\BusinessAdmin\ServiceController;
 use App\Http\Controllers\BusinessAdmin\ServiceVariantController;
-
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return view('index');
@@ -25,9 +25,7 @@ Route::get('/salon_try', function () {
     return view('salon');
 })->name('salon_try');
 
-Route::get('/test', function () {
-    return view('view');
-})->name('test');
+Route::get('/test',[HomeController::class,'displayBusiness'])->name('test');
 
 Route::get('/map', function () {
     return view('map');
