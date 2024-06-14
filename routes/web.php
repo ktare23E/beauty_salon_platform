@@ -21,11 +21,12 @@ Route::get('/', function () {
 })->name('dashboard');
 
 
-Route::get('/salon_try', function () {
-    return view('salon');
-})->name('salon_try');
+// Route::get('/salon_try', function () {
+//     return view('salon');
+// })->name('salon_try');
 
 Route::get('/test',[HomeController::class,'displayBusiness'])->name('test');
+Route::get('/view_salon/{business}',[HomeController::class,'viewSalon'])->name('view_salon');
 
 Route::get('/map', function () {
     return view('map');

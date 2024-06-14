@@ -1,7 +1,7 @@
 <x-layout>
     <!-- nav bar section -->
     <nav class="flex flex-wrap items-center justify-between p-3 bg-[#e8e8e5]">
-        <div class="text-xl">Bappa Flour mill</div>
+        <div class="text-xl">{{$business->business_name}}</div>
         <div class="flex md:hidden">
             <button id="hamburger">
                 <img class="toggle block" src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png"
@@ -49,7 +49,7 @@
         </div>
         <div class="absolute inset-9 flex flex-col md:flex-row items-center justify-between">
             <div class="md:w-1/2 mb-4 md:mb-0">
-                <h1 class="text-grey-700 font-medium text-4xl md:text-5xl leading-tight mb-2">Bappa Flour mill</h1>
+                <h1 class="text-grey-700 font-medium text-4xl md:text-5xl leading-tight mb-2">{{$business->business_name}}</h1>
                 <p class="font-regular text-xl mb-8 mt-4">One stop solution for flour grinding services</p>
                 <a href="#contactUs"
                     class="px-6 py-3 bg-[#c8a876] text-white font-medium rounded-full hover:bg-[#c09858]  transition duration-200">Contact
@@ -261,31 +261,14 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
-
-            <div class="group relative">
-                <img src="{{asset('imgs/salon2.jpg')}}"
-                    alt="Image 1"
-                    class="w-full h-auto object-cover aspect-[16/9] rounded-lg transition-transform transform scale-100 group-hover:scale-105" />
-            </div>
-        
-            <div class="group relative">
-                <img src="{{asset('imgs/service3.jpg')}}"
-                    alt="Image 2"
-                    class="w-full h-auto object-cover aspect-[16/9] rounded-lg transition-transform transform scale-100 group-hover:scale-105" />
-            </div>
-        
-            <div class="group relative">
-                <img src="{{asset('imgs/service1.jpg')}}"
-                    alt="Image 3"
-                    class="w-full h-auto object-cover aspect-[16/9] rounded-lg transition-transform transform scale-100 group-hover:scale-105" />
-            </div>
-        
-            <div class="group relative">
-                <img src="{{asset('imgs/service2.jpg')}}"
-                    alt="Image 4"
-                    class="w-full h-auto object-cover aspect-[16/9] rounded-lg transition-transform transform scale-100 group-hover:scale-105" />
-            </div>
-        
+            @foreach ($images as $image)
+                <div class="group relative">
+                    <img src="{{ asset('storage/' . $image->image_path) }}"
+                        alt="Image 1"
+                        class="w-full h-auto object-cover aspect-[16/9] rounded-lg transition-transform transform scale-100 group-hover:scale-105" />
+                </div>
+            @endforeach
+            
         </div>
         
         

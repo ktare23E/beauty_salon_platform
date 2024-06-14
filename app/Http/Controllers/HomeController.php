@@ -15,4 +15,15 @@ class HomeController extends Controller
             'salons' => $salons
         ]);
     }
+
+    public function viewSalon(Business $business){
+        $images = $business->images;
+        $services = $business->services;
+
+        return view('salon',[
+            'business' => $business,
+            'images' => $images,
+            'services' => $services
+        ]);
+    }
 }

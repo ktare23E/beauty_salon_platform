@@ -6,7 +6,7 @@
         <div class="space-x-5 text-white">
             <a href="{{route('dashboard')}}" class="">Home</a>
             <a href="{{route('test')}}" class="">About</a>
-            <a href="{{route('salon_try')}}" class="">Salons</a>
+            {{-- <a href="{{route('view_salon')}}" class="">Salons</a> --}}
             <a href="/contact" class="">Contact</a>
         </div>
         <div class="space-x-4 text-white">
@@ -20,19 +20,24 @@
             <h1 class="text-white font-semibold text-center text-6xl">Salons</h1>
             <div class="w-[85%] mx-auto grid grid-cols-3 gap-3">
                 @forelse ( $salons as $salon)
-                    <div class="flex px-3 py-3">
-                        <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+                    <div class="flex px-3 py-3 group">
+                        <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white transition-transform transform scale-100 group-hover:scale-105">
                             <img class="w-full" src="{{ asset('storage/' . $salon->business_profile) }}" alt="Sunset in the mountains">
-
                             <div class="px-6 py-4">
-                                <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-                                <p class="text-gray-700 text-base">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
-                                    perferendis eaque, exercitationem praesentium nihil.
+                                <div class="font-bold text-xl mb-2">{{$salon->business_name}}</div>
+                                <p class="text-gray-700 text-base"><span class="font-bold text-black">Address:</span>
+                                    {{$salon->address}}
+                                </p>
+                                <p class="text-gray-700 text-base"><span class="font-bold text-black">Contact:</span>
+                                    {{$salon->contact_info}}
                                 </p>
                             </div>
+                            <div class="px-6">
+                                <div class="text-base font-bold">Descrption:</div>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam accusamus nesciunt nobis soluta maxime aperiam quisquam repellendus quas. Rem, reiciendis.</p>
+                            </div>
                             <div class="px-6 py-4">
-                                <a href="" class="text-blue-500 hover:underline">view</a>
+                                <a href="{{route('view_salon',$salon->id)}}" class="text-white hover:underline bg-black py-1 px-2 rounded-sm cursor-pointer">view</a>
                                 <div class="ratings">
 
                                 </div>
