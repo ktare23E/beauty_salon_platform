@@ -12,7 +12,7 @@ use App\Models\Service;
 use App\Models\ServiceVariant;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use App\Models\BusinessImage;
 
 
 
@@ -37,7 +37,8 @@ class BusinessAdminSalonController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+
+    public function store(Request $request) {
         $user = auth()->user();
     
         // Validate business data
@@ -51,35 +52,55 @@ class BusinessAdminSalonController extends Controller
         $validatedBusinessData['user_id'] = $user->id;
         $validatedBusinessData['status'] = 'pending';
     
+        // Handle business profile upload
+        if ($request->hasFile('business_profile')) {
+            $profilePath = $request->file('business_profile')->store('uploads', 'uploads');
+            $validatedBusinessData['business_profile'] = $profilePath;
+        }
+    
         // Create the business record
         $business = Business::create($validatedBusinessData);
     
-        // Validate file data
+        // Validate images data
         $request->validate([
+            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
             'files.*.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ], [
             'files.*.*.required' => 'At least one image file is required.',
         ]);
     
+        // Store business images
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('storage/uploads'), $imageName);
+        
+                BusinessImage::create([
+                    'business_id' => $business->id,
+                    'image_path' => 'uploads/' . $imageName,
+                ]);
+            }
+        }
+    
         // Iterate through the uploaded files and store them
-        foreach($request->file('files') as $requirementId => $files) {
+        foreach ($request->file('files') as $requirementId => $files) {
             foreach ($files as $file) {
-                // Store the file
-                $filePath = $file->store('uploads', 'public');
-                
-                // Create a requirement submission record
+                $filePath = $file->store('uploads', 'uploads');
+        
                 RequirementSubmission::create([
                     'business_id' => $business->id,
-                    'requirement_id' => $requirementId, // Add the requirement_id
+                    'requirement_id' => $requirementId,
                     'submission_details' => $filePath,
                     'status' => 'pending',
                 ]);
             }
         }
-    
+
         // Redirect after successful operation
         return redirect()->route('business_admin.salon');
     }
+    
+    
 
     public function show(Business $business){
 

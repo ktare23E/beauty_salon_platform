@@ -10,7 +10,7 @@ class Business extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'business_name', 'address', 'contact_info', 'status',
+        'user_id', 'business_name', 'address', 'contact_info', 'status', 'business_profile'
     ];
 
     public function user()
@@ -25,6 +25,11 @@ class Business extends Model
 
     public function requirementsSubmission(){
         return $this->hasMany(RequirementSubmission::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(BusinessImage::class);
     }
 
 }

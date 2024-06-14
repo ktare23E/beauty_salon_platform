@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('address');
             $table->string('contact_info');
             $table->enum('status', ['approved', 'pending', 'declined'])->default('pending');
+            $table->string('business_profile');
             $table->timestamps();
         });
     }
