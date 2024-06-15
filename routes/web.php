@@ -27,6 +27,7 @@ Route::get('/', function () {
 
 Route::get('/test',[HomeController::class,'displayBusiness'])->name('test');
 Route::get('/view_salon/{business}',[HomeController::class,'viewSalon'])->name('view_salon');
+Route::get('/view_service/{service}',[HomeController::class,'viewService'])->name('view_service');
 
 Route::get('/map', function () {
     return view('map');

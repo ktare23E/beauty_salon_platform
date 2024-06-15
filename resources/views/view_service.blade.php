@@ -61,24 +61,25 @@
     <!-- our services section -->
     <section class="py-10" id="services">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Our Services</h2>
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">{{$service->service_name}} Variants</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 ">
-                @forelse ($services as $service)
+                @forelse ($service_variants as $service_variant)
                     <div class="group">
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform scale-100 group-hover:scale-105">
                             <img src="{{asset('imgs/service1.jpg')}}"
                                 alt="wheat flour grinding" class="w-full h-64 object-cover ">
                             <div class="p-6 text-center">
-                                <h3 class="text-xl font-medium text-gray-800 mb-2">{{$service->service_name}}</h3>
+                                <h3 class="text-xl font-medium text-gray-800 mb-2">{{$service->name}}</h3>
                                 <p class="text-gray-700 text-base">{{$service->description}}</p>
+                                <p class="text-gray-700 text-base">{{$service->price}}</p>
                             </div>
                             <div class="pb-4 text-center">
-                                <a href="{{route('view_service',$service->id)}}" class="text-white hover:underline bg-black py-1 px-2 rounded-sm cursor-pointer">view</a>
+                                <a href="{{route('view_salon',$service->id)}}" class="text-white hover:underline bg-black py-1 px-2 rounded-sm cursor-pointer">view</a>
                             </div>
                         </div>
                     </div>
                 @empty
-                    <h1 class="text-center">No Services Yet.</h1>
+                    <h1 class="text-center">No {{$service->service_name}} variant Yet.</h1>
                 @endforelse
                 
                 {{-- <div class="group">
@@ -181,34 +182,6 @@
         </div>
     </section>
 
-    <!-- about us -->
-    <section class="bg-gray-100" id="aboutus">
-        <div class="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                <div class="max-w-lg">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">About Us</h2>
-                    <p class="mt-4 text-gray-600 text-lg">
-                        Bappa flour mill provides our customers with the highest quality products and services. We offer
-                        a
-                        wide variety of flours and spices to choose from, and we are always happy to help our customers
-                        find
-                        the perfect products for their needs.
-                        We are committed to providing our customers with the best possible experience. We offer
-                        competitive
-                        prices, fast shipping, and excellent customer service. We are also happy to answer any questions
-                        that our customers may have about our products or services.
-                        If you are looking for a flour and spices service business that can provide you with the highest
-                        quality products and services, then we are the company for you. We look forward to serving you!
-                    </p>
-                </div>
-                <div class="mt-12 md:mt-0">
-                    <img src="https://images.unsplash.com/photo-1531973576160-7125cd663d86" alt="About Us Image"
-                        class="object-cover rounded-lg shadow-md">
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- why us  -->
     <section class="text-gray-700 body-font mt-10">
         <div class="flex justify-center text-3xl font-bold text-gray-800 text-center">
@@ -267,68 +240,20 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
-            @foreach ($images as $image)
+            @forelse ($service_images as $image )
                 <div class="group relative">
-                    <img src="{{ asset('storage/' . $image->image_path) }}"
+                    <img src="{{ asset('' . $image->path) }}"
                         alt="Image 1"
                         class="w-full h-auto object-cover aspect-[16/9] rounded-lg transition-transform transform scale-100 group-hover:scale-105" />
                 </div>
-            @endforeach
+            @empty
+                <h1>No images yet.</h1>
+            @endforelse
             
         </div>
     </section>
 
-    <!-- Visit us section -->
-    <section class="bg-gray-100">
-        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:py-20 lg:px-8">
-            <div class="max-w-2xl lg:max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl font-extrabold text-gray-900" id="contactUs">Visit Our Location</h2>
-                <p class="mt-3 text-lg text-gray-500">Let us serve you the best</p>
-            </div>
-            <div class="mt-8 lg:mt-20">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <div class="max-w-full mx-auto rounded-lg overflow-hidden">
-                            <div class="border-t border-gray-200 px-6 py-4">
-                                <h3 class="text-lg font-bold text-gray-900">Contact</h3>
-                                <p class="mt-1 font-bold text-gray-600"><a href="tel:+123">Phone: +91
-                                        123456789</a></p>
-                                <a class="flex m-1" href="tel:+919823331842">
-                                    <div class="flex-shrink-0">
-                                        <div
-                                            class="flex items-center justify-between h-10 w-30 rounded-md bg-indigo-500 text-white p-2">
-                                            <!-- Heroicon name: phone -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                                            </svg>
-                                            Call now
-                                        </div>
-                                    </div>
-
-                                </a>
-                            </div>
-                            <div class="px-6 py-4">
-                                <h3 class="text-lg font-medium text-gray-900">Our Address</h3>
-                                <p class="mt-1 text-gray-600">Sale galli, 60 foot road, Latur</p>
-                            </div>
-                            <div class="border-t border-gray-200 px-6 py-4">
-                                <h3 class="text-lg font-medium text-gray-900">Hours</h3>
-                                <p class="mt-1 text-gray-600">Monday - Sunday : 2pm - 9pm</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rounded-lg overflow-hidden order-none sm:order-first">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63206.39949991296!2d123.70967212344421!3d8.060621128727119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32544c586cd142a5%3A0x432227ecbe5b7109!2sTangub%20City%20Plaza!5e0!3m2!1sen!2sph!4v1718320898136!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
+    
     <!-- footer -->
     <section>
         <footer class="bg-gray-200 text-white py-4 px-3">

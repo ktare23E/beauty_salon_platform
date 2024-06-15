@@ -57,9 +57,7 @@
                                         </x-table.td>
                                     </tr>
                                 @empty
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td colspan="5" class="text-center py-3">No variants yet</td>
-                                </tr>
+        
                                 @endforelse
                             </tbody>
                         </x-table.table>
