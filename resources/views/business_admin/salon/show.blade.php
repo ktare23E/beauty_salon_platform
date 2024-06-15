@@ -47,9 +47,7 @@
                                         </x-table.td>
                                     </tr>
                                 @empty
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <td colspan="3" class="text-center py-3">No services yet</td>
-                                    </tr>
+                             
                                 @endforelse
                             </tbody>
                         </x-table.table>
@@ -107,9 +105,7 @@
                                         </x-table.td>
                                     </tr>
                                 @empty
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <td colspan="5" class="text-center py-3">No services yet</td>
-                                    </tr>
+                            
                                 @endforelse
                             </tbody>
                         </x-table.table>
@@ -120,7 +116,7 @@
                 <h1 class="font-bold text-2xl">Clients</h1>
                 <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md hover:shadow-xl transition-all mx-auto">
                     <div class="table_container">
-                        <x-table.table id="myTable2">
+                        <x-table.table id="myTable3">
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
@@ -167,7 +163,7 @@
                 <h1 class="font-bold text-2xl">Bookings</h1>
                 <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md hover:shadow-xl transition-all mx-auto">
                     <div class="table_container">
-                        <x-table.table id="myTable2">
+                        <x-table.table id="myTable4">
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
@@ -218,6 +214,8 @@
         $(document).ready( function () {
             $('#myTable').DataTable();
             $('#myTable2').DataTable();
+            $('#myTable3').DataTable();
+            $('#myTable4').DataTable();
         } );
 
     </script>

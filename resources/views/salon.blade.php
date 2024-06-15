@@ -63,19 +63,24 @@
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Our Services</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 ">
-                <div class="group">
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform scale-100 group-hover:scale-105">
-                        <img src="{{asset('imgs/service1.jpg')}}"
-                            alt="wheat flour grinding" class="w-full h-64 object-cover ">
-                        <div class="p-6 text-center">
-                            <h3 class="text-xl font-medium text-gray-800 mb-2">Wheat Flour Grinding</h3>
-                            <p class="text-gray-700 text-base">Our wheat flour grinding service provides fresh, high-quality
-                                flour to businesses and individuals in the area. We use state-of-the-art equipment to grind
-                                wheat into flour, and we offer a variety of flours to meet the needs of our customers.</p>
+                @forelse ($services as $service)
+                    <div class="group">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform scale-100 group-hover:scale-105">
+                            <img src="{{asset('imgs/service1.jpg')}}"
+                                alt="wheat flour grinding" class="w-full h-64 object-cover ">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-medium text-gray-800 mb-2">Wheat Flour Grinding</h3>
+                                <p class="text-gray-700 text-base">Our wheat flour grinding service provides fresh, high-quality
+                                    flour to businesses and individuals in the area. We use state-of-the-art equipment to grind
+                                    wheat into flour, and we offer a variety of flours to meet the needs of our customers.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="group">
+                @empty
+                    <h1 class="text-center">No Services Yet.</h1>
+                @endforelse
+                
+                {{-- <div class="group">
                     <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform scale-100 group-hover:scale-105">
                         <img src="https://images.unsplash.com/photo-1606854428728-5fe3eea23475?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z3JhbSUyMGZsb3VyfGVufDB8fDB8fHww"
                             alt="Coffee" class="w-full h-64 object-cover">
@@ -170,7 +175,7 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -210,7 +215,7 @@
         </div>
         <div class="container px-5 py-12 mx-auto">
             <div class="flex flex-wrap text-center justify-center">
-                <div class="p-4 md:w-1/4 sm:w-1/2">
+                {{-- <div class="p-4 md:w-1/4 sm:w-1/2">
                     <div class="px-4 py-6 transform transition duration-500 hover:scale-110">
                         <div class="flex justify-center">
                             <img src="https://image3.jdomni.in/banner/13062021/58/97/7C/E53960D1295621EFCB5B13F335_1623567851299.png?output-format=webp"
@@ -218,7 +223,7 @@
                         </div>
                         <h2 class="title-font font-regular text-2xl text-gray-900">Latest Milling Machinery</h2>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="p-4 md:w-1/4 sm:w-1/2">
                     <div class="px-4 py-6 transform transition duration-500 hover:scale-110">
@@ -270,9 +275,6 @@
             @endforeach
             
         </div>
-        
-        
-
     </section>
 
     <!-- Visit us section -->

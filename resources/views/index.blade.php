@@ -5,7 +5,7 @@
         </div>
         <div class="space-x-5 text-white">
             <a href="{{route('dashboard')}}" class="">Home</a>
-            <a href="{{route('test')}}" class="">About</a>
+            <a href="{{route('test')}}" class="">Salons</a>
             {{-- <a href="{{route('view_salon')}}" class="">Salons</a> --}}
             <a href="/contact" class="">Contact</a>
         </div>
