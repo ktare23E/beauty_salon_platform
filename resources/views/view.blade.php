@@ -1,5 +1,5 @@
 <x-layout>
-    <x-nav class="bg-inherit">
+    <x-nav>
         <div class="flex-shrink-0">
             <a href="/" class="text-md text-white">Beauty Salon Platform</a>
         </div>
@@ -44,15 +44,18 @@
                 @empty
                     <h1 class="text-white font-semibold text-center text-6xl">No Salon Existed Yet.</h1>
                 @endforelse
-                
-                
-                
-                
-                
             </div>
         </div>
-
-        
     </div>
-
+    <script>
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) { // Adjust this value as needed
+                    $('#nav_bar').addClass('bg-black bg-opacity-80');
+                } else {
+                    $('#nav_bar').removeClass('bg-black bg-opacity-80');
+                }
+            });
+        });
+    </script>
 </x-layout>

@@ -1,3 +1,3 @@
-<div class="h-10 bg-transparent fixed flex justify-between w-full items-center px-6 font-bold">
+<div id="nav_bar" class="h-10 fixed flex justify-between w-full items-center px-6 font-bold z-10">
     {{$slot}}
 </div>
