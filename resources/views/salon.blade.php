@@ -43,8 +43,8 @@
     <!-- hero seciton -->
     <div class="relative w-full h-[320px]" id="home">
         <div class="absolute inset-0 opacity-70">
-            <img src="{{asset('imgs/service1.jpg')}}"
-                alt="Background Image" class="object-cover object-center w-full h-full" />
+            <img class="w-full h-full object-cover" src="{{ asset('storage/' . $business->business_profile) }}" alt="Sunset in the mountains">
+
 
         </div>
         <div class="absolute inset-9 flex flex-col md:flex-row items-center justify-between">
@@ -177,6 +177,33 @@
                         </div>
                     </div>
                 </div> --}}
+            </div>
+        </div>
+    </section>
+
+    {{-- Package --}}
+    <section class="py-10" id="packages">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Our Packages</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 ">
+                @forelse ($packages as $package)
+                    <div class="group">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform scale-100 group-hover:scale-105">
+                            <img src="{{asset('imgs/service1.jpg')}}"
+                                alt="wheat flour grinding" class="w-full h-64 object-cover ">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-medium text-gray-800 mb-2">{{$package->package_name}}</h3>
+                                <p class="text-gray-700 text-base">{{$package->description}}</p>
+                                <p class="text-gray-700 text-base">Price: ₱{{ number_format($package->price , 2)}}</p>
+                            </div>
+                            <div class="pb-4 text-center">
+                                <a href="{{route('view_service',$package->id)}}" class="text-white hover:underline bg-black py-1 px-2 rounded-sm cursor-pointer">view</a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <h1 class="text-center">No Packages Yet.</h1>
+                @endforelse
             </div>
         </div>
     </section>

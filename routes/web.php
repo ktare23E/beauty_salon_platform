@@ -33,6 +33,10 @@ Route::get('/map', function () {
     return view('map');
 })->name('map');
 
+Route::get('/checkout', function () {
+    return view('checkout');
+})->name('checkout');
+
 // Route::get('/login', [LoginController::class, 'index'])->name('login');
 
 //need to be login before can access to the user page, admin page and business_admin page

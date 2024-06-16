@@ -69,8 +69,8 @@
                             <img src="{{asset('imgs/service1.jpg')}}"
                                 alt="wheat flour grinding" class="w-full h-64 object-cover ">
                             <div class="p-6 text-center">
-                                <h3 class="text-xl font-medium text-gray-800 mb-2">{{$service->name}}</h3>
-                                <p class="text-gray-700 text-base">{{$service->description}}</p>
+                                <h3 class="text-xl font-medium text-gray-800 mb-2">{{$service_variant->name}}</h3>
+                                <p class="text-gray-700 text-base">{{$service_variant->description}}</p>service_variant
                                 <p class="text-gray-700 text-base">{{$service->price}}</p>
                             </div>
                             <div class="pb-4 text-center">
@@ -181,6 +181,7 @@
             </div>
         </div>
     </section>
+    
 
     <!-- why us  -->
     <section class="text-gray-700 body-font mt-10">
