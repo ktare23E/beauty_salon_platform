@@ -33,9 +33,9 @@ Route::get('/map', function () {
     return view('map');
 })->name('map');
 
-Route::get('/checkout', function () {
+Route::get('/user_cart', function () {
     return view('checkout');
-})->name('checkout');
+})->name('user_cart');
 
 // Route::get('/login', [LoginController::class, 'index'])->name('login');
 
