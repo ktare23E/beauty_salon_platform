@@ -14,6 +14,13 @@ class CartController extends Controller
 {
     //
 
+    public function viewCart(){
+        $userCart = Auth::user()->cart()->with('items')->first();
+
+        dd($userCart);
+        return view('checkout', compact('userCart'));
+    }
+
     public function clientCartCount(){
         $userId = auth()->id();
         $user = User::with(['cart' => function($query) {
@@ -36,8 +43,17 @@ class CartController extends Controller
         // Determine the item type and add to cart
         if ($request->has('service_variant_id')) {
             $item = ServiceVariant::findOrFail($request->service_variant_id);
+
         } elseif ($request->has('package_id')) {
             $item = Package::findOrFail($request->package_id);
+
+            // Retrieve the first service variant related to the package
+            $serviceVariant = $item->serviceVariants()->first();
+            if ($serviceVariant) {
+                $businessId = $serviceVariant->service->business->id;
+            } else {
+                return response()->json(['message' => 'Package has no associated service variants'], 400);
+            }
         } else {
             return response()->json(['message' => 'Invalid item type'], 400);
         }
@@ -48,5 +64,16 @@ class CartController extends Controller
         ]);
 
         $cart->items()->save($cartItem);
+
+        //dynamic redirect 
+
+        //retrieve certain business id
+
+
+        if($request->has('service_variant_id')){
+            return redirect()->route('view_service', ['service' => $item->service_id]);
+        }else{
+            return redirect()->route('view_salon', ['business' => $businessId]);
+        }
     }
 }
