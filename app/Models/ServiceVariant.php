@@ -22,4 +22,9 @@ class ServiceVariant extends Model
     {
         return $this->hasMany(PackageServiceVariant::class);
     }
+
+    public function cartItems()
+    {
+        return $this->morphMany(CartItem::class, 'item');
+    }
 }

@@ -25,4 +25,9 @@ class Package extends Model
     {
         return $this->hasManyThrough(Service::class, ServiceVariant::class);
     }
+
+    public function cartItems()
+    {
+        return $this->morphMany(CartItem::class, 'item');
+    }
 }
