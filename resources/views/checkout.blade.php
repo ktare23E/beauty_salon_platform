@@ -40,7 +40,7 @@
                                 <div id="userMenu" class="hidden absolute right-0 mt-3 w-32 text-start bg-white border border-gray-200 rounded-md shadow-lg z-10">
                                     <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
                                     <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Bookings</a>
-                                    <button class="block w-full px-4 py-2 text-gray-800 hover:bg-gray-100" form="logout">Logout</button>
+                                    <button class="block w-full px-4 py-2 text-gray-800 hover:bg-gray-100 text-start" form="logout">Logout</button>
                                     <x-forms.form action="{{route('logout')}}" method="POST" id="logout">
                                         @csrf
                                     </x-forms.form>
@@ -54,7 +54,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                 </svg>
                             </div>
-                            <div id="userMenu" class="hidden absolute right-0 mt-3 w-32 text-center bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                            <div id="userMenu" class="hidden absolute right-0 mt-3 w-32 text-start bg-white border border-gray-200 rounded-md shadow-lg z-10">
                                 <a href="{{route('login')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Login</a>
                                 <a href="{{route('register.index')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Register</a>
                             </div>
@@ -81,29 +81,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($userCart->items as $items)
-                                <tr class="border-b-2">
-                                    <td class="py-4">
-                                        <div class="flex items-center">
-                                            <img class="h-16 w-16 mr-4" src="https://via.placeholder.com/150" alt="Product image">
-                                            <span class="font-semibold">
-                                                @if($items->item->name)
-                                                    {{$items->item->name}}
-                                                @else
-                                                    {{$items->item->package_name}}
-                                                @endif
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">₱{{ number_format($items->item->price , 2)}}</td>
-                                    <td class="py-4">
-                                        <input type="hidden" value="{{$items->id}}">
-                                        <button class="bg-red-600 text-white text-sm py-1 px-2 rounded-sm">remove</button>
-                                    </td>
-                                </tr>
-                                @empty
-                                    
-                                @endforelse
+                            
+                                @if ($userCart)
+                                    @foreach ($userCart->items as $items)
+                                    <tr class="border-b-2">
+                                        <td class="py-4">
+                                            <div class="flex items-center">
+                                                <img class="h-16 w-16 mr-4" src="https://via.placeholder.com/150" alt="Product image">
+                                                <span class="font-semibold">
+                                                    @if($items->item->name)
+                                                        {{$items->item->name}}
+                                                    @else
+                                                        {{$items->item->package_name}}
+                                                    @endif
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="py-4">₱{{ number_format($items->item->price , 2)}}</td>
+                                        <td class="py-4">
+                                            <input type="hidden" value="{{$items->id}}">
+                                            <button class="bg-red-600 text-white text-sm py-1 px-2 rounded-sm">remove</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                @else   
+                                    <tr col="3" class="text-center">
+                                        <td>No items in the cart</td>
+                                    </tr>
+                                @endif
                                 
                                 <!-- More product rows -->
                             </tbody>
@@ -113,7 +118,8 @@
                 <div class="md:w-1/4">
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <h2 class="text-lg font-semibold mb-4">Summary</h2>
-                        @forelse ($userCart->items as $items)
+                        @if ($userCart)
+                            @foreach ($userCart->items as $items)
                             <div class="flex justify-between mb-2">
                                 <span>
                                     @if($items->item->name)
@@ -124,9 +130,15 @@
                                 </span>
                                 <span>₱{{ number_format($items->item->price , 2)}}</span>
                             </div>
-                        @empty
+                            @endforeach
+                        @else
+                            <div class="flex justify-between mb-2">
+                                <span>Subtotal</span>
+                                <span>₱0.00</span>
+                            </div>
+                        @endif
                             
-                        @endforelse
+    
                         {{-- <div class="flex justify-between mb-2">
                             <span>Subtotal</span>
                             <span>$19.99</span>

@@ -15,17 +15,17 @@ class CartController extends Controller
     //
 
     public function viewCart(){
+    // Retrieve the user's cart with items and their details
         $userCart = Auth::user()->cart()->with('items.item')->first();
 
         $totalPrice = 0;
 
-        foreach($userCart->items as $items){
-            $totalPrice += $items->item->price;
-            //retrieve 1 service_id
-    
+        if ($userCart) {
+            // Calculate the total price of items in the cart
+            foreach ($userCart->items as $items) {
+                $totalPrice += $items->item->price;
+            }
         }
-
-
 
         return view('checkout', [
             'userCart' => $userCart,
