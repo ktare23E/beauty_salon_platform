@@ -1,5 +1,6 @@
 <x-layout>
     <!-- nav bar section -->
+
     <nav class="fixed top-0 right-0 left-0 z-10 flex flex-wrap items-center justify-between p-3 bg-[#e8e8e5]">
         <div class="text-xl">{{$business->business_name}}</div>
         <div class="flex md:hidden">
@@ -12,7 +13,6 @@
         </div>
         <div class=" toggle hidden w-full md:w-auto md:flex text-right text-bold mt-5 md:mt-0 md:border-none">
             <a href="{{route('dashboard')}}" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Home
-            </a>
             <a href="#services" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Services
             </a>
             <a href="#packages" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Packages
@@ -26,42 +26,55 @@
         </div>
 
         <div class="toggle w-full text-end hidden md:flex md:w-auto px-2 py-2 md:rounded">
-            <a href="tel:+123">
-                <div class="flex justify-end items-center gap-4">
-                    <a href="{{route('user_cart')}}" class="flex items-center h-10 w-30 rounded-md bg-[#c8a876] text-white font-medium p-2 gap-1 relative">
-                        <!-- Heroicon name: phone -->
+            <div class="flex justify-end items-center gap-4">
+                <a href="{{route('user_cart')}}" class="flex items-center h-10 w-30 rounded-md bg-[#c8a876] text-white font-medium p-2 gap-1 relative">
+                    <!-- Heroicon name: phone -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                    </svg>
+                    Your Cart
+                    <span class="cart_number absolute top-0 left-4 bg-red-600 text-white text-xs rounded-full px-1.5 py-0.5">0</span>
+                </a>
+                <div class="relative">
+                    <div id="userIcon" class="cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                         </svg>
-                        Your Cart
-                        <span class="cart_number absolute top-0 left-4 bg-red-600 text-white text-xs rounded-full px-1.5 py-0.5">3</span>
-                    </a>
-                    <div class="relative">
-                        <div id="userIcon" class="cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                            </svg>
-                        </div>
-                        <div id="userMenu" class="hidden absolute right-0 mt-3 w-32 text-center bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
-                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Bookings</a>
-                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
-                        </div>
                     </div>
+                    @auth
+                        <div class="relative">
+                            <div id="userIcon" class="cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                            </div>
+                            <div id="userMenu" class="hidden absolute right-0 mt-3 w-32 text-center bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
+                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Bookings</a>
+                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                            </div>
+                        </div>
+                    @endauth
+                    @guest
+                        <div id="userMenu" class="hidden absolute right-0 mt-3 w-32 text-center bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                            <a href="{{route('login')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Login</a>
+                            <a href="{{route('register.index')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Register</a>
+                        </div>
+                    @endguest
                 </div>
-            </a>
+            </div>
         </div>
     </nav>
 
     <!-- hero seciton -->
     <div class="relative w-full h-[320px] pt-3" id="home">
-        <div class="absolute inset-0 opacity-70">
+        <div class="absolute inset-0 opacity-40">
             <img class="w-full h-full object-cover" src="{{ asset('storage/' . $business->business_profile) }}" alt="Sunset in the mountains">
         </div>
-        <div class="absolute inset-9 flex flex-col md:flex-row items-center justify-between">
+        <div class="absolute inset-9 flex flex-col md:flex-row items-center justify-between z-10">
             <div class="md:w-1/2 mb-4 md:mb-0">
-                <h1 class="text-grey-700 font-medium text-4xl md:text-5xl leading-tight mb-2">{{$business->business_name}}</h1>
-                <p class="font-regular text-xl mb-8 mt-4">One stop solution for beauty services</p>
+                <h1 class="text-grey-700 font-bold text-4xl md:text-5xl leading-tight mb-2">{{$business->business_name}}</h1>
+                <p class="font-bold text-xl mb-8 mt-4">One stop solution for beauty services</p>
                 <a href="#contactUs"
                     class="px-6 py-3 bg-[#c8a876] text-white font-medium rounded-full hover:bg-[#c09858]  transition duration-200">Contact
                     Us</a>
@@ -83,8 +96,8 @@
                                 <h3 class="text-xl font-medium text-gray-800 mb-2">{{$service->service_name}}</h3>
                                 <p class="text-gray-700 text-base">{{$service->description}}</p>
                             </div>
-                            <div class="pb-4 text-center">
-                                <a href="{{route('view_service',$service->id)}}" class="text-white hover:underline bg-black py-1 px-2 rounded-sm cursor-pointer">view</a>
+                            <div class="text-center">
+                                <a href="{{route('view_service',$service->id)}}" class="block text-white hover:underline bg-black py-1 px-2 rounded-sm cursor-pointer">view</a>
                             </div>
                         </div>
                     </div>
@@ -92,60 +105,7 @@
                     <h1 class="text-center">No Services Yet.</h1>
                 @endforelse
                 
-                {{-- <div class="group">
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform scale-100 group-hover:scale-105">
-                        <img src="https://images.unsplash.com/photo-1606854428728-5fe3eea23475?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z3JhbSUyMGZsb3VyfGVufDB8fDB8fHww"
-                            alt="Coffee" class="w-full h-64 object-cover">
-                        <div class="p-6 text-center">
-                            <h3 class="text-xl font-medium text-gray-800 mb-2">Gram Flour Grinding</h3>
-                            <p class="text-gray-700 text-base">Our gram flour is perfect for a variety of uses, including
-                                baking, cooking, and making snacks. It is also a good source of protein and fiber.Our gram
-                                flour
-                                grinding service is a convenient and affordable way to get the freshest gram flour possible.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="group">
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform scale-100 group-hover:scale-105">
-                        <img src="https://image2.jdomni.in/banner/13062021/D2/99/0D/48D7F4AFC48C041DC8D80432E9_1623562146900.png?output-format=webp"
-                            alt="Coffee" class="w-full h-64 object-cover">
-                        <div class="p-6 text-center">
-                            <h3 class="text-xl font-medium text-gray-800 mb-2">Jowar Flour Grinding</h3>
-                            <p class="text-gray-700 text-base">Our jowar grinding service is a convenient and affordable way
-                                to
-                                get fresh, high-quality jowar flour. We use state-of-the-art equipment to grind jowar into a
-                                fine powder, which is perfect for making roti, bread, and other dishes.
-                            <details>
-                                <summary>Read More</summary>
-                                <p>Our jowar flour is also
-                                    a good source of protein and fiber, making it a healthy choice for your family.</p>
-                            </details>
-                            </p>
-    
-                        </div>
-                    </div>
-                </div>
-                <div class="group">
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform scale-100 group-hover:scale-105">
-                        <img src="https://images.unsplash.com/photo-1607672632458-9eb56696346b?q=80&w=1914&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            alt="Coffee" class="w-full h-64 object-cover">
-                        <div class="p-6 text-center">
-                            <h3 class="text-xl font-medium text-gray-800 mb-2">Chilli pounding</h3>
-                            <p class="text-gray-700 text-base">We specializes in the production of high-quality chili
-                                powder.
-                                Our chili powder is made from the finest, freshest chilies, and we use traditional pounding
-                                methods to ensure that our chili powder retains its full flavor and aroma.
-                            <details>
-                                <summary>Read More</summary>
-                                <p> We offer a variety of chili powder products, including mild, medium, and hot. We also
-                                    offer
-                                    custom blends to meet the specific needs of our customers.</p>
-                            </details>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                {{-- 
                 <div class="group">
                         <!-- special card -->
                     <div
@@ -165,29 +125,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="group">
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform scale-100 group-hover:scale-105">
-                        <img src="https://media.istockphoto.com/id/1265641298/photo/fried-papad.jpg?s=612x612&w=0&k=20&c=e_iEy4CTvU6Thn02zGgKt_TiSYAheCKmgfTF5j52ovU="
-                            alt="papad" class="w-full h-64 object-cover">
-                        <div class="p-6 text-center">
-                            <h3 class="text-xl font-medium text-gray-800 mb-2">Rice Papad</h3>
-                            <p class="text-gray-700 text-base">Our company produces high-quality rice papad that is made
-                                with
-                                the finest ingredients. We use traditional methods to make our papad, which gives it a
-                                unique
-                                flavor and texture. Our papad is also gluten-free and vegan.
-                            <details>
-                                <summary>Read More</summary>
-                                <p> We offer a variety of rice papad flavors, including plain, salted, spicy, and flavored.
-                                    We
-                                    also
-                                    offer a variety of sizes and shapes to choose from. Our papad is available in bulk or in
-                                    individual packages.</p>
-                            </details>
-                            </p>
-                        </div>
-                    </div>
-                </div> --}}
+                --}}
             </div>
         </div>
     </section>
@@ -210,6 +148,7 @@
                             </div>
                             <div class="pb-4 text-center">
                                 <button onclick='viewPackageInclusion({{$package->id}},"package_inclusion")' class="text-white hover:underline bg-black py-1 px-2 rounded-sm cursor-pointer">view</button>
+                                <button class="bg-green-500 py-1 px-4 text-center text-white rounded-sm">Add to Cart</button>
                             </div>
                         </div>
                     </div>
@@ -445,6 +384,13 @@
                     console.log(response);
                     $('.package_name').html(response.data.package.package_name);
 
+                    let formattedPackagePrice = Number(response.data.package.price).toLocaleString('en-PH', {
+                            style: 'currency',
+                            currency: 'PHP',
+                            minimumFractionDigits: 2,
+                        });
+                    $('.package_price').html(formattedPackagePrice);
+
                     // Clear previous content or initialize an empty string if appending
                     let service_variants = response.data.service_variants;
                     let tableHtml = '';
@@ -474,6 +420,18 @@
             $('#' + modal).toggleClass('hidden');
         }
 
+        //check the cart number of this user and display it
+        $.ajax({
+            url: "{{ route('cart_number') }}",
+            type: 'GET',
+            success: function(response) {
+                console.log(response);
+                $('.cart_number').html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
     </script>
 
 </x-layout>

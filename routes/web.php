@@ -15,6 +15,7 @@ use App\Http\Controllers\BusinessAdmin\PackageController;
 use App\Http\Controllers\BusinessAdmin\ServiceController;
 use App\Http\Controllers\BusinessAdmin\ServiceVariantController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Client\CartController;
 
 Route::get('/', function () {
     return view('index');
@@ -36,9 +37,9 @@ Route::get('/map', function () {
     return view('map');
 })->name('map');
 
-Route::get('/user_cart', function () {
-    return view('checkout');
-})->name('user_cart');
+
+Route::get('/cart_number',[CartController::class,'clientCartCount'])->name('cart_number');
+
 
 // Route::get('/login', [LoginController::class, 'index'])->name('login');
 
@@ -52,6 +53,11 @@ Route::middleware(['auth'])->group(function () {
         }
         return view('user.index');
     })->name('user.index');
+
+    Route::get('/user_cart', function () {
+        return view('checkout');
+    })->name('user_cart');
+    
 
 
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
