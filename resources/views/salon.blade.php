@@ -36,11 +36,6 @@
                     <span class="cart_number absolute top-0 left-4 bg-red-600 text-white text-xs rounded-full px-1.5 py-0.5">0</span>
                 </a>
                 <div class="relative">
-                    <div id="userIcon" class="cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        </svg>
-                    </div>
                     @auth
                         <div class="relative">
                             <div id="userIcon" class="cursor-pointer">
@@ -148,7 +143,11 @@
                             </div>
                             <div class="pb-4 text-center">
                                 <button onclick='viewPackageInclusion({{$package->id}},"package_inclusion")' class="text-white hover:underline bg-black py-1 px-2 rounded-sm cursor-pointer">view</button>
-                                <button class="bg-green-500 py-1 px-4 text-center text-white rounded-sm">Add to Cart</button>
+                                <input type="submit" class="bg-green-500 py-1 px-4 text-center text-white rounded-sm" value="Add to Cart" form="addToCart"></input>
+                                <x-forms.form method="POST" action="{{route('addToCart')}}" id="addToCart">
+                                    @csrf
+                                    <input type="hidden" name="package_id" value="{{$package->id}}">
+                                </x-forms.form>
                             </div>
                         </div>
                     </div>

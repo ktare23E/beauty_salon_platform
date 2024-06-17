@@ -27,27 +27,29 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                         </svg>
                         Your Cart
-                        <span class="cart_number absolute top-0 left-4 bg-red-600 text-white text-xs rounded-full px-1.5 py-0.5"></span>
+                        <span class="cart_number absolute top-0 left-4 bg-red-600 text-white text-xs rounded-full px-1.5 py-0.5">0</span>
                     </a>
                     <div class="relative">
-                        <div id="userIcon" class="cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                            </svg>
-                        </div>
-                        <div id="userIcon" class="cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                            </svg>
-                        </div>
-                        <div id="userMenu" class="hidden absolute right-0 mt-3 w-32 text-center bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
-                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Bookings</a>
-                            <form action="{{route('logout')}}" method="post" class="inline">
-                                @csrf
-                                <button type="submit" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-center">Logout</button>
-                            </form>
-                        </div>
+                        @auth
+                            <div class="relative">
+                                <div id="userIcon" class="cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
+                                </div>
+                                <div id="userMenu" class="hidden absolute right-0 mt-3 w-32 text-center bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
+                                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Bookings</a>
+                                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                                </div>
+                            </div>
+                        @endauth
+                        @guest
+                            <div id="userMenu" class="hidden absolute right-0 mt-3 w-32 text-center bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                                <a href="{{route('login')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Login</a>
+                                <a href="{{route('register.index')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Register</a>
+                            </div>
+                        @endguest
                     </div>
                 </div>
             </a>
@@ -55,10 +57,17 @@
     </nav>
     <div class="w-full h-screen bg-cover bg-no-repeat bg-left bg-fixed flex items-center justify-around" style="background-image: url({{ asset('imgs/salon.jpg') }})">
             <div class="text-center text-white">
-                <h1 class="text-4xl font-semibold leading-tight">
-                    Welcome to Beauty Salon Platform {{auth()->user()->first_name}}
-                </h1>
-                <a href="" class="text-sm">Get Started</a>
+                @auth
+                    <h1 class="text-4xl font-semibold leading-tight">
+                        Welcome to Beauty Salon Platform {{auth()->user()->first_name}}
+                    </h1>
+                @endauth
+                @guest
+                    <h1 class="text-4xl font-semibold leading-tight">
+                        Welcome to Beauty Salon Platform
+                    </h1>
+                @endguest
+                <a href="{{route('test')}}" class="text-sm">Get Started</a>
             </div>
             <div class="bg-gray-900 p-[0.6rem] grid grid-cols-2 gap-3 rotate-6">
                 <div class="p-[0.5rem] bg-[#f6f6f6] w-64">

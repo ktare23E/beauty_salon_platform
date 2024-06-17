@@ -57,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user_cart', function () {
         return view('checkout');
     })->name('user_cart');
+
+    Route::post('/addToCart', [CartController::class, 'addToCart'])->name('addToCart');
     
 
 
