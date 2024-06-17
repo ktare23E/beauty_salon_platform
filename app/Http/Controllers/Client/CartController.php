@@ -15,9 +15,8 @@ class CartController extends Controller
     //
 
     public function viewCart(){
-        $userCart = Auth::user()->cart()->with('items')->first();
+        $userCart = Auth::user()->cart()->with('items.item')->first();
 
-        dd($userCart);
         return view('checkout', compact('userCart'));
     }
 

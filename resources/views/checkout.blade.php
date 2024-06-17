@@ -8,30 +8,31 @@
                         <table class="w-full">
                             <thead>
                                 <tr>
-                                    <th class="text-left font-semibold">Product</th>
+                                    <th class="text-left font-semibold">Service/Package</th>
                                     <th class="text-left font-semibold">Price</th>
-                                    <th class="text-left font-semibold">Quantity</th>
-                                    <th class="text-left font-semibold">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse ($userCart->items as $items)
                                 <tr>
                                     <td class="py-4">
                                         <div class="flex items-center">
                                             <img class="h-16 w-16 mr-4" src="https://via.placeholder.com/150" alt="Product image">
-                                            <span class="font-semibold">Product name</span>
+                                            <span class="font-semibold">
+                                                @if($items->item->name)
+                                                    {{$items->item->name}}
+                                                @else
+                                                    {{$items->item->package_name}}
+                                                @endif
+                                            </span>
                                         </div>
                                     </td>
-                                    <td class="py-4">$19.99</td>
-                                    <td class="py-4">
-                                        <div class="flex items-center">
-                                            <button class="border rounded-md py-2 px-4 mr-2">-</button>
-                                            <span class="text-center w-8">1</span>
-                                            <button class="border rounded-md py-2 px-4 ml-2">+</button>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">$19.99</td>
+                                    <td class="py-4">{{$items->item->price}}</td>
                                 </tr>
+                                @empty
+                                    
+                                @endforelse
+                                
                                 <!-- More product rows -->
                             </tbody>
                         </table>
