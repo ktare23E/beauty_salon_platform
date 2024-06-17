@@ -57,4 +57,21 @@ class HomeController extends Controller
             'service_images' => $service_images
         ]);
     }
+
+    public function viewPackage(Package $package){
+        $data = Package::find($package->id);
+
+        $package->load('serviceVariants.service');
+
+        $send = [
+            'package' => $data,
+            'service_variants' => $package->serviceVariants
+        ];
+
+        if ($data) {
+            return response()->json(['success' => true, 'data' => $send]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Data not found']);
+        }
+    }
 }

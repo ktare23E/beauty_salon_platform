@@ -193,6 +193,7 @@
     </section>
 
     {{-- Package --}}
+    @include('components.modal.package_inclusion')
     <section class="py-10" id="packages">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Our Packages</h2>
@@ -208,7 +209,7 @@
                                 <p class="text-gray-700 text-base">Price: ₱{{ number_format($package->price , 2)}}</p>
                             </div>
                             <div class="pb-4 text-center">
-                                <a href="{{route('view_service',$package->id)}}" class="text-white hover:underline bg-black py-1 px-2 rounded-sm cursor-pointer">view</a>
+                                <button onclick='viewPackageInclusion({{$package->id}},"package_inclusion")' class="text-white hover:underline bg-black py-1 px-2 rounded-sm cursor-pointer">view</button>
                             </div>
                         </div>
                     </div>
@@ -405,6 +406,74 @@
                 navToggle.item(i).classList.toggle("hidden");
             }
         };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Listen for click events on elements with the data-modal-toggle attribute
+            document.querySelectorAll('[data-modal-toggle]').forEach(function (toggleBtn) {
+                toggleBtn.addEventListener('click', function () {
+                    // Get the target modal ID from the data-modal-toggle attribute
+                    var target = toggleBtn.getAttribute('data-modal-toggle');
+                    var modal = document.getElementById(target);
+
+                    if (modal) {
+                        // Toggle the "hidden" class on the modal
+                        modal.classList.toggle('hidden');
+                    }
+                });
+            });
+        });
+
+        function closeModal(modalId){
+            document.addEventListener("DOMContentLoaded", function() {
+                const modal = document.getElementById(`${modalId}`);
+                modal.addEventListener('click', function(event) {
+                    const modalContent = modal.querySelector('.relative');
+                    if (!modalContent.contains(event.target)) {
+                        modal.classList.add('hidden');
+                    }
+                });
+            });
+        }
+
+        closeModal('package_inclusion');
+
+        function viewPackageInclusion(id,modal){
+            $.ajax({
+                url: "{{ url('/package_inclusion') }}/" + id,
+                type: 'GET',
+                success: function(response) {
+                    console.log(response);
+                    $('.package_name').html(response.data.package.package_name);
+
+                    // Clear previous content or initialize an empty string if appending
+                    let service_variants = response.data.service_variants;
+                    let tableHtml = '';
+
+
+                    service_variants.forEach(function(variant) {
+                        
+                        let formattedPrice = Number(variant.price).toLocaleString('en-PH', {
+                            style: 'currency',
+                            currency: 'PHP',
+                            minimumFractionDigits: 2,
+                        });
+
+                        tableHtml += '<tr>' +
+                                        '<td class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4">' + variant.name + '</td>' +
+                                        '<td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">' + formattedPrice + '</td>' +
+                                        '</tr>';
+                    });
+
+                    // Update the HTML of the table body with all service variants
+                    $('.service_variants_table tbody').html(tableHtml);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+            $('#' + modal).toggleClass('hidden');
+        }
+
     </script>
 
 </x-layout>
