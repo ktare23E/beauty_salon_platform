@@ -88,4 +88,10 @@ class CartController extends Controller
             return redirect()->route('view_salon', ['business' => $businessId]);
         }
     }
+
+    public function removeCartItem(CartItem $cartItem){
+        $cartItem->delete();
+
+        return redirect()->back();
+    }
 }

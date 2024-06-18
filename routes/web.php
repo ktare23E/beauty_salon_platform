@@ -55,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('user.index');
 
     Route::get('/user_cart', [CartController::class, 'viewCart'])->name('user_cart');
-
+    Route::delete('/remove_cart_item/{cartItem}',[CartController::class,'removeCartItem'])->name('remove_cart_item');
     Route::post('/addToCart', [CartController::class, 'addToCart'])->name('addToCart');
     
 

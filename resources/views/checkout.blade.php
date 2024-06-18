@@ -99,10 +99,13 @@
                                         </td>
                                         <td class="py-4">₱{{ number_format($items->item->price , 2)}}</td>
                                         <td class="py-4">
-                                            <input type="hidden" value="{{$items->id}}">
-                                            <button class="bg-red-600 text-white text-sm py-1 px-2 rounded-sm">remove</button>
+                                            <button class="bg-red-600 text-white text-sm py-1 px-2 rounded-sm" form="remove_cart_item">remove</button>
                                         </td>
                                     </tr>
+                                    <x-forms.form method="POST" action="{{route('remove_cart_item',$items->id)}}" id="remove_cart_item">
+                                        @method('DELETE')
+                                        @csrf
+                                    </x-forms.form>
                                     @endforeach
                                 @else   
                                     <tr col="3" class="text-center">
