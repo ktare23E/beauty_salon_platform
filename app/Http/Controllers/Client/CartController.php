@@ -17,6 +17,7 @@ class CartController extends Controller
     public function viewCart(){
     // Retrieve the user's cart with items and their details
         $userCart = Auth::user()->cart()->with('items.item')->first();
+        // return $userCart;
 
         $totalPrice = 0;
 

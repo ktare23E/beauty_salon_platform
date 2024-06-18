@@ -16,6 +16,7 @@ use App\Http\Controllers\BusinessAdmin\ServiceController;
 use App\Http\Controllers\BusinessAdmin\ServiceVariantController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Client\BookingController;
 
 Route::get('/', function () {
     return view('index');
@@ -58,6 +59,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/remove_cart_item/{cartItem}',[CartController::class,'removeCartItem'])->name('remove_cart_item');
     Route::post('/addToCart', [CartController::class, 'addToCart'])->name('addToCart');
     
+    Route::post('/booking',[BookingController::class,'storeBooking'])->name('booking');
 
 
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
