@@ -156,6 +156,12 @@
                             <span class="font-semibold">Total</span>
                             <span class="font-semibold"> ₱{{ number_format($totalPrice , 2)}}</span>
                         </div>
+                        <div class="bg-white p-6 rounded shadow-lg">
+                            <label for="datetime" class="block text-gray-700 text-sm font-bold mb-2">Select Date and Time:</label>
+                            <input id="date" type="date" class="block w-full mt-1 p-2 border border-gray-300 rounded" min="">
+                            <input id="time" type="time" class="block w-full mt-1 p-2 border border-gray-300 rounded">
+                            <div id="error" class="text-red-500 text-sm mt-2 hidden">Please select a future date and time.</div>
+                        </div>
                         <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
                     </div>
                 </div>
@@ -186,5 +192,41 @@
                 }
             });
         });
+
+        $(document).ready(function() {
+        const $dateInput = $('#date');
+        const $timeInput = $('#time');
+        const $errorDiv = $('#error');
+
+        // Set the min attribute to disable past dates
+        const today = new Date().toISOString().split('T')[0];
+        $dateInput.attr('min', today);
+
+        $dateInput.on('change', function() {
+            const selectedDate = new Date($(this).val());
+            const now = new Date();
+
+            if (selectedDate.setHours(0, 0, 0, 0) < now.setHours(0, 0, 0, 0)) {
+                $errorDiv.removeClass('hidden');
+                $(this).val('');
+            } else {
+                $errorDiv.addClass('hidden');
+            }
+        });
+
+        // Optional: Handle time input validation if needed
+        $timeInput.on('change', function() {
+            if ($dateInput.val()) {
+                const selectedDateTime = new Date(`${$dateInput.val()}T${$(this).val()}`);
+                const now = new Date();
+
+                if (selectedDateTime < now) {
+                    $errorDiv.removeClass('hidden');
+                } else {
+                    $errorDiv.addClass('hidden');
+                }
+            }
+        });
+    });
     </script>
 </x-layout>
