@@ -162,10 +162,13 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <x-table.thead>
-                                        Requirement
+                                        Client Name
                                     </x-table.thead>
                                     <x-table.thead>
                                         Status
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Total Price
                                     </x-table.thead>
                                     <x-table.thead>
                                         Action
@@ -173,31 +176,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @forelse ($requirements as $requirement_submission)
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                @foreach ($bookings as $booking)
+                                    <tr>
                                         <x-table.td>
-                                            {{ $requirement_submission->requirement->requirement_name }}
-                                        </x-table.td>
-                                        <x-table.td class="{{ $requirement_submission->status == 'declined' ? 'text-red-500':'text-yellow-500'}}">
-                                            {{ $requirement_submission->status }}
+                                            {{ $booking->user->first_name }} {{ $booking->user->last_name }}
                                         </x-table.td>
                                         <x-table.td>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" onclick='openViewModal({{$requirement_submission->id}},"view_requirement_submission")'>view</button>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-green-600 text-sm font-normal" onclick='updateSubmissionStatus({{$requirement_submission->id}},"approved")'>approve</button>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-red-600 text-sm font-normal" onclick='updateSubmissionStatus({{$requirement_submission->id}},"declined")'>decline</button>
+                                            {{ $booking->status }}
+                                        </x-table.td>
+                                        <x-table.td>
+                                            ₱{{ number_format($booking->total_price , 2)}}
+                                        </x-table.td>
+                                        <x-table.td>
+                                            {{-- <x-table.button-action href="{{route('',$booking->id)}}">view</x-table.button-action> --}}
                                         </x-table.td>
                                     </tr>
-                                    <form action="{{route('update_requirement_submission',$requirement_submission->id)}}" method="POST" id="update_requirement_submission_{{ $requirement_submission->id }}">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="status" id="status_{{ $requirement_submission->id }}" value="">
-                                    </form>
-                                @empty
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td colspan="3" class="text-center py-3">No requirement submissions available</td>
-                                </tr>
-                                @endforelse
-                            </tbody> --}}
+                                @endforeach
+                            </tbody>
                         </x-table.table>
                     </div>
                 </div>

@@ -13,6 +13,7 @@ use App\Models\ServiceVariant;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\BusinessImage;
+use App\Models\Booking;
 
 
 
@@ -126,6 +127,15 @@ class BusinessAdminSalonController extends Controller
             });
         })->distinct()->get();
 
+        // Fetch bookings associated with these service variants or packages
+        $bookings = Booking::with('user')
+        ->whereHas('items', function ($query) use ($serviceVariantIds) {
+            $query->whereHasMorph('item', ['package', 'service_variant'], function ($query) use ($serviceVariantIds) {
+                $query->whereIn('id', $serviceVariantIds);
+            });
+        })->distinct()->get();
+
+
 
         $services = $business->services;
         
@@ -137,6 +147,7 @@ class BusinessAdminSalonController extends Controller
             'services' => $services,
             'packages' => $packages,
             'clients' => $clients,
+            'bookings' => $bookings
         ]);
 
     }
