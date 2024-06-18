@@ -129,9 +129,9 @@
                                     <x-table.thead>
                                         Email
                                     </x-table.thead>
-                                    {{-- <x-table.thead>
+                                    <x-table.thead>
                                         Action
-                                    </x-table.thead> --}}
+                                    </x-table.thead>
                                 </tr>
                             </thead>
                             <tbody>
@@ -146,7 +146,9 @@
                                         <x-table.td>
                                             {{ $client->email }}
                                         </x-table.td>
-
+                                        <x-table.td>
+                                            <x-table.button-action onclick='viewClientTransactions({{$client->id}})'>view</x-table.button-action>
+                                        </x-table.td>
                                     </tr>
                                 @endforeach
                         </x-table.table>
@@ -206,6 +208,49 @@
             $('#myTable3').DataTable();
             $('#myTable4').DataTable();
         } );
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Listen for click events on elements with the data-modal-toggle attribute
+            document.querySelectorAll('[data-modal-toggle]').forEach(function (toggleBtn) {
+                toggleBtn.addEventListener('click', function () {
+                    // Get the target modal ID from the data-modal-toggle attribute
+                    var target = toggleBtn.getAttribute('data-modal-toggle');
+                    var modal = document.getElementById(target);
+
+                    if (modal) {
+                        // Toggle the "hidden" class on the modal
+                        modal.classList.toggle('hidden');
+                    }
+                });
+            });
+        });
+
+        function closeModal(modalId){
+            document.addEventListener("DOMContentLoaded", function() {
+                const modal = document.getElementById(`${modalId}`);
+                modal.addEventListener('click', function(event) {
+                    const modalContent = modal.querySelector('.relative');
+                    if (!modalContent.contains(event.target)) {
+                        modal.classList.add('hidden');
+                    }
+                });
+            });
+        }
+
+        // closeModal('package_inclusion');
+
+        function viewClientTransactions(id){
+            const url = `{{ route('user.transactions', ':id') }}`.replace(':id', id);
+
+            $.ajax({
+                url : url,
+                method : 'GET',
+                success: function(response){
+                    console.log(response);
+                }
+            });
+        }
 
     </script>
 </x-layout>

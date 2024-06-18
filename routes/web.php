@@ -98,6 +98,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/create_salon',[BusinessAdminSalonController::class,'store'])->name('business_admin.store_business');
 
     Route::get('/salon/{business}',[BusinessAdminSalonController::class,'show'])->name('show_business');
+    Route::get('/user/{id}/transactions', [BusinessAdminSalonController::class, 'getUserTransactions'])->name('user.transactions');
 
     Route::get('/create_package/{business}',[PackageController::class,'create'])->name('create_package');
     Route::post('/store_package',[PackageController::class,'store'])->name('store_package');

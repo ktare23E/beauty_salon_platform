@@ -151,5 +151,24 @@ class BusinessAdminSalonController extends Controller
         ]);
 
     }
+
+    public function getUserTransactions($userId)
+    {
+        $user = User::with([
+            'bookings.items.item' => function ($query) {
+                $query->with('service'); // Ensure service is loaded for ServiceVariant
+            },
+            'bookings.items' => function ($query) {
+                $query->with(['item' => function ($morphTo) {
+                    $morphTo->morphWith([
+                        ServiceVariant::class => ['service'],
+                        Package::class => ['serviceVariants']
+                    ]);
+                }]);
+            }
+        ])->findOrFail($userId);
+    
+        return response()->json($user->bookings);
+    }
     
 }
