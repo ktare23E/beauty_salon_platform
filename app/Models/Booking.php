@@ -34,4 +34,9 @@ class Booking extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function items()
+    {
+        return $this->hasMany(BookingItem::class);
+    }
 }

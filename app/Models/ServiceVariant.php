@@ -27,4 +27,9 @@ class ServiceVariant extends Model
     {
         return $this->morphMany(CartItem::class, 'item');
     }
+
+    public function bookingItems()
+    {
+        return $this->morphMany(BookingItem::class, 'item');
+    }
 }
