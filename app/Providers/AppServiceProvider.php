@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use App\Models\Package;
+use App\Models\ServiceVariant;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,5 +23,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+
+        Relation::morphMap([
+            'package' => 'App\Models\Package',
+            'service_variant' => 'App\Models\ServiceVariant',
+        ]);
     }
 }

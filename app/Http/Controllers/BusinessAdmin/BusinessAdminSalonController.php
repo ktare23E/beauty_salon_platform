@@ -114,48 +114,30 @@ class BusinessAdminSalonController extends Controller
             return $service->variants->pluck('id');
         });
 
-        // // Fetch the packages associated with these variants
+        // Fetch the packages associated with these variants
         $packages = Package::whereHas('serviceVariants', function ($query) use ($serviceVariantIds) {
             $query->whereIn('service_variant_id', $serviceVariantIds);
         })->distinct()->get();
 
+         // Fetch the clients associated with the business's services
+        $clients = User::whereHas('bookings.items', function ($query) use ($serviceVariantIds) {
+            $query->whereHasMorph('item', ['package', 'service_variant'], function ($query) use ($serviceVariantIds) {
+                $query->whereIn('id', $serviceVariantIds);
+            });
+        })->distinct()->get();
+
+
         $services = $business->services;
+        
+  
  
 
         return view('business_admin.salon.show',[
             'business' => $business,
             'services' => $services,
-            'packages' => $packages
+            'packages' => $packages,
+            'clients' => $clients,
         ]);
-
-        // $services = Service::where('business_id',$business->id)->get();
-        // $service_id = [];
-        // foreach($services as $service){
-        //     $service_id[] = $service->id;
-        // }
-
-        // $ServiceVariants = ServiceVariant::whereIn('service_id',$service_id)->get();
-        // $service_variant_id = [];
-
-        // foreach($ServiceVariants as $variant){
-        //     $service_variant_id[] = $variant->id;
-        // }
-
-        // $packageServices = PackageServiceVariant::whereIn('service_variant_id',$service_variant_id)->get();
-
-        // $package_id = [];
-
-        // foreach($packageServices as $packServces){
-        //     $package_id[] = $packServces->package_id;
-        // }
-
-        // $packageData = Package::whereIn('id',$package_id)->get();
-        // return $packageData;
-        // return view('business_admin.salon.show', [
-        //     'business' => $business,
-        //     'services' => $business->services,
-        //     'packageServiceVariants' => $packageServiceVariants,
-        // ]);
 
     }
     

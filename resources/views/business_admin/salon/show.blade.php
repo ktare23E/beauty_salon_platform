@@ -127,34 +127,28 @@
                                         Last Name
                                     </x-table.thead>
                                     <x-table.thead>
-                                        Address
+                                        Email
                                     </x-table.thead>
-                                    <x-table.thead>
+                                    {{-- <x-table.thead>
                                         Action
-                                    </x-table.thead>
+                                    </x-table.thead> --}}
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @forelse ($requirements as $requirement_submission)
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                @foreach ($clients as $client)
+                                    <tr>
                                         <x-table.td>
-                                            {{ $requirement_submission->requirement->requirement_name }}
-                                        </x-table.td>
-                                        <x-table.td class="{{ $requirement_submission->status == 'declined' ? 'text-red-500':'text-yellow-500'}}">
-                                            {{ $requirement_submission->status }}
+                                            {{ $client->first_name }}
                                         </x-table.td>
                                         <x-table.td>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" onclick='openViewModal({{$requirement_submission->id}},"view_requirement_submission")'>view</button>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-green-600 text-sm font-normal" onclick='updateSubmissionStatus({{$requirement_submission->id}},"approved")'>approve</button>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-red-600 text-sm font-normal" onclick='updateSubmissionStatus({{$requirement_submission->id}},"declined")'>decline</button>
+                                            {{ $client->last_name }}
                                         </x-table.td>
+                                        <x-table.td>
+                                            {{ $client->email }}
+                                        </x-table.td>
+
                                     </tr>
-                                @empty
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td colspan="3" class="text-center py-3">No requirement submissions available</td>
-                                </tr>
-                                @endforelse
-                            </tbody> --}}
+                                @endforeach
                         </x-table.table>
                     </div>
                 </div>
