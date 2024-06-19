@@ -256,14 +256,15 @@
                 url: url,
                 method: 'GET',
                 success: function(response) {
-                    let data = response;
+                    let userData = response.user; // User data
+                    let transactions = response.transactions; // Transactions array
 
                     // Clear previous data
                     $('#booking-container').empty();
 
-                    // Loop through each booking and generate HTML content
-                    data.forEach(booking => {
-                        const bookingDate = new Date(booking.booking_date);
+                    // Loop through each transaction and generate HTML content
+                    transactions.forEach(transaction => {
+                        const bookingDate = new Date(transaction.booking_date);
                         const options = { year: 'numeric', month: 'long', day: 'numeric' };
                         const humanReadableDate = bookingDate.toLocaleDateString(undefined, options);
                         let hours = bookingDate.getHours();
@@ -278,24 +279,24 @@
                             <div class="p-8 bg-white rounded-lg shadow">
                                 <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Booking Details</div>
                                 <div class="booking-info mt-4">
-                                    <p class="text-lg leading-tight font-medium text-black">Client Name: John Doe</p>
-                            <p class="text-lg leading-tight font-medium text-black">Booking Date: ${humanReadableDate} at ${formattedTime}</p>
-                                    <p class="mt-2 text-gray-500">Total Price: ₱${booking.total_price}</p>
+                                    <p class="text-lg leading-tight font-medium text-black">Client Name: ${userData.first_name} ${userData.last_name}</p>
+                                    <p class="text-lg leading-tight font-medium text-black">Booking Date: ${humanReadableDate} at ${formattedTime}</p>
+                                    <p class="mt-2 text-gray-500">Total Price: ₱${transaction.total_price}</p>
                                 </div>
                         `;
-                        
-                        booking.items.forEach(item => {
+
+                        transaction.items.forEach(item => {
                             if (item.item_type === 'package') {
                                 let packageHtml = `
                                     <div class="package mt-4">
-                                        <p class="text-gray-500"><span class="font-bold">Package Name:</span>${item.item.package_name}</p>
-                                        <p class="text-gray-500"><span class="font-bold">Package Details:</span>${item.item.description}</p>
+                                        <p class="text-gray-500 font-medium">Package Name: ${item.item.package_name}</p>
+                                        <p class="text-gray-500 font-medium">Package Details: ${item.item.description}</p>
                                         <button class="toggle-service-variants mt-2 text-indigo-600 hover:text-indigo-900">Show Package Inclusions</button>
                                         <div class="service-variants mt-2 hidden">
                                 `;
                                 item.item.service_variants.forEach(variant => {
                                     packageHtml += `
-                                        <p class="text-gray-500"> <span class="font-bold">${variant.name}</span>: ${variant.description}</p>
+                                        <p class="text-gray-500"><span class="font-medium">${variant.name}</span>: ${variant.description}</p>
                                     `;
                                 });
                                 packageHtml += `</div></div>`;
@@ -303,8 +304,8 @@
                             } else if (item.item_type === 'service_variant') {
                                 bookingHtml += `
                                     <div class="service-variant mt-4">
-                                        <p class="text-gray-500"><span class="font-bold">Service Name:</span>${item.item.name}</p>
-                                        <p class="text-gray-500"><span class="font-bold">Service Details:</span>${item.item.description}</p>
+                                        <p class="text-gray-500 font-medium">Service Name: ${item.item.name}</p>
+                                        <p class="text-gray-500 font-medium">Service Details: ${item.item.description}</p>
                                     </div>
                                 `;
                             }
@@ -318,15 +319,14 @@
                     $('.toggle-service-variants').on('click', function() {
                         $(this).next('.service-variants').toggleClass('hidden');
                         $(this).text(function(i, text) {
-                            return text === "Show Service Variants" ? "Hide Service Variants" :
-                                "Show Service Variants";
+                            return text === "Show Package Inclusions" ? "Hide Package Inclusions" : "Show Package Inclusions";
                         });
                     });
+
+                    // Show the modal
+                    $('#' + modal).removeClass('hidden');
                 }
             });
-
-            $('#' + modal).toggleClass('hidden');
-
         }
 
         // $(document).ready(function() {

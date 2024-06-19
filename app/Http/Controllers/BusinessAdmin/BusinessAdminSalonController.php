@@ -165,8 +165,15 @@ class BusinessAdminSalonController extends Controller
             }
         ])->findOrFail($userId);
 
+        //retrieve user data
+        $userData = $user->only(['first_name','last_name']);
+
+
     
-        return response()->json($user->bookings);
+        return response()->json([
+            'user' => $userData,
+            'transactions' => $user->bookings
+        ]);
     }
     
 }

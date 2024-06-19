@@ -40,7 +40,7 @@
                                 <x-forms.error></x-forms.error>
                             </div>
                             <div class="relative z-0 w-full mb-5 group">
-                                <h1 class="font-bold">Package Services</h1>
+                                <h1 class="font-bold">Package Inclusions</h1>
                             </div>
                             <div class="relative z-0 w-full mb-5 group space-y-3">
                                 @foreach ($package->serviceVariants as $service_variant)
