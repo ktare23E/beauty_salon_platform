@@ -199,7 +199,7 @@
                                             ₱{{ number_format($booking->total_price, 2) }}
                                         </x-table.td>
                                         <x-table.td>
-                                            {{-- <x-table.button-action href="{{route('',$booking->id)}}">view</x-table.button-action> --}}
+                                            <button class="bg-yellow-500 py-1 px-2 text-sm rounded-sm text-white" onclick="viewBooking($booking->id)">view</button>
                                         </x-table.td>
                                     </tr>
                                 @endforeach
@@ -329,13 +329,12 @@
             });
         }
 
-        // $(document).ready(function() {
-        //     $('.toggle-service-variants').on('click', function() {
-        //         $(this).next('.service-variants').toggleClass('hidden');
-        //         $(this).text(function(i, text) {
-        //             return text === "Show Service Variants" ? "Hide Service Variants" : "Show Service Variants";
-        //         });
-        //     });
-        // });
+        function viewBooking(id){
+            
+            $.ajax({
+
+            });
+        }
+
     </script>
 </x-layout>

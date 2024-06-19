@@ -15,8 +15,7 @@ use App\Models\User;
 use App\Models\BusinessImage;
 use App\Models\Booking;
 
-
-
+use function Pest\Laravel\json;
 
 class BusinessAdminSalonController extends Controller
 {
@@ -174,6 +173,34 @@ class BusinessAdminSalonController extends Controller
             'user' => $userData,
             'transactions' => $user->bookings
         ]);
+    }
+
+    public function viewBooking(Booking $booking) {
+        // Eager load all necessary relationships
+        $bookingData = Booking::with([
+            'items.item', // Load items and their related models
+            'payments'
+        ])->findOrFail($booking->id);
+    
+    
+        // Load relationships dynamically based on item_type
+        foreach ($bookingData->items as $item) {
+            if ($item->item_type === 'service_variant') {
+                $item->item->load('service');
+            } elseif ($item->item_type === 'package') {
+                $item->item->load('serviceVariants');
+            } else {
+                // Handle unexpected item_type if needed
+            }
+        }
+
+        $userData = User::findOrFail($bookingData->user_id);
+    
+        // Return the booking data with all related information
+        return [
+            'booking' => $bookingData,
+            'user' => $userData,
+        ];
     }
     
 }
