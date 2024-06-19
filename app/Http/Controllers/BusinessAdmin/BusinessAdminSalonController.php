@@ -195,12 +195,13 @@ class BusinessAdminSalonController extends Controller
         }
 
         $userData = User::findOrFail($bookingData->user_id);
+        
     
         // Return the booking data with all related information
-        return [
+        return response()->json([
             'booking' => $bookingData,
             'user' => $userData,
-        ];
+        ]);
     }
     
 }
