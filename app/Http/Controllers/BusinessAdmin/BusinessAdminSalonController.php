@@ -138,9 +138,6 @@ class BusinessAdminSalonController extends Controller
 
 
         $services = $business->services;
-        
-  
- 
 
         return view('business_admin.salon.show',[
             'business' => $business,
@@ -167,6 +164,7 @@ class BusinessAdminSalonController extends Controller
                 }]);
             }
         ])->findOrFail($userId);
+
     
         return response()->json($user->bookings);
     }
