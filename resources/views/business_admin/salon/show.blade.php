@@ -164,6 +164,7 @@
                     </div>
                 </div>
             </div>
+            @include('components.modal.user_booking')
             <div class="pb-[500px] mt-20">
                 <h1 class="font-bold text-2xl">Bookings</h1>
                 <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md hover:shadow-xl transition-all mx-auto">
@@ -180,6 +181,9 @@
                                     </x-table.thead>
                                     <x-table.thead>
                                         Total Price
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Date And Time
                                     </x-table.thead>
                                     <x-table.thead>
                                         Action
@@ -199,7 +203,10 @@
                                             ₱{{ number_format($booking->total_price, 2) }}
                                         </x-table.td>
                                         <x-table.td>
-                                            <button class="bg-yellow-500 py-1 px-2 text-sm rounded-sm text-white" onclick="viewBooking($booking->id)">view</button>
+                                            @formatDate($booking->booking_date)
+                                        </x-table.td>
+                                        <x-table.td>
+                                            <button class="bg-yellow-500 py-1 px-2 text-sm rounded-sm text-white" onclick='viewBooking({{$booking->id}},"user_booking")'>view</button>
                                         </x-table.td>
                                     </tr>
                                 @endforeach
@@ -329,11 +336,24 @@
             });
         }
 
-        function viewBooking(id){
-            
-            $.ajax({
+        closeModal('user_booking');
 
+
+        function viewBooking(id,modal){
+            const url = `{{ route('client_booking', ':id') }}`.replace(':id', id);
+
+            $.ajax({
+                url : url,
+                method : 'GET',
+                success : function(response){
+                    console.log(response);
+                    let bookingData = response.booking;
+                    let userData = response.user;
+                }
             });
+
+            $('#' + modal).removeClass('hidden');
+
         }
 
     </script>

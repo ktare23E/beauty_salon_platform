@@ -1,6 +1,6 @@
 <div id="user_transactions" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 w-full h-full bg-black bg-opacity-30 backdrop-blur-sm ">
     <div class="flex items-center justify-center min-h-full">
-        <div class="content_container relative rounded-md max-w-[90%] max-h-[90vh] w-[50%] h-[650px] mx-auto my-auto bg-gray-100 p-6">
+        <div class="content_container relative rounded-md max-w-[90%] max-h-[90vh] w-[70%] h-[650px] mx-auto my-auto bg-gray-100 p-6">
             <div class="top flex align-center justify-between border-b border-black">
                 <h3 class="requirement_name font-bold font text-xl">Client Transactions</h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="view_requirement_submission">
