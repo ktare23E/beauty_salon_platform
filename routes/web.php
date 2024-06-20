@@ -61,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/addToCart', [CartController::class, 'addToCart'])->name('addToCart');
 
     Route::get('/user_profile',[ClientController::class,'userProfile'])->name('user_profile');
+    Route::post('/update_user_details',[ClientController::class,'updateUserDetails'])->name('update_user_details');
 
     
     Route::post('/booking',[BookingController::class,'storeBooking'])->name('booking');
