@@ -17,6 +17,7 @@ use App\Http\Controllers\BusinessAdmin\ServiceVariantController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\BookingController;
+use App\Http\Controllers\Client\ClientController;
 
 Route::get('/', function () {
     return view('index');
@@ -58,6 +59,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user_cart', [CartController::class, 'viewCart'])->name('user_cart');
     Route::delete('/remove_cart_item/{cartItem}',[CartController::class,'removeCartItem'])->name('remove_cart_item');
     Route::post('/addToCart', [CartController::class, 'addToCart'])->name('addToCart');
+
+    Route::get('/user_profile',[ClientController::class,'userProfile'])->name('user_profile');
+
     
     Route::post('/booking',[BookingController::class,'storeBooking'])->name('booking');
 
