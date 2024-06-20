@@ -91,67 +91,111 @@
                 <div class="tab-content">
                     <div class="tab-pane" id="pending">
                         <h2 class="text-xl font-bold mb-4">Pending Bookings</h2>
-                        <!-- Pending bookings content here -->
-                        <div class="booking_details bg-gray-50 p-4 rounded-lg shadow-inner mb-4">
-                            <div class="flex flex-wrap -mx-4">
-                                <div class="w-full md:w-1/2 px-4">
-                                    <h3 class="text-lg font-semibold mb-2">User Details</h3>
-                                    <p><strong>Name:</strong> John Doe</p>
-                                    <p><strong>Email:</strong> john.doe@example.com</p>
-                                    
-                                    <h3 class="text-lg font-semibold mt-4 mb-2">Booking Details</h3>
-                                    <p><strong>Date:</strong> 2024-06-25</p>
-                                    <p><strong>Time:</strong> 14:00</p>
-                                </div>
-                                <div class="w-full md:w-1/2 px-4">
-                                    <h3 class="text-lg font-semibold mb-2">Services/Packages</h3>
-                                    <p>Service 1, Service 2, Package 1</p>
+                        @forelse ($userBookingPending as $booking)
+                            <div class="booking_details bg-gray-50 p-4 rounded-lg shadow-inner mb-4">
+                                <div class="flex flex-wrap -mx-4">
+                                    <div class="w-full md:w-1/2 px-4">
+                                        <h3 class="text-lg font-semibold mb-2">User Details</h3>
+                                        <p><strong>Name:</strong>{{$userData['first_name'].' '.$userData['last_name']}}</p>
+                                        <p><strong>Email:</strong>{{$userData['email']}}</p>
+                                        
+                                        <h3 class="text-lg font-semibold mt-4 mb-2">Booking Details</h3>
+                                        <p><strong>Date:</strong> {{ date('Y-m-d', strtotime($booking['booking_date'])) }}</p>
+                                        <p><strong>Time:</strong> 14:00 pm</p>
+                                    </div>
+                                    <div class="w-full md:w-1/2 px-4">
+                                        <h3 class="text-lg font-semibold mb-2">Services/Packages</h3>
+                                        @foreach ($booking->items as $item)
+                                            @if ($item->item_type == 'service_variant')
+                                                <p>{{$item->item->name}}</p>
+                                            @else
+                                                <p>{{$item->item->package_name}}</p>
+                                                {{-- @foreach ($item->item->service_variants as $variants)
+                                                    
+                                                @endforeach --}}
+                                                {{-- package ni sya --}}
+                                            @endif
+                                        @endforeach
+                                        
+                                        @php
+                                        $seenBusinessNames = [];
+                                    @endphp
                                     
                                     <h3 class="text-lg font-semibold mt-4 mb-2">Business Information</h3>
-                                    <p><strong>Business Name:</strong> XYZ Spa</p>
-                                    <p><strong>Address:</strong> 1234 Main St, City, Country</p>
-                                    
-                                    <h3 class="text-lg font-semibold mt-4 mb-2">Payment Details</h3>
-                                    <p><strong>Amount:</strong> $100</p>
-                                    <p><strong>Status:</strong> Pending</p>
-                                </div>
-                                <div class="w-full px-4 flex justify-center item-center mt-5">
-                                    <div class="action_buttons space-x-2">
-                                        <button class="text-sm bg-black text-white py-1 px-2 rounded-sm">reschedule</button>
-                                        <button class="text-sm bg-green-500 text-white py-1 px-2 rounded-sm">pay</button>
+                                        <p><strong>Business Name:</strong> XYZ Spa</p> 
+                                        <p><strong>Address:</strong> 1234 Main St, City, Country</p> 
+                                        
+                                        <h3 class="text-lg font-semibold mt-4 mb-2">Payment Details</h3>
+                                        {{-- check payments if empty --}}
+                                        @if ($booking->payments->count() > 0)
+                                            <p><strong>Amount:</strong> $100</p>
+                                            <p><strong>Status:</strong> Pending</p>
+                                        @else
+                                            No Payment Yet.
+                                        @endif
+                                    </div>
+                                    <div class="w-full px-4 flex justify-center item-center mt-5">
+                                        <div class="action_buttons space-x-2">
+                                            <button class="text-sm bg-black text-white py-1 px-2 rounded-sm">reschedule</button>
+                                            <button class="text-sm bg-green-500 text-white py-1 px-2 rounded-sm">pay</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @empty
+                            <h1>No Pending Booking</h1>
+                        @endforelse
                     </div>  
                     <div class="tab-pane hidden" id="approved">
                         <h2 class="text-xl font-bold mb-4">Approved Bookings</h2>
                         <!-- Approved bookings content here -->
+                        @forelse ($userBookingApproved as $booking)
                         <div class="booking_details bg-gray-50 p-4 rounded-lg shadow-inner mb-4">
                             <div class="flex flex-wrap -mx-4">
                                 <div class="w-full md:w-1/2 px-4">
                                     <h3 class="text-lg font-semibold mb-2">User Details</h3>
-                                    <p><strong>Name:</strong> Jane Smith</p>
-                                    <p><strong>Email:</strong> jane.smith@example.com</p>
+                                    <p><strong>Name:</strong>{{$userData['first_name'].' '.$userData['last_name']}}</p>
+                                    <p><strong>Email:</strong>{{$userData['email']}}</p>
                                     
                                     <h3 class="text-lg font-semibold mt-4 mb-2">Booking Details</h3>
-                                    <p><strong>Date:</strong> 2024-06-26</p>
-                                    <p><strong>Time:</strong> 15:00</p>
+                                    <p><strong>Date:</strong> {{ date('Y-m-d', strtotime($booking['booking_date'])) }}</p>
+                                    <p><strong>Time:</strong> 15:00 pm</p>
                                 </div>
                                 <div class="w-full md:w-1/2 px-4">
                                     <h3 class="text-lg font-semibold mb-2">Services/Packages</h3>
-                                    <p>Service 3, Package 2</p>
+                                    @foreach ($booking->items as $item)
+                                        @if ($item->item_type == 'service_variant')
+                                            <p>{{$item->item->name}}</p>
+                                        @else
+                                            <p>{{$item->item->package_name}}</p>
+                                            {{-- @foreach ($item->item->service_variants as $variants)
+                                                
+                                            @endforeach --}}
+                                            {{-- package ni sya --}}
+                                        @endif
+                                    @endforeach
                                     
                                     <h3 class="text-lg font-semibold mt-4 mb-2">Business Information</h3>
+                              
                                     <p><strong>Business Name:</strong> ABC Salon</p>
                                     <p><strong>Address:</strong> 5678 Market St, City, Country</p>
                                     
                                     <h3 class="text-lg font-semibold mt-4 mb-2">Payment Details</h3>
-                                    <p><strong>Amount:</strong> $150</p>
-                                    <p><strong>Status:</strong> Approved</p>
+                                    @if ($booking->payments->count() > 0)
+                                        @foreach ($booking->payments as $payment)
+                                            <p><strong>Amount:</strong> {{$payment->amount}}</p>
+                                            <p><strong>Status:</strong> {{$payment->status}}</p>
+                                        @endforeach
+                                    @else
+                                        No Payment Yet.
+                                    @endif
                                 </div>
                             </div>
                         </div>
+                        @empty
+                            <h1>No approved booking</h1>
+                        @endforelse
+                        
                     </div>
                 </div>
             </div>

@@ -54,8 +54,7 @@ class ClientController extends Controller
 
         //userData
         $userData = $user->only(['first_name','last_name','email']);
-        
-   
+  
         return view('booking_list', [
             'userBookingPending' => $userBookingPending,
             'userBookingApproved' => $userBookingApproved,
