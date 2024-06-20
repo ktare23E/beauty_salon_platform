@@ -93,7 +93,7 @@
                     <h3 class="text-xl font-semibold mb-2">Latest Booking</h3>
                     <p><strong>Salon:</strong> {{ $user->latestBooking->items[0]->item->service->business->business_name}}</p>
                     <p><strong>Total Price:</strong> ₱{{ number_format($user->latestBooking->total_price , 2)}}</p>
-                    <p><strong>Booking Date:</strong> {{ $user->latestBooking->booking_date }}</p>
+                    <p><strong>Booking Date:</strong> @formatDate( $user->latestBooking->booking_date )</p>
                     <p><strong>Status:</strong> {{ $user->latestBooking->status }}</p>
                     <a  class="text-blue-500 hover:underline">View Booking</a>
                     {{-- href="{{ route('view_booking', ['id' => $user->latestBooking->id]) }}" --}}
