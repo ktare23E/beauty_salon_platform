@@ -3,7 +3,7 @@
         <div class="content_container relative rounded-md max-w-[90%] max-h-[90vh] w-[60%] h-[450px] mx-auto my-auto bg-gray-100 p-6 shadow-lg">
             <div class="top flex items-center justify-between border-b border-gray-300 mb-4 pb-2">
                 <h3 class="requirement_name font-semibold text-lg">Client Booking</h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" onclick="closeModal('user_booking')">
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="user_booking">
                     <svg class="w-4 h-4" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>

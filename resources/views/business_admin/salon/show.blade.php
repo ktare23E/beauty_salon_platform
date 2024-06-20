@@ -340,79 +340,79 @@
 
 
         function viewBooking(id, modal) {
-    const url = `{{ route('client_booking', ':id') }}`.replace(':id', id);
+        const url = `{{ route('client_booking', ':id') }}`.replace(':id', id);
 
-    $.ajax({
-        url: url,
-        method: 'GET',
-        success: function(response) {
-            console.log(response);
-            let bookingData = response.booking;
-            let userData = response.user;
+        $.ajax({
+            url: url,
+            method: 'GET',
+            success: function(response) {
+                console.log(response);
+                let bookingData = response.booking;
+                let userData = response.user;
 
-            // Format the booking date
-            let bookingDate = new Date(bookingData.booking_date);
-            let options = { year: 'numeric', month: 'long', day: 'numeric' };
-            let formattedBookingDate = bookingDate.toLocaleDateString(undefined, options);
-            let formattedTotalPrice = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(bookingData.total_price);
-            let bookingTime = bookingDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: 'numeric', hour12: true });
+                // Format the booking date
+                let bookingDate = new Date(bookingData.booking_date);
+                let options = { year: 'numeric', month: 'long', day: 'numeric' };
+                let formattedBookingDate = bookingDate.toLocaleDateString(undefined, options);
+                let formattedTotalPrice = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(bookingData.total_price);
+                let bookingTime = bookingDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: 'numeric', hour12: true });
 
-            // Populate booking details
-            $('#client-name').html(`<strong>Name:</strong> ${userData.first_name} ${userData.last_name}`);
-            $('#booking-date').html(`<strong>Booking Date:</strong> ${formattedBookingDate} at ${bookingTime}`);
-            $('#total-price').html(`<strong>Total Price:</strong> ${formattedTotalPrice}`);
-            $('#status').html(`<strong>Status:</strong> ${bookingData.status}`);
+                // Populate booking details
+                $('#client-name').html(`<strong>Name:</strong> ${userData.first_name} ${userData.last_name}`);
+                $('#booking-date').html(`<strong>Booking Date:</strong> ${formattedBookingDate} at ${bookingTime}`);
+                $('#total-price').html(`<strong>Total Price:</strong> ${formattedTotalPrice}`);
+                $('#status').html(`<strong>Status:</strong> <span class="${bookingData.status  == 'pending' ? 'text-yellow-500' : 'text-green-500'}">${bookingData.status}</span>`);
 
-            // Populate payment details
-            let paymentDetails = $('#payment-details');
-            paymentDetails.empty();
-            if (bookingData.payments.length === 0) {
-                paymentDetails.append('<p>No Payment Yet.</p>');
-            } else {
-                bookingData.payments.forEach(payment => {
-                    let paymentDate = new Date(payment.payment_date);
-                    let formattedPaymentDate = paymentDate.toLocaleDateString(undefined, options);
-                    let formattedPaymentAmount = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(payment.amount);
+                // Populate payment details
+                let paymentDetails = $('#payment-details');
+                paymentDetails.empty();
+                if (bookingData.payments.length === 0) {
+                    paymentDetails.append('<p>No Payment Yet.</p>');
+                } else {
+                    bookingData.payments.forEach(payment => {
+                        let paymentDate = new Date(payment.payment_date);
+                        let formattedPaymentDate = paymentDate.toLocaleDateString(undefined, options);
+                        let formattedPaymentAmount = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(payment.amount);
 
-                    paymentDetails.append(`
-                        <p class="mb-1"><strong>Amount:</strong> ${formattedPaymentAmount}</p>
-                        <p class="mb-1"><strong>Status:</strong> ${payment.status}</p>
-                        <p class="mb-1"><strong>Date of Payment:</strong> ${formattedPaymentDate}</p>
-                    `);
-                });
-            }
-
-            // Populate booking items
-            let bookingItems = $('#booking-items');
-            bookingItems.empty();
-            bookingData.items.forEach(item => {
-                if (item.item_type === 'service_variant') {
-                    bookingItems.append(`
-                        <div>
-                            <p class="mb-1"><strong>Service:</strong> ${item.item.name}</p>
-                        </div>
-                    `);
-                } else if (item.item_type === 'package') {
-                    let packageHTML = `
-                        <div>
-                            <p class="mb-1"><strong>Package:</strong> ${item.item.package_name}</p>
-                            <div class="pl-4">
-                                ${item.item.service_variants.map(variant => `
-                                    <div>
-                                        <p class="mb-1"><strong>&gt; Service:</strong> ${variant.name}</p>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                    bookingItems.append(packageHTML);
+                        paymentDetails.append(`
+                            <p class="mb-1"><strong>Amount:</strong> ${formattedPaymentAmount}</p>
+                            <p class="mb-1"><strong>Status:</strong> ${payment.status}</p>
+                            <p class="mb-1"><strong>Date of Payment:</strong> ${formattedPaymentDate}</p>
+                        `);
+                    });
                 }
-            });
 
-            $('#' + modal).toggleClass('hidden');
-        }
-    });
-}
+                // Populate booking items
+                let bookingItems = $('#booking-items');
+                bookingItems.empty();
+                bookingData.items.forEach(item => {
+                    if (item.item_type === 'service_variant') {
+                        bookingItems.append(`
+                            <div>
+                                <p class="mb-1"><strong>Service:</strong> ${item.item.name}</p>
+                            </div>
+                        `);
+                    } else if (item.item_type === 'package') {
+                        let packageHTML = `
+                            <div>
+                                <p class="mb-1"><strong>Package:</strong> ${item.item.package_name}</p>
+                                <div class="pl-4">
+                                    ${item.item.service_variants.map(variant => `
+                                        <div>
+                                            <p class="mb-1"><strong>&gt; Service:</strong> ${variant.name}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                        bookingItems.append(packageHTML);
+                    }
+                });
+
+                $('#' + modal).toggleClass('hidden');
+            }
+        });
+    }
 
     </script>
 </x-layout>
