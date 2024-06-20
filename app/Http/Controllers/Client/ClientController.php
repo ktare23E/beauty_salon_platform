@@ -52,11 +52,14 @@ class ClientController extends Controller
         $userBookingPending = $user->bookings->where('status', 'pending');
         $userBookingApproved = $user->bookings->where('status', 'approved');
 
-     
-    
+        //userData
+        $userData = $user->only(['first_name','last_name','email']);
+        
+   
         return view('booking_list', [
             'userBookingPending' => $userBookingPending,
             'userBookingApproved' => $userBookingApproved,
+            'userData' => $userData
         ]);
     }
     

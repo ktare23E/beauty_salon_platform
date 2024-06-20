@@ -81,7 +81,7 @@
             </a>
         </div>
     </nav>
-    <div class="bg-gray-100 h-screen py-8 mt-20 ">
+    <div class="bg-gray-100 min-h-screen py-8 mt-20 ">
         <div class="container mx-auto w-[70%]">
             <div class="bg-white shadow-md rounded-lg p-4">
                 <div class="flex mb-4">
@@ -115,9 +115,15 @@
                                     <p><strong>Amount:</strong> $100</p>
                                     <p><strong>Status:</strong> Pending</p>
                                 </div>
+                                <div class="w-full px-4 flex justify-center item-center mt-5">
+                                    <div class="action_buttons space-x-2">
+                                        <button class="text-sm bg-black text-white py-1 px-2 rounded-sm">reschedule</button>
+                                        <button class="text-sm bg-green-500 text-white py-1 px-2 rounded-sm">pay</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </div>  
                     <div class="tab-pane hidden" id="approved">
                         <h2 class="text-xl font-bold mb-4">Approved Bookings</h2>
                         <!-- Approved bookings content here -->
