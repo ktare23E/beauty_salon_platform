@@ -63,7 +63,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user_profile',[ClientController::class,'userProfile'])->name('user_profile');
     Route::post('/update_user_details',[ClientController::class,'updateUserDetails'])->name('update_user_details');
 
-    
+    Route::get('/user_booking_list',[ClientController::class,'userBookingList'])->name('user_booking_list');
     Route::post('/booking',[BookingController::class,'storeBooking'])->name('booking');
 
 

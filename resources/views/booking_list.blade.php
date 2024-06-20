@@ -48,7 +48,7 @@
                                 <div id="userMenu"
                                     class="hidden absolute right-0 mt-3 w-32 text-start bg-white border border-gray-200 rounded-md shadow-lg z-10">
                                     <a href="{{route('user_profile')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
-                                    <a href="{{route('user_booking_list')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Bookings</a>
+                                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Bookings</a>
                                     <button class="block w-full px-4 py-2 text-gray-800 hover:bg-gray-100 text-start"
                                         form="logout">Logout</button>
                                     <x-forms.form action="{{ route('logout') }}" method="POST" id="logout">
@@ -83,54 +83,37 @@
     </nav>
     <div class="bg-gray-100 h-screen py-8 mt-20">
         <div class="container mx-auto px-4">
-            <h1 class="text-2xl font-semibold mb-4">Service Cart</h1>
+            <h1 class="text-2xl font-semibold mb-4">Shopping Cart</h1>
             <div class="flex flex-col md:flex-row gap-4">
                 <div class="md:w-3/4">
                     <div class="bg-white rounded-lg shadow-md p-6 mb-4">
                         <table class="w-full">
                             <thead>
                                 <tr>
-                                    <th class="text-left font-semibold">Service/Package</th>
+                                    <th class="text-left font-semibold">Product</th>
                                     <th class="text-left font-semibold">Price</th>
-                                    <th class="text-left font-semibold">Action</th>
+                                    <th class="text-left font-semibold">Quantity</th>
+                                    <th class="text-left font-semibold">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
-
-                                @if ($userCart)
-                                    @foreach ($userCart->items as $items)
-                                        <tr class="border-b-2">
-                                            <td class="py-4">
-                                                <div class="flex items-center">
-                                                    <img class="h-16 w-16 mr-4" src="https://via.placeholder.com/150"
-                                                        alt="Product image">
-                                                    <span class="font-semibold">
-                                                        @if ($items->item->name)
-                                                            {{ $items->item->name }}
-                                                        @else
-                                                            {{ $items->item->package_name }}
-                                                        @endif
-                                                    </span>
-                                                </div>
-                                            </td>
-                                            <td class="py-4">₱{{ number_format($items->item->price, 2) }}</td>
-                                            <td class="py-4">
-                                                <button class="bg-red-600 text-white text-sm py-1 px-2 rounded-sm"
-                                                    form="remove_cart_item">remove</button>
-                                            </td>
-                                        </tr>
-                                        <x-forms.form method="POST" action="{{ route('remove_cart_item', $items->id) }}"
-                                            id="remove_cart_item">
-                                            @method('DELETE')
-                                            @csrf
-                                        </x-forms.form>
-                                    @endforeach
-                                @else
-                                    <tr col="3" class="text-center">
-                                        <td>No items in the cart</td>
-                                    </tr>
-                                @endif
-
+                                <tr>
+                                    <td class="py-4">
+                                        <div class="flex items-center">
+                                            <img class="h-16 w-16 mr-4" src="https://via.placeholder.com/150" alt="Product image">
+                                            <span class="font-semibold">Product name</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4">$19.99</td>
+                                    <td class="py-4">
+                                        <div class="flex items-center">
+                                            <button class="border rounded-md py-2 px-4 mr-2">-</button>
+                                            <span class="text-center w-8">1</span>
+                                            <button class="border rounded-md py-2 px-4 ml-2">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4">$19.99</td>
+                                </tr>
                                 <!-- More product rows -->
                             </tbody>
                         </table>
@@ -139,50 +122,24 @@
                 <div class="md:w-1/4">
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <h2 class="text-lg font-semibold mb-4">Summary</h2>
-                        <x-forms.form method="POST" action="{{route('booking')}}">
-                            @csrf
-                            @if ($userCart)
-                                @foreach ($userCart->items as $items)
-                                    <div class="flex justify-between mb-2">
-                                        <span>
-                                            @if ($items->item->name)
-                                                <input type="hidden" name="items[{{ $loop->index }}][id]" value="{{ $items->item->id }}">
-                                                <input type="hidden" name="items[{{ $loop->index }}][type]" value="service_variant">
-                                                {{ $items->item->name }}
-                                            @else
-                                                <input type="hidden" name="items[{{ $loop->index }}][id]" value="{{ $items->item->id }}">
-                                                <input type="hidden" name="items[{{ $loop->index }}][type]" value="package">
-                                                {{ $items->item->package_name }}
-                                            @endif
-                                        </span>
-                                        <span>₱{{ number_format($items->item->price, 2) }}</span>
-                                    </div>
-                                @endforeach
-                            @else
-                                <div class="flex justify-between mb-2">
-                                    <span>Subtotal</span>
-                                    <span>₱0.00</span>
-                                </div>
-                            @endif
-                            <hr class="my-2">
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold">Total</span>
-                                <input type="hidden" name="total_price" id="total_price" value="{{$totalPrice}}">
-                                <span class="font-semibold"> ₱{{ number_format($totalPrice, 2) }}</span>
-                            </div>
-                            <div class="bg-white p-6 rounded shadow-lg">
-                                <label for="datetime" class="block text-gray-700 text-sm font-bold mb-2">Select Date
-                                    and Time:</label>
-                                <input id="date" type="date" name="date"
-                                    class="block w-full mt-1 p-2 border border-gray-300 rounded" min="{{ now()->toDateString() }}"  required>
-                                <input id="time" type="time" name="time"
-                                    class="block w-full mt-1 p-2 border border-gray-300 rounded" required>
-                                <div id="error" class="text-red-500 text-sm mt-2 hidden">Please select a future
-                                    date and time.</div>
-                            </div>
-                            <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full" type="submit"     @if(is_null($userCart) || $userCart->items->isEmpty()) disabled @endif>
-                                Checkout</button>
-                        </x-forms.form>
+                        <div class="flex justify-between mb-2">
+                            <span>Subtotal</span>
+                            <span>$19.99</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span>Taxes</span>
+                            <span>$1.99</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span>Shipping</span>
+                            <span>$0.00</span>
+                        </div>
+                        <hr class="my-2">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold">Total</span>
+                            <span class="font-semibold">$21.98</span>
+                        </div>
+                        <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
                     </div>
                 </div>
             </div>

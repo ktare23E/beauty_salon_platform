@@ -31,4 +31,10 @@ class ClientController extends Controller
 
         return redirect()->back()->with('success','Profile updated successfully');
     }
+
+    public function userBookingList(){
+        // $user = User::with(['bookings.items.item.service.business'])->find(auth()->id());
+
+        return view('booking_list');
+    }
 }

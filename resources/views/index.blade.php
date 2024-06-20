@@ -39,7 +39,7 @@
                                 </div>
                                 <div id="userMenu" class="hidden absolute right-0 mt-3 w-32 text-start bg-white border border-gray-200 rounded-md shadow-lg z-10">
                                     <a href="{{route('user_profile')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
-                                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Bookings</a>
+                                    <a href="{{route('user_booking_list')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Bookings</a>
                                     <button class="block w-full px-4 py-2 text-gray-800 hover:bg-gray-100 text-start" form="logout">Logout</button>
                                     <x-forms.form action="{{route('logout')}}" method="POST" id="logout">
                                         @csrf
