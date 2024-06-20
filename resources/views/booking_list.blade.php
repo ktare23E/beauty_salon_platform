@@ -81,65 +81,71 @@
             </a>
         </div>
     </nav>
-    <div class="bg-gray-100 h-screen py-8 mt-20">
-        <div class="container mx-auto px-4">
-            <h1 class="text-2xl font-semibold mb-4">Shopping Cart</h1>
-            <div class="flex flex-col md:flex-row gap-4">
-                <div class="md:w-3/4">
-                    <div class="bg-white rounded-lg shadow-md p-6 mb-4">
-                        <table class="w-full">
-                            <thead>
-                                <tr>
-                                    <th class="text-left font-semibold">Product</th>
-                                    <th class="text-left font-semibold">Price</th>
-                                    <th class="text-left font-semibold">Quantity</th>
-                                    <th class="text-left font-semibold">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="py-4">
-                                        <div class="flex items-center">
-                                            <img class="h-16 w-16 mr-4" src="https://via.placeholder.com/150" alt="Product image">
-                                            <span class="font-semibold">Product name</span>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">$19.99</td>
-                                    <td class="py-4">
-                                        <div class="flex items-center">
-                                            <button class="border rounded-md py-2 px-4 mr-2">-</button>
-                                            <span class="text-center w-8">1</span>
-                                            <button class="border rounded-md py-2 px-4 ml-2">+</button>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">$19.99</td>
-                                </tr>
-                                <!-- More product rows -->
-                            </tbody>
-                        </table>
-                    </div>
+    <div class="bg-gray-100 h-screen py-8 mt-20 ">
+        <div class="container mx-auto w-[70%]">
+            <div class="bg-white shadow-md rounded-lg p-4">
+                <div class="flex mb-4">
+                    <button class="tab-button px-4 py-2 mr-2 bg-blue-500 text-white rounded" data-tab="pending">Pending Bookings</button>
+                    <button class="tab-button px-4 py-2 bg-gray-200 text-gray-700 rounded" data-tab="approved">Approved Bookings</button>
                 </div>
-                <div class="md:w-1/4">
-                    <div class="bg-white rounded-lg shadow-md p-6">
-                        <h2 class="text-lg font-semibold mb-4">Summary</h2>
-                        <div class="flex justify-between mb-2">
-                            <span>Subtotal</span>
-                            <span>$19.99</span>
+                <div class="tab-content">
+                    <div class="tab-pane" id="pending">
+                        <h2 class="text-xl font-bold mb-4">Pending Bookings</h2>
+                        <!-- Pending bookings content here -->
+                        <div class="booking_details bg-gray-50 p-4 rounded-lg shadow-inner mb-4">
+                            <div class="flex flex-wrap -mx-4">
+                                <div class="w-full md:w-1/2 px-4">
+                                    <h3 class="text-lg font-semibold mb-2">User Details</h3>
+                                    <p><strong>Name:</strong> John Doe</p>
+                                    <p><strong>Email:</strong> john.doe@example.com</p>
+                                    
+                                    <h3 class="text-lg font-semibold mt-4 mb-2">Booking Details</h3>
+                                    <p><strong>Date:</strong> 2024-06-25</p>
+                                    <p><strong>Time:</strong> 14:00</p>
+                                </div>
+                                <div class="w-full md:w-1/2 px-4">
+                                    <h3 class="text-lg font-semibold mb-2">Services/Packages</h3>
+                                    <p>Service 1, Service 2, Package 1</p>
+                                    
+                                    <h3 class="text-lg font-semibold mt-4 mb-2">Business Information</h3>
+                                    <p><strong>Business Name:</strong> XYZ Spa</p>
+                                    <p><strong>Address:</strong> 1234 Main St, City, Country</p>
+                                    
+                                    <h3 class="text-lg font-semibold mt-4 mb-2">Payment Details</h3>
+                                    <p><strong>Amount:</strong> $100</p>
+                                    <p><strong>Status:</strong> Pending</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex justify-between mb-2">
-                            <span>Taxes</span>
-                            <span>$1.99</span>
+                    </div>
+                    <div class="tab-pane hidden" id="approved">
+                        <h2 class="text-xl font-bold mb-4">Approved Bookings</h2>
+                        <!-- Approved bookings content here -->
+                        <div class="booking_details bg-gray-50 p-4 rounded-lg shadow-inner mb-4">
+                            <div class="flex flex-wrap -mx-4">
+                                <div class="w-full md:w-1/2 px-4">
+                                    <h3 class="text-lg font-semibold mb-2">User Details</h3>
+                                    <p><strong>Name:</strong> Jane Smith</p>
+                                    <p><strong>Email:</strong> jane.smith@example.com</p>
+                                    
+                                    <h3 class="text-lg font-semibold mt-4 mb-2">Booking Details</h3>
+                                    <p><strong>Date:</strong> 2024-06-26</p>
+                                    <p><strong>Time:</strong> 15:00</p>
+                                </div>
+                                <div class="w-full md:w-1/2 px-4">
+                                    <h3 class="text-lg font-semibold mb-2">Services/Packages</h3>
+                                    <p>Service 3, Package 2</p>
+                                    
+                                    <h3 class="text-lg font-semibold mt-4 mb-2">Business Information</h3>
+                                    <p><strong>Business Name:</strong> ABC Salon</p>
+                                    <p><strong>Address:</strong> 5678 Market St, City, Country</p>
+                                    
+                                    <h3 class="text-lg font-semibold mt-4 mb-2">Payment Details</h3>
+                                    <p><strong>Amount:</strong> $150</p>
+                                    <p><strong>Status:</strong> Approved</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex justify-between mb-2">
-                            <span>Shipping</span>
-                            <span>$0.00</span>
-                        </div>
-                        <hr class="my-2">
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold">Total</span>
-                            <span class="font-semibold">$21.98</span>
-                        </div>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
                     </div>
                 </div>
             </div>
@@ -168,6 +174,14 @@
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
                 }
+            });
+
+            $('.tab-button').click(function() {
+                var tabId = $(this).data('tab');
+                $('.tab-button').removeClass('bg-blue-500 text-white').addClass('bg-gray-200 text-gray-700');
+                $(this).addClass('bg-blue-500 text-white').removeClass('bg-gray-200 text-gray-700');
+                $('.tab-pane').addClass('hidden');
+                $('#' + tabId).removeClass('hidden');
             });
         });
 

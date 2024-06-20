@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\ServiceVariant;
+use App\Models\Package;
 
 class ClientController extends Controller
 {
@@ -32,9 +34,32 @@ class ClientController extends Controller
         return redirect()->back()->with('success','Profile updated successfully');
     }
 
-    public function userBookingList(){
-        // $user = User::with(['bookings.items.item.service.business'])->find(auth()->id());
+    public function userBookingList()
+    {
+        // Retrieve the user with their bookings and eager load related data
+        $user = User::with([
+            'bookings' => function ($query) {
+                $query->with(['items.item' => function ($morphTo) {
+                    $morphTo->morphWith([
+                        ServiceVariant::class => ['service.business'],
+                        Package::class => ['serviceVariants.service.business']
+                    ]);
+                }, 'payments']);
+            }
+        ])->findOrFail(auth()->id());
 
-        return view('booking_list');
+        // Separate bookings into pending and approved groups
+        $userBookingPending = $user->bookings->where('status', 'pending');
+        $userBookingApproved = $user->bookings->where('status', 'approved');
+
+     
+    
+        return view('booking_list', [
+            'userBookingPending' => $userBookingPending,
+            'userBookingApproved' => $userBookingApproved,
+        ]);
     }
+    
+    
+    
 }
