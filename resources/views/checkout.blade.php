@@ -180,7 +180,8 @@
                                 <div id="error" class="text-red-500 text-sm mt-2 hidden">Please select a future
                                     date and time.</div>
                             </div>
-                            <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full" type="submit">Checkout</button>
+                            <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full" type="submit"     @if(is_null($userCart) || $userCart->items->isEmpty()) disabled @endif>
+                                Checkout</button>
                         </x-forms.form>
                     </div>
                 </div>
