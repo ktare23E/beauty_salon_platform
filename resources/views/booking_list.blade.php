@@ -47,7 +47,8 @@
                                 </div>
                                 <div id="userMenu"
                                     class="hidden absolute right-0 mt-3 w-32 text-start bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                                    <a href="{{route('user_profile')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
+                                    <a href="{{ route('user_profile') }}"
+                                        class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
                                     <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Bookings</a>
                                     <button class="block w-full px-4 py-2 text-gray-800 hover:bg-gray-100 text-start"
                                         form="logout">Logout</button>
@@ -85,8 +86,10 @@
         <div class="container mx-auto w-[70%]">
             <div class="bg-white shadow-md rounded-lg p-4">
                 <div class="flex mb-4">
-                    <button class="tab-button px-4 py-2 mr-2 bg-blue-500 text-white rounded" data-tab="pending">Pending Bookings</button>
-                    <button class="tab-button px-4 py-2 bg-gray-200 text-gray-700 rounded" data-tab="approved">Approved Bookings</button>
+                    <button class="tab-button px-4 py-2 mr-2 bg-blue-500 text-white rounded" data-tab="pending">Pending
+                        Bookings</button>
+                    <button class="tab-button px-4 py-2 bg-gray-200 text-gray-700 rounded" data-tab="approved">Approved
+                        Bookings</button>
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane" id="pending">
@@ -96,32 +99,40 @@
                                 <div class="flex flex-wrap -mx-4">
                                     <div class="w-full md:w-1/2 px-4">
                                         <h3 class="text-lg font-semibold mb-2">User Details</h3>
-                                        <p><strong>Name:</strong>{{$userData['first_name'].' '.$userData['last_name']}}</p>
-                                        <p><strong>Email:</strong>{{$userData['email']}}</p>
-                                        
+                                        <p><strong>Name:</strong>{{ $userData['first_name'] . ' ' . $userData['last_name'] }}
+                                        </p>
+                                        <p><strong>Email:</strong>{{ $userData['email'] }}</p>
+
                                         <h3 class="text-lg font-semibold mt-4 mb-2">Booking Details</h3>
-                                        <p><strong>Total Amount:</strong> {{$booking->total_price}}</p>
-                                        <p><strong>Date:</strong> {{ date('Y-m-d', strtotime($booking['booking_date'])) }}</p>
+                                        <p><strong>Total Amount:</strong> {{ $booking->total_price }}</p>
+                                        <p><strong>Date:</strong>
+                                            {{ date('Y-m-d', strtotime($booking['booking_date'])) }}</p>
                                         <p><strong>Time:</strong> 14:00 pm</p>
                                     </div>
                                     <div class="w-full md:w-1/2 px-4">
                                         <h3 class="text-lg font-semibold mb-2">Services/Packages</h3>
                                         @foreach ($booking->items as $item)
-                                            @if ($item->item_type == 'service_variant' )
-                                                <p>{{$item->item->name}}</p>
-                                            @else
-                                                <p>{{$item->item->package_name}}</p>
-                                                {{-- @foreach ($item->item->service_variants as $variants)
-                                                    
-                                                @endforeach --}}
-                                                {{-- package ni sya --}}
+                                            @if ($item->item_type == 'service_variant')
+                                                <p>{{ $item->item->name }}</p>
+                                            @elseif($item->item_type == 'package')
+                                                <p>{{ $item->item->package_name }}</p>
                                             @endif
                                         @endforeach
-                                    <h3 class="text-lg font-semibold mt-4 mb-2">Business Information</h3>
-                                            @if ($item->item_type == 'service_variant' )
-                                                <p><strong>Business Name:</strong> {{$item->item->service->business->business_name}}</p> 
-                                                <p><strong>Address:</strong> {{$item->item->service->business->address}}</p> 
-                                            @endif
+                                        <h3 class="text-lg font-semibold mt-4 mb-2">Business Information</h3>
+                                        @if ($item->item_type == 'service_variant')
+                                            <p><strong>Business Name:</strong>
+                                                {{ $item->item->service->business->business_name }}</p>
+                                            <p><strong>Address:</strong> {{ $item->item->service->business->address }}
+                                            </p>
+                                        @endif
+                                        @if ($item->item_type == 'package')
+                                            <div class="package_business_name hidden">
+
+                                            </div>
+                                            <div class="package_business_address hidden">
+
+                                            </div>
+                                        @endif
                                         <h3 class="text-lg font-semibold mt-4 mb-2">Payment Details</h3>
                                         {{-- check payments if empty --}}
                                         @if ($booking->payments->count() > 0)
@@ -133,8 +144,10 @@
                                     </div>
                                     <div class="w-full px-4 flex justify-center item-center mt-5">
                                         <div class="action_buttons space-x-2">
-                                            <button class="text-sm bg-black text-white py-1 px-2 rounded-sm">reschedule</button>
-                                            <button class="text-sm bg-green-500 text-white py-1 px-2 rounded-sm">pay</button>
+                                            <button
+                                                class="text-sm bg-black text-white py-1 px-2 rounded-sm">reschedule</button>
+                                            <button
+                                                class="text-sm bg-green-500 text-white py-1 px-2 rounded-sm">pay</button>
                                         </div>
                                     </div>
                                 </div>
@@ -142,61 +155,66 @@
                         @empty
                             <h1>No Pending Booking</h1>
                         @endforelse
-                    </div>  
+                    </div>
                     <div class="tab-pane hidden" id="approved">
                         <h2 class="text-xl font-bold mb-4">Approved Bookings</h2>
                         <!-- Approved bookings content here -->
                         @forelse ($userBookingApproved as $booking)
-                        <div class="booking_details bg-gray-50 p-4 rounded-lg shadow-inner mb-4">
-                            <div class="flex flex-wrap -mx-4">
-                                <div class="w-full md:w-1/2 px-4">
-                                    <h3 class="text-lg font-semibold mb-2">User Details</h3>
-                                    <p><strong>Name:</strong>{{$userData['first_name'].' '.$userData['last_name']}}</p>
-                                    <p><strong>Email:</strong>{{$userData['email']}}</p>
-                                    
-                                    <h3 class="text-lg font-semibold mt-4 mb-2">Booking Details</h3>
-                                    <p><strong>Total Amount:</strong> {{$booking->total_price}}</p>
-                                    <p><strong>Date:</strong> {{ date('Y-m-d', strtotime($booking['booking_date'])) }}</p>
-                                    <p><strong>Time:</strong> 15:00 pm</p>
-                                </div>
-                                <div class="w-full md:w-1/2 px-4">
-                                    <h3 class="text-lg font-semibold mb-2">Services/Packages</h3>
-                                    @foreach ($booking->items as $item)
-                                        @if ($item->item_type == 'service_variant')
-                                            <p>{{$item->item->name}}</p>
-                                        @else
-                                            <p>{{$item->item->package_name}}</p>
-                                            {{-- @foreach ($item->item->service_variants as $variants)
-                                                
-                                            @endforeach --}}
-                                            {{-- package ni sya --}}
-                                        @endif
-                                    @endforeach
-                                    
-                                    <h3 class="text-lg font-semibold mt-4 mb-2">Business Information</h3>
-                                    @if ($item->item_type == 'service_variant' )
-                                        <p><strong>Business Name:</strong> {{$item->item->service->business->business_name}}</p> 
-                                        <p><strong>Address:</strong> {{$item->item->service->business->address}}</p> 
-                                    @endif
-                                    {{-- <p><strong>Business Name:</strong> ABC Salon</p>
-                                    <p><strong>Address:</strong> 5678 Market St, City, Country</p> --}}
-                                    
-                                    <h3 class="text-lg font-semibold mt-4 mb-2">Payment Details</h3>
-                                    @if ($booking->payments->count() > 0)
-                                        @foreach ($booking->payments as $payment)
-                                            <p><strong>Amount:</strong> {{$payment->amount}}</p>
-                                            <p><strong>Date of Payment:</strong> @formatDate($payment->date_of_payment)</p>
+                            <div class="booking_details bg-gray-50 p-4 rounded-lg shadow-inner mb-4">
+                                <div class="flex flex-wrap -mx-4">
+                                    <div class="w-full md:w-1/2 px-4">
+                                        <h3 class="text-lg font-semibold mb-2">User Details</h3>
+                                        <p><strong>Name:</strong>{{ $userData['first_name'] . ' ' . $userData['last_name'] }}
+                                        </p>
+                                        <p><strong>Email:</strong>{{ $userData['email'] }}</p>
+
+                                        <h3 class="text-lg font-semibold mt-4 mb-2">Booking Details</h3>
+                                        <p><strong>Total Amount:</strong> {{ $booking->total_price }}</p>
+                                        <p><strong>Date:</strong>
+                                            {{ date('Y-m-d', strtotime($booking['booking_date'])) }}</p>
+                                        <p><strong>Time:</strong> 15:00 pm</p>
+                                    </div>
+                                    <div class="w-full md:w-1/2 px-4">
+                                        <h3 class="text-lg font-semibold mb-2">Services/Packages</h3>
+                                        @foreach ($booking->items as $item)
+                                            @if ($item->item_type == 'service_variant')
+                                                <p>{{ $item->item->name }}</p>
+                                            @else
+                                                <p>{{ $item->item->package_name }}</p>
+                                            @endif
                                         @endforeach
-                                    @else
-                                        No Payment Yet.
-                                    @endif
+
+                                        <h3 class="text-lg font-semibold mt-4 mb-2">Business Information</h3>
+                                        @if ($item->item_type == 'service_variant')
+                                            <p><strong>Business Name:</strong>
+                                                {{ $item->item->service->business->business_name }}</p>
+                                            <p><strong>Address:</strong> {{ $item->item->service->business->address }}
+                                            </p>
+                                        @endif
+                                        @if ($item->item_type == 'package')
+                                            <div class="package_business_name hidden">
+
+                                            </div>
+                                            <div class="package_business_address hidden">
+
+                                            </div>
+                                        @endif
+                                        <h3 class="text-lg font-semibold mt-4 mb-2">Payment Details</h3>
+                                        @if ($booking->payments->count() > 0)
+                                            @foreach ($booking->payments as $payment)
+                                                <p><strong>Amount:</strong> {{ $payment->amount }}</p>
+                                                <p><strong>Date of Payment:</strong> @formatDate($payment->date_of_payment)</p>
+                                            @endforeach
+                                        @else
+                                            No Payment Yet.
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @empty
                             <h1>No approved booking</h1>
                         @endforelse
-                        
+
                     </div>
                 </div>
             </div>
@@ -219,7 +237,7 @@
                 url: "{{ route('cart_number') }}",
                 type: 'GET',
                 success: function(response) {
-                    console.log(response);
+                    // console.log(response);
                     $('.cart_number').html(response);
                 },
                 error: function(xhr, status, error) {
@@ -229,11 +247,77 @@
 
             $('.tab-button').click(function() {
                 var tabId = $(this).data('tab');
-                $('.tab-button').removeClass('bg-blue-500 text-white').addClass('bg-gray-200 text-gray-700');
+                $('.tab-button').removeClass('bg-blue-500 text-white').addClass(
+                'bg-gray-200 text-gray-700');
                 $(this).addClass('bg-blue-500 text-white').removeClass('bg-gray-200 text-gray-700');
                 $('.tab-pane').addClass('hidden');
                 $('#' + tabId).removeClass('hidden');
             });
+
+            let data = @json($userBookingPending);
+            
+            for (let key in data) {
+                if (data.hasOwnProperty(key)) {  // Ensure key is a direct property of the object
+                    let booking = data[key];
+                    // Assuming 'items' is an array within each booking
+                    booking.items.forEach(function(item) {
+                        if (item.item_type == 'package') {
+                            // Show the package business name and address
+                            //loop item.item.service_variants
+                            item.item.service_variants.forEach(function(service_variant) {
+                                var businessName = service_variant.service.business.business_name;
+                                var $strongTag = $('<strong></strong>').text('Business Name: ');
+                                var $pTag = $('<p></p>');
+                                $pTag.append($strongTag);
+                                $pTag.append(businessName);
+
+                                var address = service_variant.service.business.address;
+                                var $strongTag = $('<strong></strong>').text('Address: ');
+                                var $pTag = $('<p></p>');
+                                $pTag.append($strongTag);
+                                $pTag.append(address);
+
+
+                                $('.package_business_name').removeClass('hidden').empty().append($pTag);
+                                $('.package_business_address').removeClass('hidden').empty().append($pTag);
+                            });
+                        }
+                    });
+                }
+            }
+
+            let data2 = @json($userBookingApproved);
+            
+            for (let key in data2) {
+                if (data2.hasOwnProperty(key)) {  // Ensure key is a direct property of the object
+                    let booking = data2[key];
+                    // Assuming 'items' is an array within each booking
+                    booking.items.forEach(function(item) {
+                        if (item.item_type == 'package') {
+                            // Show the package business name and address
+                            //loop item.item.service_variants
+                            item.item.service_variants.forEach(function(service_variant) {
+                                var businessName = service_variant.service.business.business_name;
+                                var $strongTag = $('<strong></strong>').text('Business Name: ');
+                                var $pTag = $('<p></p>');
+                                $pTag.append($strongTag);
+                                $pTag.append(businessName);
+
+                                var address = service_variant.service.business.address;
+                                var $strongTag = $('<strong></strong>').text('Address: ');
+                                var $pTag = $('<p></p>');
+                                $pTag.append($strongTag);
+                                $pTag.append(address);
+
+
+                                $('.package_business_name').removeClass('hidden').empty().append($pTag);
+                                $('.package_business_address').removeClass('hidden').empty().append($pTag);
+                            });
+                        }
+                    });
+                }
+            }
+            
         });
 
         $(document).ready(function() {
