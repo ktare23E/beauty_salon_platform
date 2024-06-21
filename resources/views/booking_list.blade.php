@@ -116,7 +116,7 @@
                                                 <p>{{ $item->item->name }}</p>
                                             @elseif($item->item_type == 'package')
                                                 <p>{{ $item->item->package_name }}</p>
-                                                <div class="package_inclusion hidden">
+                                                <div class="package_inclusion hidden" data-package-id="{{ $item->item->id }}">
 
                                                 </div>
                                             @endif
@@ -139,8 +139,12 @@
                                         <h3 class="text-lg font-semibold mt-4 mb-2">Payment Details</h3>
                                         {{-- check payments if empty --}}
                                         @if ($booking->payments->count() > 0)
-                                            <p><strong>Amount:</strong> $100</p>
-                                            <p><strong>Status:</strong> Pending</p>
+                                            @foreach ($booking->payments as $payment)
+                                                <p><strong>Amount:</strong> {{$payment->amount}}</p>
+                                                <p><strong>Status:</strong> {{$payment->status}}</p>
+                                                <p><strong>Date of Payment:</strong> @formatDate($payment->payment_date)</p>
+                                            @endforeach
+                                    
                                         @else
                                             No Payment Yet.
                                         @endif
@@ -260,7 +264,7 @@
             });
 
             let data = @json($userBookingPending);
-            let allServiceVariants = [];
+            let allServiceVariantsByPackageId2 = {};
 
             
             for (let key in data) {
@@ -269,9 +273,18 @@
                     // Assuming 'items' is an array within each booking
                     booking.items.forEach(function(item) {
                         if (item.item_type == 'package') {
+
+                            let packageId = item.item.id;
+                            if (!allServiceVariantsByPackageId2[packageId]) {
+                                allServiceVariantsByPackageId2[packageId] = [];
+                            }
+
                             // Show the package business name and address
                             //loop item.item.service_variants
                             item.item.service_variants.forEach(function(service_variant) {
+                                allServiceVariantsByPackageId2[packageId].push(service_variant);
+
+
                                 var businessName = service_variant.service.business.business_name;
                                 var $strongTag = $('<strong></strong>').text('Business Name: ');
                                 var $pTag = $('<p></p>');
@@ -288,7 +301,6 @@
 
                                 $('.package_business_address').removeClass('hidden').empty().append($pTag2);
 
-                                allServiceVariants.push(service_variant);
                                 
                             });
                         }
@@ -296,13 +308,19 @@
                 }
             }
 
-            let ul = $('<ul class="pl-10 list-disc"></ul>');
-            allServiceVariants.forEach(function(service_variant) {
-                let li = $('<li class="text-xs"></li>').text(service_variant.name);
-                ul.append(li);
+            // Populate the package inclusions in the DOM
+            $('.package_inclusion').each(function() {
+                let packageId = $(this).data('packageId');  // Use camelCase here
+                console.log(packageId);
+                if (allServiceVariantsByPackageId2[packageId]) {
+                    let ul2 = $('<ul class="pl-10 list-disc"></ul>');
+                    allServiceVariantsByPackageId2[packageId].forEach(function(service_variant) {
+                        let li = $('<li class="text-xs"></li>').text(service_variant.name);
+                        ul2.append(li);
+                    });
+                    $(this).removeClass('hidden').empty().append(ul2);
+                }
             });
-
-            $('.package_inclusion').removeClass('hidden').empty().append(ul);
 
 
             let data2 = @json($userBookingApproved);
