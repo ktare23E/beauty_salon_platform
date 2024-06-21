@@ -81,7 +81,7 @@
             </a>
         </div>
     </nav>
-    <div class="bg-gray-100 h-screen py-8 flex items-center justify-center">
+    <div class="bg-gray-100 min-h-screen py-8 flex items-center justify-center ">
         <div class="user_data p-8 bg-white rounded-md w-[40%] hover:shadow-lg transition-all relative text-center">
             <div class="absolute top-4 right-4">
                 <button id="editButton" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none">
@@ -98,10 +98,10 @@
             @if ($user->latestBooking)
                 <div class="latest_booking p-4 bg-gray-100 rounded-md text-center">
                     <h3 class="text-xl font-semibold mb-2">Latest Booking</h3>
-                    <p><strong>Salon:</strong> {{ $user->latestBooking->items[0]->item->service->business->business_name }}</p>
+                    <p><strong>Salon:</strong> {{ $business->business_name}}</p>
                     <p><strong>Total Price:</strong> ₱{{ number_format($user->latestBooking->total_price, 2) }}</p>
                     <p><strong>Booking Date:</strong> {{ \Carbon\Carbon::parse($user->latestBooking->booking_date)->format('Y-m-d') }}</p>
-                    <p><strong>Status:</strong> {{ $user->latestBooking->status }}</p>
+                    <p><strong>Status:</strong> <span class="{{$user->latestBooking->status === 'approved' ? 'text-green-500':'text-orange-500'}}">{{ $user->latestBooking->status }}</span></p>
                     <a href="{{route('user_booking_list')}}" class="text-blue-500 hover:underline">View Booking</a>
                 </div>
             @else
@@ -111,15 +111,15 @@
             <form id="editForm" class="hidden mt-4">
                 <div class="mb-4">
                     <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
-                    <input type="text" id="first_name" name="first_name" value="{{ $user->first_name }}" class="mt-1 py-2 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                    <input type="text" id="first_name" name="first_name" value="{{ $user->first_name }}" class="mt-1 py-2 block border-2 border-black w-full rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
                 </div>
                 <div class="mb-4">
                     <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
-                    <input type="text" id="last_name" name="last_name" value="{{ $user->last_name }}" class="mt-1 py-2 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                    <input type="text" id="last_name" name="last_name" value="{{ $user->last_name }}" class="mt-1 py-2 block w-full border-2 border-black rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
                 </div>
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" id="email" name="email" value="{{ $user->email }}" class="mt-1 block py-2 w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                    <input type="email" id="email" name="email" value="{{ $user->email }}" class="mt-1 block py-2 w-full border-2 border-black rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
                 </div>
                 <div class="flex justify-end">
                     <button type="button" id="saveButton" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Save</button>
