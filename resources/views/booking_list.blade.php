@@ -184,7 +184,7 @@
                                                 <p>{{ $item->item->name }}</p>
                                             @elseif($item->item_type == 'package')
                                                 <p>{{ $item->item->package_name }}</p>
-                                                <div class="package_inclusion2 hidden">
+                                                <div class="package_inclusion2 hidden" data-package-id="{{ $item->item->id }}">
 
                                                 </div>
                                             @endif
@@ -197,10 +197,10 @@
                                             </p>
                                         @endif
                                         @if ($item->item_type == 'package')
-                                            <div class="package_business_name hidden">
+                                            <div class="package_business_name2 hidden">
 
                                             </div>
-                                            <div class="package_business_address hidden">
+                                            <div class="package_business_address2 hidden">
 
                                             </div>
                                         @endif
@@ -307,7 +307,7 @@
 
             let data2 = @json($userBookingApproved);
 
-            let allServiceVariants2 = [];
+            let allServiceVariantsByPackageId = {};
 
             
             for (let key in data2) {
@@ -318,7 +318,14 @@
                         if (item.item_type == 'package') {
                             // Show the package business name and address
                             //loop item.item.service_variants
+                            let packageId = item.item.id;
+                            if (!allServiceVariantsByPackageId[packageId]) {
+                                allServiceVariantsByPackageId[packageId] = [];
+                            }
+
                             item.item.service_variants.forEach(function(service_variant) {
+                                allServiceVariantsByPackageId[packageId].push(service_variant);
+
                                 var businessName = service_variant.service.business.business_name;
                                 var $strongTag = $('<strong></strong>').text('Business Name: ');
                                 var $pTag = $('<p></p>');
@@ -326,29 +333,36 @@
                                 $pTag.append(businessName);
 
                                 var address = service_variant.service.business.address;
-                                var $strongTag = $('<strong></strong>').text('Address: ');
-                                var $pTag = $('<p></p>');
-                                $pTag.append($strongTag);
-                                $pTag.append(address);
+                                var $strongTag2 = $('<strong></strong>').text('Address: ');
+                                var $pTag2 = $('<p></p>');
+                                $pTag2.append($strongTag2);
+                                $pTag2.append(address);
 
 
-                                $('.package_business_name').removeClass('hidden').empty().append($pTag);
-                                $('.package_business_address').removeClass('hidden').empty().append($pTag);
+                                $('.package_business_name2').removeClass('hidden').empty().append($pTag);
+                                $('.package_business_address2').removeClass('hidden').empty().append($pTag2);
 
-                                allServiceVariants2.push(service_variant);
                             });
                         }
                     });
                 }
             }
 
-            let ul2 = $('<ul class="pl-10 list-disc"></ul>');
-            allServiceVariants2.forEach(function(service_variant) {
-                let li = $('<li class="text-xs"></li>').text(service_variant.name);
-                ul2.append(li);
-            });
+            console.log(allServiceVariantsByPackageId);
 
-            $('.package_inclusion2').removeClass('hidden').empty().append(ul2);
+         // Populate the package inclusions in the DOM
+            $('.package_inclusion2').each(function() {
+                let packageId = $(this).data('packageId');  // Use camelCase here
+                console.log(packageId);
+                if (allServiceVariantsByPackageId[packageId]) {
+                    let ul2 = $('<ul class="pl-10 list-disc"></ul>');
+                    allServiceVariantsByPackageId[packageId].forEach(function(service_variant) {
+                        let li = $('<li class="text-xs"></li>').text(service_variant.name);
+                        ul2.append(li);
+                    });
+                    $(this).removeClass('hidden').empty().append(ul2);
+                }
+            });
             
         });
 
