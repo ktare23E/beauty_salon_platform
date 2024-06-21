@@ -116,6 +116,9 @@
                                                 <p>{{ $item->item->name }}</p>
                                             @elseif($item->item_type == 'package')
                                                 <p>{{ $item->item->package_name }}</p>
+                                                <div class="package_inclusion hidden">
+
+                                                </div>
                                             @endif
                                         @endforeach
                                         <h3 class="text-lg font-semibold mt-4 mb-2">Business Information</h3>
@@ -126,7 +129,7 @@
                                             </p>
                                         @endif
                                         @if ($item->item_type == 'package')
-                                            <div class="package_business_name hidden">
+                                            <div class="package_business_name1 hidden">
 
                                             </div>
                                             <div class="package_business_address hidden">
@@ -179,11 +182,13 @@
                                         @foreach ($booking->items as $item)
                                             @if ($item->item_type == 'service_variant')
                                                 <p>{{ $item->item->name }}</p>
-                                            @else
+                                            @elseif($item->item_type == 'package')
                                                 <p>{{ $item->item->package_name }}</p>
+                                                <div class="package_inclusion2 hidden">
+
+                                                </div>
                                             @endif
                                         @endforeach
-
                                         <h3 class="text-lg font-semibold mt-4 mb-2">Business Information</h3>
                                         @if ($item->item_type == 'service_variant')
                                             <p><strong>Business Name:</strong>
@@ -255,6 +260,8 @@
             });
 
             let data = @json($userBookingPending);
+            let allServiceVariants = [];
+
             
             for (let key in data) {
                 if (data.hasOwnProperty(key)) {  // Ensure key is a direct property of the object
@@ -270,23 +277,38 @@
                                 var $pTag = $('<p></p>');
                                 $pTag.append($strongTag);
                                 $pTag.append(businessName);
+                                $('.package_business_name1').removeClass('hidden').empty().append($pTag);
 
                                 var address = service_variant.service.business.address;
-                                var $strongTag = $('<strong></strong>').text('Address: ');
-                                var $pTag = $('<p></p>');
-                                $pTag.append($strongTag);
-                                $pTag.append(address);
+                                var $strongTag2 = $('<strong></strong>').text('Address: ');
+                                var $pTag2 = $('<p></p>');
+                                $pTag2.append($strongTag2);
+                                $pTag2.append(address);
 
 
-                                $('.package_business_name').removeClass('hidden').empty().append($pTag);
-                                $('.package_business_address').removeClass('hidden').empty().append($pTag);
+                                $('.package_business_address').removeClass('hidden').empty().append($pTag2);
+
+                                allServiceVariants.push(service_variant);
+                                
                             });
                         }
                     });
                 }
             }
 
+            let ul = $('<ul class="pl-10 list-disc"></ul>');
+            allServiceVariants.forEach(function(service_variant) {
+                let li = $('<li class="text-xs"></li>').text(service_variant.name);
+                ul.append(li);
+            });
+
+            $('.package_inclusion').removeClass('hidden').empty().append(ul);
+
+
             let data2 = @json($userBookingApproved);
+
+            let allServiceVariants2 = [];
+
             
             for (let key in data2) {
                 if (data2.hasOwnProperty(key)) {  // Ensure key is a direct property of the object
@@ -312,11 +334,21 @@
 
                                 $('.package_business_name').removeClass('hidden').empty().append($pTag);
                                 $('.package_business_address').removeClass('hidden').empty().append($pTag);
+
+                                allServiceVariants2.push(service_variant);
                             });
                         }
                     });
                 }
             }
+
+            let ul2 = $('<ul class="pl-10 list-disc"></ul>');
+            allServiceVariants2.forEach(function(service_variant) {
+                let li = $('<li class="text-xs"></li>').text(service_variant.name);
+                ul2.append(li);
+            });
+
+            $('.package_inclusion2').removeClass('hidden').empty().append(ul2);
             
         });
 
