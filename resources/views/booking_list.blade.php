@@ -100,13 +100,14 @@
                                         <p><strong>Email:</strong>{{$userData['email']}}</p>
                                         
                                         <h3 class="text-lg font-semibold mt-4 mb-2">Booking Details</h3>
+                                        <p><strong>Total Amount:</strong> {{$booking->total_price}}</p>
                                         <p><strong>Date:</strong> {{ date('Y-m-d', strtotime($booking['booking_date'])) }}</p>
                                         <p><strong>Time:</strong> 14:00 pm</p>
                                     </div>
                                     <div class="w-full md:w-1/2 px-4">
                                         <h3 class="text-lg font-semibold mb-2">Services/Packages</h3>
                                         @foreach ($booking->items as $item)
-                                            @if ($item->item_type == 'service_variant')
+                                            @if ($item->item_type == 'service_variant' )
                                                 <p>{{$item->item->name}}</p>
                                             @else
                                                 <p>{{$item->item->package_name}}</p>
@@ -116,15 +117,11 @@
                                                 {{-- package ni sya --}}
                                             @endif
                                         @endforeach
-                                        
-                                        @php
-                                        $seenBusinessNames = [];
-                                    @endphp
-                                    
                                     <h3 class="text-lg font-semibold mt-4 mb-2">Business Information</h3>
-                                        <p><strong>Business Name:</strong> XYZ Spa</p> 
-                                        <p><strong>Address:</strong> 1234 Main St, City, Country</p> 
-                                        
+                                            @if ($item->item_type == 'service_variant' )
+                                                <p><strong>Business Name:</strong> {{$item->item->service->business->business_name}}</p> 
+                                                <p><strong>Address:</strong> {{$item->item->service->business->address}}</p> 
+                                            @endif
                                         <h3 class="text-lg font-semibold mt-4 mb-2">Payment Details</h3>
                                         {{-- check payments if empty --}}
                                         @if ($booking->payments->count() > 0)
@@ -158,6 +155,7 @@
                                     <p><strong>Email:</strong>{{$userData['email']}}</p>
                                     
                                     <h3 class="text-lg font-semibold mt-4 mb-2">Booking Details</h3>
+                                    <p><strong>Total Amount:</strong> {{$booking->total_price}}</p>
                                     <p><strong>Date:</strong> {{ date('Y-m-d', strtotime($booking['booking_date'])) }}</p>
                                     <p><strong>Time:</strong> 15:00 pm</p>
                                 </div>
@@ -176,15 +174,18 @@
                                     @endforeach
                                     
                                     <h3 class="text-lg font-semibold mt-4 mb-2">Business Information</h3>
-                              
-                                    <p><strong>Business Name:</strong> ABC Salon</p>
-                                    <p><strong>Address:</strong> 5678 Market St, City, Country</p>
+                                    @if ($item->item_type == 'service_variant' )
+                                        <p><strong>Business Name:</strong> {{$item->item->service->business->business_name}}</p> 
+                                        <p><strong>Address:</strong> {{$item->item->service->business->address}}</p> 
+                                    @endif
+                                    {{-- <p><strong>Business Name:</strong> ABC Salon</p>
+                                    <p><strong>Address:</strong> 5678 Market St, City, Country</p> --}}
                                     
                                     <h3 class="text-lg font-semibold mt-4 mb-2">Payment Details</h3>
                                     @if ($booking->payments->count() > 0)
                                         @foreach ($booking->payments as $payment)
                                             <p><strong>Amount:</strong> {{$payment->amount}}</p>
-                                            <p><strong>Status:</strong> {{$payment->status}}</p>
+                                            <p><strong>Date of Payment:</strong> @formatDate($payment->date_of_payment)</p>
                                         @endforeach
                                     @else
                                         No Payment Yet.
