@@ -47,5 +47,26 @@ class BookingController extends Controller
     
         // return redirect()->route('booking.success', ['booking' => $booking->id]);
     }
+
+    public function rescheduleBooking(Request $request,$id){
+        $validatedData = $request->validate([
+            'id' => 'required|exists:bookings,id',  // Assuming there's a bookings table
+            'date' => 'required|date_format:Y-m-d', // Validate date format
+            'time' => 'required|date_format:H:i'    // Validate time format
+        ]);
+
+        // Concatenate date and time
+        $dateTime = $request->input('date') . ' ' . $request->input('time');
+
+        // Optionally, parse and format the datetime to ensure it's correct
+        $dateTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i', $dateTime);
+
+        $booking = Booking::findOrFail($id);
+        $booking->update([
+            'booking_date' => $dateTime
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Booking rescheduled successfully.']);
+    }
     
 }

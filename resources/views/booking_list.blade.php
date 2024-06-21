@@ -82,6 +82,7 @@
             </a>
         </div>
     </nav>
+    @include('components.modal.booking_reschedule')
     <div class="bg-gray-100 min-h-screen py-8 mt-20 ">
         <div class="container mx-auto w-[70%]">
             <div class="bg-white shadow-md rounded-lg p-4">
@@ -150,11 +151,13 @@
                                         @endif
                                     </div>
                                     <div class="w-full px-4 flex justify-center item-center mt-5">
-                                        <div class="action_buttons space-x-2">
+                                        <div class="action_buttons space-x-1">
                                             <button
-                                                class="text-sm bg-black text-white py-1 px-2 rounded-sm">reschedule</button>
+                                                class="text-sm bg-black text-white py-1 px-2 rounded-sm" onclick='rescheduleBooking({{$booking->id}},"booking_reschedule")'>reschedule</button>
                                             <button
                                                 class="text-sm bg-green-500 text-white py-1 px-2 rounded-sm">pay</button>
+                                                <button
+                                                class="text-sm bg-red-500 text-white py-1 px-2 rounded-sm">cancel</button>
                                         </div>
                                     </div>
                                 </div>
@@ -366,12 +369,11 @@
                 }
             }
 
-            console.log(allServiceVariantsByPackageId);
 
          // Populate the package inclusions in the DOM
             $('.package_inclusion2').each(function() {
                 let packageId = $(this).data('packageId');  // Use camelCase here
-                console.log(packageId);
+                // console.log(packageId);
                 if (allServiceVariantsByPackageId[packageId]) {
                     let ul2 = $('<ul class="pl-10 list-disc"></ul>');
                     allServiceVariantsByPackageId[packageId].forEach(function(service_variant) {
@@ -383,6 +385,105 @@
             });
             
         });
+
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Listen for click events on elements with the data-modal-toggle attribute
+            document.querySelectorAll('[data-modal-toggle]').forEach(function(toggleBtn) {
+                toggleBtn.addEventListener('click', function() {
+                    // Get the target modal ID from the data-modal-toggle attribute
+                    var target = toggleBtn.getAttribute('data-modal-toggle');
+                    var modal = document.getElementById(target);
+
+                    if (modal) {
+                        // Toggle the "hidden" class on the modal
+                        modal.classList.toggle('hidden');
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            const $dateInput = $('#date');
+            const $timeInput = $('#time');
+            const $errorDiv = $('#error');
+
+            // Set the min attribute to disable past dates
+            const today = new Date().toISOString().split('T')[0];
+            $dateInput.attr('min', today);
+
+            $dateInput.on('change', function() {
+                const selectedDate = new Date($(this).val());
+                const now = new Date();
+
+                if (selectedDate.setHours(0, 0, 0, 0) < now.setHours(0, 0, 0, 0)) {
+                    $errorDiv.removeClass('hidden');
+                    $(this).val('');
+                } else {
+                    $errorDiv.addClass('hidden');
+                }
+            });
+
+            // Optional: Handle time input validation if needed
+            $timeInput.on('change', function() {
+                if ($dateInput.val()) {
+                    const selectedDateTime = new Date(`${$dateInput.val()}T${$(this).val()}`);
+                    const now = new Date();
+
+                    if (selectedDateTime < now) {
+                        $errorDiv.removeClass('hidden');
+                    } else {
+                        $errorDiv.addClass('hidden');
+                    }
+                }
+            });
+        });
+
+        function closeModal(modalId) {
+            document.addEventListener("DOMContentLoaded", function() {
+                const modal = document.getElementById(`${modalId}`);
+                modal.addEventListener('click', function(event) {
+                    const modalContent = modal.querySelector('.relative');
+                    if (!modalContent.contains(event.target)) {
+                        modal.classList.add('hidden');
+                    }
+                });
+            });
+        }
+
+        closeModal('booking_reschedule');
+
+        function rescheduleBooking(id,modal){
+         
+
+            $('#reschedule').click(function(){
+                let date = $('#date').val();
+                let time = $('#time').val();
+
+                $.ajax({
+                    url: "{{ route('reschedule_booking', '') }}/" + id,
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        date: date,
+                        time: time,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if(response.success === true){
+                            alert(response.message);
+                            location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            })
+
+            $('#' + modal).toggleClass('hidden');
+
+        }
 
         $(document).ready(function() {
             const $dateInput = $('#date');
