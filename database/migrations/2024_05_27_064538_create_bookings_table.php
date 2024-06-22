@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->timestamp('booking_date');
             $table->decimal('total_price', 10, 2);
-            $table->enum('status', ['pending', 'approved', 'declined'])->default('pending');
+            $table->enum('status', ['pending', 'approved', 'declined','canceled'])->default('pending');
             $table->timestamps();
         });
     }

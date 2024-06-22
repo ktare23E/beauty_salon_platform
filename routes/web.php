@@ -66,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user_booking_list',[ClientController::class,'userBookingList'])->name('user_booking_list');
     Route::post('/booking',[BookingController::class,'storeBooking'])->name('booking');
     Route::post('/reschedule_booking/{id}',[BookingController::class,'rescheduleBooking'])->name('reschedule_booking');
+    Route::post('/cancel_booking/{booking}',[BookingController::class,'cancelBooking'])->name('cancel_booking');
 
 
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');

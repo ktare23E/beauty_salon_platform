@@ -68,5 +68,13 @@ class BookingController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Booking rescheduled successfully.']);
     }
+
+    public function cancelBooking(Booking $booking){
+        $booking->update([
+            'status' => 'declined'
+        ]);
+
+        return redirect()->back()->with('success', 'Booking canceled successfully.');
+    }
     
 }
