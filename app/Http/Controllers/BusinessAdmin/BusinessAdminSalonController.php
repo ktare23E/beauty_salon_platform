@@ -106,46 +106,56 @@ class BusinessAdminSalonController extends Controller
 
     public function show(Business $business){
 
-        // Load the services and their variants for the business
-        $business->load('services.variants');
+        // // Load the services and their variants for the business
+        // $business->load('services.variants');
 
-        // Collect all variant IDs for the business's services
-        $serviceVariantIds = $business->services->flatMap(function ($service) {
-            return $service->variants->pluck('id');
-        });
+        // // Collect all variant IDs for the business's services
+        // $serviceVariantIds = $business->services->flatMap(function ($service) {
+        //     return $service->variants->pluck('id');
+        // });
 
-        // Fetch the packages associated with these variants
-        $packages = Package::whereHas('serviceVariants', function ($query) use ($serviceVariantIds) {
-            $query->whereIn('service_variant_id', $serviceVariantIds);
-        })->distinct()->get();
+        // // Fetch the packages associated with these variants
+        // $packages = Package::whereHas('serviceVariants', function ($query) use ($serviceVariantIds) {
+        //     $query->whereIn('service_variant_id', $serviceVariantIds);
+        // })->distinct()->get();
 
-         // Fetch the clients associated with the business's services
-        $clients = User::whereHas('bookings.items', function ($query) use ($serviceVariantIds) {
-            $query->whereHasMorph('item', ['package', 'service_variant'], function ($query) use ($serviceVariantIds) {
-                $query->whereIn('id', $serviceVariantIds);
-            });
-        })->distinct()->get();
+        //  // Fetch the clients associated with the business's services
+        // $clients = User::whereHas('bookings.items', function ($query) use ($serviceVariantIds) {
+        //     $query->whereHasMorph('item', ['package', 'service_variant'], function ($query) use ($serviceVariantIds) {
+        //         $query->whereIn('id', $serviceVariantIds);
+        //     });
+        // })->distinct()->get();
 
-        // Fetch bookings associated with these service variants or packages
-        $bookings = Booking::with('user')
-        ->whereHas('items', function ($query) use ($serviceVariantIds) {
-            $query->whereHasMorph('item', ['package', 'service_variant'], function ($query) use ($serviceVariantIds) {
-                $query->whereIn('id', $serviceVariantIds);
-            });
-        })->distinct()->get();
+        // // Fetch bookings associated with these service variants or packages
+        // $bookings = Booking::with('user')
+        // ->whereHas('items', function ($query) use ($serviceVariantIds) {
+        //     $query->whereHasMorph('item', ['package', 'service_variant'], function ($query) use ($serviceVariantIds) {
+        //         $query->whereIn('id', $serviceVariantIds);
+        //     });
+        // })->distinct()->get();
 
 
 
+        // $services = $business->services;
+
+        // return view('business_admin.salon.show',[
+        //     'business' => $business,
+        //     'services' => $services,
+        //     'packages' => $packages,
+        //     'clients' => $clients,
+        //     'bookings' => $bookings
+        // ]);
+
+    }
+    
+    public function services(Business $business)
+    {
         $services = $business->services;
 
-        return view('business_admin.salon.show',[
+        return view('business_admin.service.index', [
             'business' => $business,
-            'services' => $services,
-            'packages' => $packages,
-            'clients' => $clients,
-            'bookings' => $bookings
+            'services' => $services
         ]);
-
     }
 
     public function getUserTransactions($userId)

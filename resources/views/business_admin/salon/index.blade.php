@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="pt-5 text-base font-semibold leading-7">
                                     <p>
-                                        <a href="{{route('show_business',$business->id)}}" class="text-sky-500 transition-all duration-300 group-hover:text-white">View Business Salon
+                                        <a href="{{route('show_service',$business->id)}}" class="text-sky-500 transition-all duration-300 group-hover:text-white">View Business Salon
                                             &rarr;</a>
                                     </p>
                                 </div>

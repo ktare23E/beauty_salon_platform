@@ -104,7 +104,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/create_salon',[BusinessAdminSalonController::class,'create'])->name('business_admin.create_salon');
     Route::post('/create_salon',[BusinessAdminSalonController::class,'store'])->name('business_admin.store_business');
 
-    Route::get('/salon/{business}',[BusinessAdminSalonController::class,'show'])->name('show_business');
+    // Route::get('/salon/{business}',[BusinessAdminSalonController::class,'show'])->name('show_business');
+    Route::get('/salon/show_service/{business}',[BusinessAdminSalonController::class,'services'])->name('show_service');
     Route::get('/user/{id}/transactions', [BusinessAdminSalonController::class, 'getUserTransactions'])->name('user.transactions');
     Route::get('/booking/{booking}', [BusinessAdminSalonController::class, 'viewBooking'])->name('client_booking');
 
