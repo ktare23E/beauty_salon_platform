@@ -68,6 +68,25 @@ class PackageController extends Controller
             'service_variants' => $package->serviceVariants
         ]);
     }
+
+    public function showPackage(Business $business){
+        $business->load('services.variants');
+
+        // Collect all variant IDs for the business's services
+        $serviceVariantIds = $business->services->flatMap(function ($service) {
+            return $service->variants->pluck('id');
+        });
+
+        // Fetch the packages associated with these variants
+        $packages = Package::whereHas('serviceVariants', function ($query) use ($serviceVariantIds) {
+            $query->whereIn('service_variant_id', $serviceVariantIds);
+        })->distinct()->get();
+
+        return view('business_admin.packages.index',[
+            'business' => $business,
+            'packages' => $packages
+        ]);
+    }
     
 
     public function edit(Package $package){
