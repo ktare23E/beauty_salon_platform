@@ -148,6 +148,28 @@ class BusinessAdminSalonController extends Controller
 
     }
 
+    public function bookingList(Business $business){
+        // Load the services and their variants for the business
+        $business->load('services.variants');
+
+        // Collect all variant IDs for the business's services
+        $serviceVariantIds = $business->services->flatMap(function ($service) {
+            return $service->variants->pluck('id');
+        });
+
+        $bookings = Booking::with('user')
+            ->whereHas('items', function ($query) use ($serviceVariantIds) {
+                $query->whereHasMorph('item', ['package', 'service_variant'], function ($query) use ($serviceVariantIds) {
+                    $query->whereIn('id', $serviceVariantIds);
+                });
+            })->distinct()->get();
+
+        return view('business_admin.bookings.index',[
+            'business' => $business,
+            'bookings' => $bookings
+        ]);
+    }
+
     public function clientList(Business $business)
     {
            // Load the services and their variants for the business
