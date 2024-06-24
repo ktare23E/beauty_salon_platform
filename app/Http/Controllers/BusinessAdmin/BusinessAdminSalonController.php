@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\BusinessImage;
 use App\Models\Booking;
+use Carbon\Carbon;
 
 use function Pest\Laravel\json;
 
@@ -162,11 +163,32 @@ class BusinessAdminSalonController extends Controller
                 $query->whereHasMorph('item', ['package', 'service_variant'], function ($query) use ($serviceVariantIds) {
                     $query->whereIn('id', $serviceVariantIds);
                 });
-            })->distinct()->get();
+            })->where('status','approved')->get();
+
+        $pendingBookings = Booking::with('user')
+            ->whereHas('items', function ($query) use ($serviceVariantIds) {
+                $query->whereHasMorph('item', ['package', 'service_variant'], function ($query) use ($serviceVariantIds) {
+                    $query->whereIn('id', $serviceVariantIds);
+                });
+            })->where('status','pending')->distinct()->get();
+
+        $approvedBookingsToday = Booking::with('user')
+            ->whereHas('items', function ($query) use ($serviceVariantIds) {
+                $query->whereHasMorph('item', ['package', 'service_variant'], function ($query) use ($serviceVariantIds) {
+                    $query->whereIn('id', $serviceVariantIds);
+                });
+            })->where('status','approved')->whereDate('booking_date',Carbon::today())->distinct()->get();
+
+            $currentDate = Carbon::today()->toFormattedDateString();
+        $currentDate;
+    
 
         return view('business_admin.bookings.index',[
             'business' => $business,
-            'bookings' => $bookings
+            'bookings' => $bookings,
+            'pendingBookings' => $pendingBookings,
+            'approvedBookingsToday' => $approvedBookingsToday,
+            'currentDate' => $currentDate
         ]);
     }
 
@@ -249,12 +271,12 @@ class BusinessAdminSalonController extends Controller
         }
 
         $userData = User::findOrFail($bookingData->user_id);
+  
         
-    
         // Return the booking data with all related information
         return response()->json([
             'booking' => $bookingData,
-            'user' => $userData,
+            'user' => $userData
         ]);
     }
     

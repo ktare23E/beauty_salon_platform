@@ -112,7 +112,7 @@
         <main class="ml-17rem w-full">
             <h1 class="font-bold text-2xl">{{ $business->business_name }}</h1>
             @include('components.modal.user_booking')
-            <div class="pb-[500px] mt-20">
+            <div class="mt-20">
                 <h1 class="font-bold text-2xl">Bookings</h1>
                 <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md hover:shadow-xl transition-all mx-auto">
                     <div class="table_container">
@@ -143,7 +143,107 @@
                                         <x-table.td>
                                             {{ $booking->user->first_name }} {{ $booking->user->last_name }}
                                         </x-table.td>
+                                        <x-table.td class="text-green-500">
+                                            {{ $booking->status }}
+                                        </x-table.td>
                                         <x-table.td>
+                                            ₱{{ number_format($booking->total_price, 2) }}
+                                        </x-table.td>
+                                        <x-table.td>
+                                            @formatDate($booking->booking_date)
+                                        </x-table.td>
+                                        <x-table.td>
+                                            <button class="bg-yellow-500 py-1 px-2 text-sm rounded-sm text-white" onclick='viewBooking({{$booking->id}},"user_booking")'>view</button>
+                                        </x-table.td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </x-table.table>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-20">
+                <h1 class="font-bold text-2xl">Pending Bookings</h1>
+                <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md hover:shadow-xl transition-all mx-auto">
+                    <div class="table_container">
+                        <x-table.table id="myTable5">
+                            <thead
+                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <x-table.thead>
+                                        Client Name
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Status
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Total Price
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Date And Time
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Action
+                                    </x-table.thead>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($pendingBookings as $booking)
+                                    <tr>
+                                        <x-table.td>
+                                            {{ $booking->user->first_name }} {{ $booking->user->last_name }}
+                                        </x-table.td>
+                                        <x-table.td class="text-orange-500">
+                                            {{ $booking->status }}
+                                        </x-table.td>
+                                        <x-table.td>
+                                            ₱{{ number_format($booking->total_price, 2) }}
+                                        </x-table.td>
+                                        <x-table.td>
+                                            @formatDate($booking->booking_date)
+                                        </x-table.td>
+                                        <x-table.td>
+                                            <button class="bg-yellow-500 py-1 px-2 text-sm rounded-sm text-white" onclick='viewBooking({{$booking->id}},"user_booking")'>view</button>
+                                        </x-table.td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </x-table.table>
+                    </div>
+                </div>
+            </div>
+            <div class="pb-[500px] mt-20">
+                <h1 class="font-bold text-2xl">Approved Bookings of {{$currentDate}}</h1>
+                <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md hover:shadow-xl transition-all mx-auto">
+                    <div class="table_container">
+                        <x-table.table id="myTable6">
+                            <thead
+                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <x-table.thead>
+                                        Client Name
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Status
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Total Price
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Date And Time
+                                    </x-table.thead>
+                                    <x-table.thead>
+                                        Action
+                                    </x-table.thead>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($approvedBookingsToday as $booking)
+                                    <tr>
+                                        <x-table.td>
+                                            {{ $booking->user->first_name }} {{ $booking->user->last_name }}
+                                        </x-table.td>
+                                        <x-table.td class="text-green-500">
                                             {{ $booking->status }}
                                         </x-table.td>
                                         <x-table.td>
@@ -167,6 +267,8 @@
     <script>
         $(document).ready(function() {
             $('#myTable4').DataTable();
+            $('#myTable5').DataTable();
+            $('#myTable6').DataTable();
         });
         
         document.addEventListener('DOMContentLoaded', function() {
