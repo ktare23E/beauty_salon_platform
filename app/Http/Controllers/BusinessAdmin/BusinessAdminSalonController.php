@@ -192,6 +192,17 @@ class BusinessAdminSalonController extends Controller
         ]);
     }
 
+    public function approveBooking($id){
+        $booking = Booking::findOrFail($id);
+        $booking->update([
+            'status' => 'approved'
+        ]);
+
+        return response()->json([
+            'message' => 'Booking approved successfully'
+        ]);
+    }
+
     public function clientList(Business $business)
     {
            // Load the services and their variants for the business

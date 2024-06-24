@@ -305,6 +305,23 @@
         function viewBooking(id, modal) {
         const url = `{{ route('client_booking', ':id') }}`.replace(':id', id);
         
+        $('.approve').click(function(){
+            $.ajax({
+                url: `{{ route('approve_booking', ':id') }}`.replace(':id', id),
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    console.log(response);
+                    if(response.message == 'Booking approved successfully') {
+                        alert('Booking approved successfully!');
+                        location.reload();
+                    }
+                }
+            });
+        });
+
         $.ajax({
             url: url,
             method: 'GET',

@@ -37,8 +37,8 @@
                     </div>
                     <div class="w-full flex justify-end">
                         <div class="booking_actions flex space-x-2">
-                            <button type="button" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 focus:ring-2 focus:ring-green-400 focus:outline-none">Approve</button>
-                            <button type="button" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-green-600 focus:ring-2 focus:ring-green-400 focus:outline-none">Decline</button>
+                            <button type="button" class="approve px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 focus:ring-2 focus:ring-green-400 focus:outline-none">Approve</button>
+                            <button type="button" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:ring-2 focus:ring-red-400 focus:outline-none">Decline</button>
                             <button type="button" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none">Pay</button>
                         </div>
                     </div>

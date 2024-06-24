@@ -114,6 +114,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/booking_list/{business}',[BusinessAdminSalonController::class,'bookingList'])->name('booking_list');
+    Route::post('/approve_booking/{id}',[BusinessAdminSalonController::class,'approveBooking'])->name('approve_booking');
 
 
     Route::get('/package_index/{business}',[PackageController::class,'showPackage'])->name('package_index');
