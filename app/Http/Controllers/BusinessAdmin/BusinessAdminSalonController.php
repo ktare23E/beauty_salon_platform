@@ -15,6 +15,8 @@ use App\Models\User;
 use App\Models\BusinessImage;
 use App\Models\Booking;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotificaitonMail;
 
 use function Pest\Laravel\json;
 
@@ -201,6 +203,17 @@ class BusinessAdminSalonController extends Controller
         return response()->json([
             'message' => 'Booking approved successfully'
         ]);
+    }
+
+    public function email(){
+        $details = [
+            'title' => 'Mail from Salon',
+            'body' => 'This is for testing email using smtp'
+        ];
+
+        Mail::to('tare.kristian@gmail.com')->send(new NotificaitonMail($details));
+
+        return 'Email sent successfully!';
     }
 
     public function clientList(Business $business)

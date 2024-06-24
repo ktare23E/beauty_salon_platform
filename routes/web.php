@@ -116,6 +116,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/booking_list/{business}',[BusinessAdminSalonController::class,'bookingList'])->name('booking_list');
     Route::post('/approve_booking/{id}',[BusinessAdminSalonController::class,'approveBooking'])->name('approve_booking');
 
+    Route::get('/email',[BusinessAdminSalonController::class,'email'])->name('email');
+
+
 
     Route::get('/package_index/{business}',[PackageController::class,'showPackage'])->name('package_index');
     Route::get('/create_package/{business}',[PackageController::class,'create'])->name('create_package');
