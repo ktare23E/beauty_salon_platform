@@ -304,14 +304,19 @@
 
         function viewBooking(id, modal) {
         const url = `{{ route('client_booking', ':id') }}`.replace(':id', id);
-
+        
         $.ajax({
             url: url,
             method: 'GET',
             success: function(response) {
-                console.log(response);
                 let bookingData = response.booking;
                 let userData = response.user;
+
+                if(id == bookingData.id && bookingData.status == 'approved') {
+                    $('.booking_actions').addClass('hidden');
+                }else{
+                    $('.booking_actions').removeClass('hidden');
+                }
 
                 // Format the booking date
                 let bookingDate = new Date(bookingData.booking_date);
