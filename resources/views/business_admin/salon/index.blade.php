@@ -23,7 +23,7 @@
                 @foreach ($userWithBusinesses->businesses as $business)
                     <div class="relative flex min-h-screen flex-col justify-start items-start overflow-hidden sm:py-12">
                         <div
-                            class="group relative cursor-pointer overflow-hidden bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl sm:mx-auto sm:max-w-sm sm:rounded-lg sm:px-10">
+                            class="group relative cursor-pointer overflow-hidden bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl sm:mx-auto sm:max-w-sm sm:rounded-lg sm:px-10 h-64">
                             <div
                                 class="absolute top-0 left-0 w-full h-full bg-sky-500 transition-all duration-300 transform origin-top-left scale-x-0 scale-y-0 group-hover:scale-x-100 group-hover:scale-y-100">
                             </div>
@@ -39,9 +39,11 @@
                             </div>
                             <div class="relative z-10 mx-auto max-w-md">
                                 <div
-                                    class="space-y-6 pt-5 text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-white/90">
+                                    class="space-y-1 pt-5 text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-white/90">
                                     <p class="font-bold">{{ $business->business_name }}</p>
                                     <p>Owner: {{ $userWithBusinesses->first_name . ' ' . $userWithBusinesses->last_name }}
+                                    </p>
+                                    <p class="truncate">Business Address: {{ $business->address }}
                                     </p>
                                     <p>Business Status: <span class="{{ $business->status == 'approved' ? 'text-green-500':'text-orange-500'}}">{{ $business->status}}</span> 
                                     </p>
@@ -99,6 +101,31 @@
             $('#address').val(address);
             $('#contact_info').val(contact_info);
 
+
+            $('#update_business').click(function(){
+                var business_name = $('#business_name').val();
+                var address = $('#address').val();
+                var contact_info = $('#contact_info').val();
+                var status = $('#status').val();
+                var url = `{{ route('update_business',':id') }}`.replace(':id',id);
+                $.ajax({
+                    url: url,
+                    method: 'PUT',
+                    data: {
+                        business_name: business_name,
+                        address: address,
+                        contact_info: contact_info,
+                        status: status,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response){
+                        if(response.message == 'Business updated successfully'){
+                            alert('Business updated successfully');
+                            location.reload();
+                        }
+                    }
+                });
+            });
             
             $('#' + modal).toggleClass('hidden');
         }

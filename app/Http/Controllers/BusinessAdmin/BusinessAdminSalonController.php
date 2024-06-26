@@ -41,6 +41,22 @@ class BusinessAdminSalonController extends Controller
         ]);
     }
 
+    public function update(Request $request,$id){
+        $business = Business::findOrFail($id);
+ 
+        $validatedData = $request->validate([
+            'business_name' => 'required',
+            'address' => 'required',
+            'contact_info' => 'required',
+        ]);
+
+        $business->update($validatedData);
+
+        return response()->json([
+            'message' => 'Business updated successfully'
+        ]);
+    }
+
     public function store(Request $request){
   // Validate and process request as per your application's requirements
     $validatedData = $request->validate([
