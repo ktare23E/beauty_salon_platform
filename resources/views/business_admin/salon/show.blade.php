@@ -128,7 +128,7 @@
                     });
 
                     // Show the modal
-                    $('#' + modal).removeClass('hidden');
+                    $('#' + modal).toggleClass('hidden');
                 }
             });
         }
