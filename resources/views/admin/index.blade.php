@@ -16,32 +16,32 @@
                         @empty
                             <p class="text-xl ">No requirements yet.</p>
                         @endforelse
-                        <a href="" class="mt-2 text-blue-500 text-sm hover:underline">view details</a>
+                        <a href="{{route('admin.requirement_list')}}" class="mt-2 text-blue-500 text-sm hover:underline">view details</a>
                     </div>
                     <div class="bg-white p-4 rounded-md shadow-md flex flex-col justify-between">
                         <h2 class="text-xl font-semibold">Total Salon Owner</h2>
                         <p class="text-3xl font-semibold">{{$businessAdminCount}}</p>
-                        <a href="" class="mt-2 text-blue-500 text-sm hover:underline">view details</a>
+                        <a href="{{route('admin.user_list')}}" class="mt-2 text-blue-500 text-sm hover:underline">view details</a>
                     </div>
                     <div class="bg-white p-4 rounded-md shadow-md flex flex-col justify-between">
                         <h2 class="text-xl font-semibold">Total Client</h2>
                         <p class="text-3xl font-semibold">{{$clientCount}}</p>
-                        <a href="" class="mt-2 text-blue-500 text-sm hover:underline">view details</a>
+                        <a href="{{route('admin.user_list')}}" class="mt-2 text-blue-500 text-sm hover:underline">view details</a>
                     </div>
                     <div class="bg-white p-4 rounded-md shadow-md flex flex-col justify-between">
                         <h2 class="text-xl font-semibold">Total Approved Salon</h2>
                         <p class="text-3xl font-semibold">{{$approvedBusinessCount}}</p>
-                        <a href="" class="mt-2 text-blue-500 text-sm hover:underline">view details</a>
+                        <a href="{{route('admin.salon_list')}}" class="mt-2 text-blue-500 text-sm hover:underline">view details</a>
                     </div>
                     <div class="bg-white p-4 rounded-md shadow-md flex flex-col justify-between">
                         <h2 class="text-xl font-semibold">Total Pending Salon</h2>
                         <p class="text-3xl font-semibold">{{$pendingBusinessCount}}</p>
-                        <a href="" class="mt-2 text-blue-500 text-sm hover:underline">view details</a>
+                        <a href="{{route('admin.salon_list')}}" class="mt-2 text-blue-500 text-sm hover:underline">view details</a>
                     </div>
                     <div class="bg-white p-4 rounded-md shadow-md flex flex-col justify-between">
                         <h2 class="text-xl font-semibold">Latest Approved Salon</h2>
                         <p class="text-3xl font-semibold">{{$latestBusinessApproved[0]->business_name}}</p>
-                        <a href="" class="mt-2 text-blue-500 text-sm hover:underline">view details</a>
+                        <a href="{{route('admin.salon_list')}}" class="mt-2 text-blue-500 text-sm hover:underline">view details</a>
                     </div>
                 </div>
             </div>

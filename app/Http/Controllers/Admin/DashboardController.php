@@ -20,7 +20,7 @@ class DashboardController extends Controller
         }
         $requirements = Requirement::where('status','active')->get();
         $businessAdminCount = User::where('user_type','business_admin')->count();
-        $clientCount = User::where('user_type','client')->count();
+        $clientCount = User::where('user_type','user')->count();
         $approvedBusinessCount = Business::where('status','approved')->count();
         $pendingBusinessCount = Business::where('status','pending')->count();
         $latestBusinessApproved = Business::where('status','approved')->orderBy('id','desc')->limit(1)->get();
