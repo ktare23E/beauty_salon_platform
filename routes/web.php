@@ -112,6 +112,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/update_business/{id}',[BusinessAdminSalonController::class,'update'])->name('update_business');
 
     Route::get('/sales',[SalesController::class,'index'])->name('sales');
+    Route::get('/certain_sales/{id}',[SalesController::class,'viewSales'])->name('certain_sales');
 
 
     // Route::get('/salon/{business}',[BusinessAdminSalonController::class,'show'])->name('show_business');

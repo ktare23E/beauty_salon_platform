@@ -75,8 +75,7 @@
                                 </x-nav-link>
                             </li>
                             <li class="my-px">
-                                <a href="#"
-                                    class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-500 hover:bg-gray-700">
+                                <x-nav-link :href="route('certain_sales',$business->id)" :active="request()->routeIs('certain_sales',$business->id)">
                                     <span class="flex items-center justify-center text-lg text-gray-500">
                                         <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
@@ -86,7 +85,7 @@
                                         </svg>
                                     </span>
                                     <span class="ml-3">Sales</span>
-                                </a>
+                                </x-nav-link>
                             </li>
                         @endif
                         </div>

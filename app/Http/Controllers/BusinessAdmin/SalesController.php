@@ -18,4 +18,14 @@ class SalesController extends Controller
             'user' => $user
         ]);
     }
+
+    public function viewSales($business){
+        $user = User::with('businesses')->find(Auth::id());
+        $business = $user->businesses->find($business);
+
+        return view('business_admin.sales.view_sales',[
+            'user' => $user,
+            'business' => $business
+        ]);
+    }
 }
