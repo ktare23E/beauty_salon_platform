@@ -97,7 +97,12 @@ Route::middleware(['auth'])->group(function () {
         if($user->user_type != 'business_admin'){
             abort('403');
         }
-        return view('business_admin.index');
+        $businesses = $user->businesses;
+
+        return view('business_admin.index',[
+            'businesses' => $businesses,
+            'user' => $user
+        ]);
     })->name('business_admin.index');
 
     Route::get('/salon',[BusinessAdminSalonController::class,'index'])->name('business_admin.salon');
