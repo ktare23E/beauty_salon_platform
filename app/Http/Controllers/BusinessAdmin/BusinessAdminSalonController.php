@@ -17,6 +17,7 @@ use App\Models\Booking;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotificaitonMail;
+use App\Mail\NotificationMail;
 
 use function Pest\Laravel\json;
 
@@ -222,7 +223,7 @@ class BusinessAdminSalonController extends Controller
             'body' => 'Your booking has been approved.'
         ];
 
-        Mail::to($userEmail)->queue(new NotificaitonMail($details));        
+        Mail::to($userEmail)->queue(new NotificationMail($details));        
 
         return response()->json([
             'message' => 'Booking approved successfully'
