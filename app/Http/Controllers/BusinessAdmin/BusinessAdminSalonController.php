@@ -206,7 +206,7 @@ class BusinessAdminSalonController extends Controller
             'body' => 'Your booking has been approved.'
         ];
 
-        Mail::to($userEmail)->send(new NotificaitonMail($details));        
+        Mail::to($userEmail)->queue(new NotificaitonMail($details));        
 
         return response()->json([
             'message' => 'Booking approved successfully'
