@@ -13,13 +13,19 @@ class ClientController extends Controller
     //
 
     public function userProfile(){
-        $user = User::with(['latestBooking.items.item.serviceVariants.service.business'])->find(auth()->id());
 
-        //retrieve first business data
-        $business = $user->latestBooking->items->first()->item->serviceVariants->first()->service->business;
-      
+        $test = User::with(['latestBooking.items.item'])->find(auth()->id());
+        $business = null;
+
+        if($test->latestBooking->items->first()->item_type == 'service_variant'){
+            $business = $test->latestBooking->items->first()->item->service->business;
+        }
+        else{
+            $business = $test->latestBooking->items->first()->item->serviceVariants->first()->service->business;
+        }
+        
         return view('profile',[
-            'user' => $user,
+            'user' => $test,
             'business' => $business
         ]);
     }

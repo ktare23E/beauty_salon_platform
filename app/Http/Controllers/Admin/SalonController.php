@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Business;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\RequirementSubmission;
+
+
 
 class SalonController extends Controller
 {
@@ -35,4 +35,7 @@ class SalonController extends Controller
             'requirements' => $requirements
         ]);
     }
+
+ 
 }
+
