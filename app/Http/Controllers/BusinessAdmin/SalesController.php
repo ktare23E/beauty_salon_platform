@@ -58,7 +58,48 @@ class SalesController extends Controller
         // Calculate the highest sales for service variants and packages
         $highestServiceVariantSales = $this->getHighestSales($bookings, 'service_variant');
         $highestPackageSales = $this->getHighestSales($bookings, 'package');
+        
+   
+        $dailySales = $dailySales->map(function ($value, $key) {
+            return [
+                'date' => $key,
+                'amount' => $value
+            ];
+        });
 
+        //retrieve the sales only current day
+        $dailySales = $dailySales->filter(function ($value, $key) {
+            return $value['date'] == Carbon::now()->format('Y-m-d');
+        });
+
+        $totalWeeklySales = $weeklySales->map(function ($value, $key) {
+            return [
+                'date' => $key,
+                'amount' => $value
+            ];
+        });
+
+        //retrieve the sales only current week
+        $totalWeeklySales = $totalWeeklySales->filter(function ($value, $key) {
+            return $value['date'] == Carbon::now()->format('o-W');
+        });
+
+        $totalMonthlySales = $monthlySales->map(function ($value, $key) {
+            return [
+                'date' => $key,
+                'amount' => $value
+            ];
+        });
+
+        //retrieve the sales only current month
+        $totalMonthlySales = $totalMonthlySales->filter(function ($value, $key) {
+            return $value['date'] == Carbon::now()->format('Y-m');
+        });
+
+
+        $totalToadySales = $dailySales->sum('amount');
+        $totalWeeklySales = $totalWeeklySales->sum('amount');
+        $totalMonthlySales = $totalMonthlySales->sum('amount');
 
         return view('business_admin.sales.view_sales', [
             'user' => $user,
@@ -69,6 +110,9 @@ class SalesController extends Controller
             'yearlySales' => $yearlySales,
             'highestServiceVariantSales' => $highestServiceVariantSales,
             'highestPackageSales' => $highestPackageSales,
+            'totalToadySales' => $totalToadySales,
+            'totalWeeklySales' => $totalWeeklySales,
+            'totalMonthlySales' => $totalMonthlySales,
         ]);
     }
 

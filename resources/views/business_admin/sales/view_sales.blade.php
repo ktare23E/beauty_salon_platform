@@ -127,19 +127,55 @@
             <div class="analytics mt-12 w-[90%] mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div class="bg-white p-4 rounded-md shadow-md">
-                        <h2 class="text-xl font-semibold">Highest Service Sale</h2>
+                        <h2 class="text-xl font-semibold">Highest Service Sales</h2>
                         @if ($highestServiceVariantSales['item'] == null)
                             <p class="text-xl font-semibold">No service sales yet.</p>
                         @else
-                            <p class="text-xl font-semibold">{{$highestServiceVariantSales['item']->name}}</p>
+                            <div class="w-full flex justify-between">
+                                <p class="font-semibold">{{$highestServiceVariantSales['item']->name}}</p>
+                                <p>Total Sales: {{$highestServiceVariantSales['amount']}}</p>
+                            </div>
                         @endif
                     </div>
                     <div class="bg-white p-4 rounded-md shadow-md">
-                        <h2 class="text-xl font-semibold">Total Package Sale</h2>
+                        <h2 class="text-xl font-semibold">Total Package Sales</h2>
                         @if ($highestPackageSales['item'] == null)
                             <p class="text-xl font-semibold">No package sales yet.</p>
                         @else
-                            <p class="text-xl font-semibold">{{$highestPackageSales['item']->package_name}}</p>
+                            <div class="w-full flex justify-between">
+                                <p class="font-semibold">{{$highestPackageSales['item']->package_name}}</p>
+                                <p>Total Sales: {{$highestPackageSales['amount']}}</p>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="bg-white p-4 rounded-md shadow-md">
+                        <h2 class="text-xl font-semibold">Total Daily Sales</h2>
+                        @if (empty($totalToadySales))
+                            <p class="">No sales for this day yet.</p>
+                        @else
+                            <div class="w-full flex justify-between">
+                                <p>Total Sales: {{$totalToadySales}}</p>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="bg-white p-4 rounded-md shadow-md">
+                        <h2 class="text-xl font-semibold">Total Weekly Sales</h2>
+                        @if (empty($totalWeeklySales))
+                            <p class="">No sales for this week yet.</p>
+                        @else
+                            <div class="w-full flex justify-between">
+                                <p>Total Sales: {{$totalWeeklySales}}</p>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="bg-white p-4 rounded-md shadow-md">
+                        <h2 class="text-xl font-semibold">Total Monthly Sales</h2>
+                        @if (empty($totalMonthlySales))
+                            <p class="text-xl font-semibold">No sales for this month yet.</p>
+                        @else
+                            <div class="w-full flex justify-between">
+                                <p>Total Sales: {{$totalMonthlySales}}</p>
+                            </div>
                         @endif
                     </div>
                 </div>
