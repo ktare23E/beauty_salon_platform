@@ -229,9 +229,12 @@
                         datasets: [{
                             label: 'Daily Sales of ' + monthName + ' ' + currentYear,
                             data: data, // Use the data array
-                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderColor: 'rgba(0,0,0,1)',
                             backgroundColor: 'transparent',
-                            fill: false
+                            fill: false,
+                            pointStyle: 'circle', // Customize point style (options: 'circle', 'rect', 'rectRounded', 'rectRot', 'cross', 'crossRot', 'star', 'line', 'dash')
+                            pointRadius: 3, // Radius of the point dots
+                            pointBorderWidth: 1 // Bo
                         }]
                     },
                     options: {
