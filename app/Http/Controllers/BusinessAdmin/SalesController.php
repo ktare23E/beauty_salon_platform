@@ -96,6 +96,20 @@ class SalesController extends Controller
             return $value['date'] == Carbon::now()->format('Y-m');
         });
 
+        //calculate the total sales of current year
+        $totalYearSales = $yearlySales->map(function ($value, $key) {
+            return [
+                'date' => $key,
+                'amount' => $value
+            ];
+        });
+
+        $totalYearSales = $totalYearSales->filter(function ($value, $key) {
+            return $value['date'] == Carbon::now()->format('Y');
+        });
+
+        //calculate the total sales of current year
+        $totalYearSales = $totalYearSales->sum('amount');
 
         $totalToadySales = $dailySales->sum('amount');
         $totalWeeklySales = $totalWeeklySales->sum('amount');
@@ -113,6 +127,7 @@ class SalesController extends Controller
             'totalToadySales' => $totalToadySales,
             'totalWeeklySales' => $totalWeeklySales,
             'totalMonthlySales' => $totalMonthlySales,
+            'totalYearSales' => $totalYearSales
         ]);
     }
 
