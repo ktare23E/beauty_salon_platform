@@ -60,7 +60,7 @@ class SalesController extends Controller
         $highestPackageSales = $this->getHighestSales($bookings, 'package');
         
    
-        $dailySales = $dailySales->map(function ($value, $key) {
+        $totalTodaySales = $dailySales->map(function ($value, $key) {
             return [
                 'date' => $key,
                 'amount' => $value
@@ -68,7 +68,7 @@ class SalesController extends Controller
         });
 
         //retrieve the sales only current day
-        $dailySales = $dailySales->filter(function ($value, $key) {
+        $totalTodaySales = $totalTodaySales->filter(function ($value, $key) {
             return $value['date'] == Carbon::now()->format('Y-m-d');
         });
 
@@ -111,9 +111,10 @@ class SalesController extends Controller
         //calculate the total sales of current year
         $totalYearSales = $totalYearSales->sum('amount');
 
-        $totalToadySales = $dailySales->sum('amount');
+        $totalTodaySales = $totalTodaySales->sum('amount');
         $totalWeeklySales = $totalWeeklySales->sum('amount');
         $totalMonthlySales = $totalMonthlySales->sum('amount');
+        
 
         return view('business_admin.sales.view_sales', [
             'user' => $user,
@@ -124,7 +125,7 @@ class SalesController extends Controller
             'yearlySales' => $yearlySales,
             'highestServiceVariantSales' => $highestServiceVariantSales,
             'highestPackageSales' => $highestPackageSales,
-            'totalToadySales' => $totalToadySales,
+            'totalTodaySales' => $totalTodaySales,
             'totalWeeklySales' => $totalWeeklySales,
             'totalMonthlySales' => $totalMonthlySales,
             'totalYearSales' => $totalYearSales

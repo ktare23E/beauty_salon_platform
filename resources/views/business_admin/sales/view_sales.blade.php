@@ -124,15 +124,15 @@
         </div>
         <main class="w-full">
             <h1 class="text-2xl font-semibold mt-3"> {{ $businessData->business_name }} Sales</h1>
-            <div class="analytics mt-12 w-[90%] mx-auto">
+            <div class="analytics mt-12 w-[90%] mx-auto pb-[100px]">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div class="bg-white p-4 rounded-md shadow-md">
                         <h2 class="text-xl font-semibold">Total Daily Sales</h2>
-                        @if (empty($totalToadySales))
+                        @if (empty($totalTodaySales))
                             <p class="">No sales for this day yet.</p>
                         @else
                             <div class="w-full flex justify-between">
-                                <p>Total Sales: ₱{{number_format($totalToadySales,2)}}</p>
+                                <p>Total Sales: ₱{{ number_format($totalTodaySales, 2) }}</p>
                             </div>
                         @endif
                     </div>
@@ -142,7 +142,7 @@
                             <p class="">No sales for this week yet.</p>
                         @else
                             <div class="w-full flex justify-between">
-                                <p>Total Sales: ₱{{number_format($totalWeeklySales,2)}}</p>
+                                <p>Total Sales: ₱{{ number_format($totalWeeklySales, 2) }}</p>
                             </div>
                         @endif
                     </div>
@@ -152,17 +152,17 @@
                             <p class="">No sales for this month yet.</p>
                         @else
                             <div class="w-full flex justify-between">
-                                <p>Total Sales: ₱{{number_format($totalMonthlySales,2)}}</p>
+                                <p>Total Sales: ₱{{ number_format($totalMonthlySales, 2) }}</p>
                             </div>
                         @endif
                     </div>
                     <div class="bg-white p-4 rounded-md shadow-md">
-                        <h2 class="text-xl font-semibold">Total Year {{date('Y')}} Sales</h2>
+                        <h2 class="text-xl font-semibold">Total Year {{ date('Y') }} Sales</h2>
                         @if (empty($totalYearSales))
                             <p class="">No sales for this year yet.</p>
                         @else
                             <div class="w-full flex justify-between">
-                                <p>Total Sales: ₱{{number_format($totalYearSales,2)}}</p>
+                                <p>Total Sales: ₱{{ number_format($totalYearSales, 2) }}</p>
                             </div>
                         @endif
                     </div>
@@ -172,8 +172,8 @@
                             <p class="">No service sales yet.</p>
                         @else
                             <div class="w-full flex justify-between">
-                                <p class="font-semibold">{{$highestServiceVariantSales['item']->name}}</p>
-                                <p>Total Sales: ₱{{number_format($highestServiceVariantSales['amount'],2)}}</p>
+                                <p class="font-semibold">{{ $highestServiceVariantSales['item']->name }}</p>
+                                <p>Total Sales: ₱{{ number_format($highestServiceVariantSales['amount'], 2) }}</p>
                             </div>
                         @endif
                     </div>
@@ -183,42 +183,55 @@
                             <p class="">No package sales yet.</p>
                         @else
                             <div class="w-full flex justify-between">
-                                <p class="font-semibold">{{$highestPackageSales['item']->package_name}}</p>
-                                <p>Total Sales: ₱{{number_format($highestPackageSales['amount'],2)}}</p>
+                                <p class="font-semibold">{{ $highestPackageSales['item']->package_name }}</p>
+                                <p>Total Sales: ₱{{ number_format($highestPackageSales['amount'], 2) }}</p>
                             </div>
                         @endif
                     </div>
                 </div>
-                <div class="w-[50%] mt-12 bg-white px-4">
+                <div class="w-full mt-12 bg-white px-4">
                     <canvas id="salesChart" width="400" height="200"></canvas>
                 </div>
             </div>
-    
 
             <script>
-                const salesData = {
-                    daily: [100, 150, 120, 170, 200, 180, 130],
-                    weekly: [700, 800, 750, 900, 850, 870, 920],
-                    monthly: [3000, 3200, 3100, 3300, 3400, 3500, 3600]
-                };
+                const dailySales = @json($dailySales);
 
-                const labels = {
-                    daily: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                    weekly: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7'],
-                    monthly: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
-                };
+                // Get the current year and month
+                const now = new Date();
+                const currentYear = now.getFullYear();
+                const currentMonth = now.getMonth(); // 0-based index
+
+                //retrive the readable month name based on the currenthMonth variable
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
+                const monthName = monthNames[currentMonth];
+
+                // Get the number of days in the current month
+                const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+                // Generate labels for each day of the current month
+                const labels = [];
+                const data = [];
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    labels.push(day); // Use day numbers for labels (1, 2, 3, ..., 30/31)
+                    const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    data.push(dailySales[dateStr] || 0); // Use 0 if the date is not in the dailySales object
+                }
 
                 const ctx = document.getElementById('salesChart').getContext('2d');
                 const salesChart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: labels.daily,
+                        labels: labels, // Use the labels array
                         datasets: [{
-                            label: 'Daily Sales',
-                            data: salesData.daily,
+                            label: 'Daily Sales of ' + monthName + ' ' + currentYear,
+                            data: data, // Use the data array
                             borderColor: 'rgba(75, 192, 192, 1)',
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            fill: true
+                            backgroundColor: 'transparent',
+                            fill: false
                         }]
                     },
                     options: {
@@ -226,16 +239,23 @@
                             y: {
                                 beginAtZero: true
                             }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let value = context.raw;
+                                        // Format the value with peso sign, commas, and 2 decimal points
+                                        return '₱' + value.toLocaleString('en-US', {
+                                            minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2
+                                        });
+                                    }
+                                }
+                            }
                         }
                     }
                 });
-
-                function updateChart(period) {
-                    salesChart.data.labels = labels[period];
-                    salesChart.data.datasets[0].data = salesData[period];
-                    salesChart.data.datasets[0].label = `${period.charAt(0).toUpperCase() + period.slice(1)} Sales`;
-                    salesChart.update();
-                }
             </script>
 
         </main>
