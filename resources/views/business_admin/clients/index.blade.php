@@ -113,7 +113,7 @@
             @include('components.modal.user_transactions')
             <div class="mt-20">
                 <h1 class="font-bold text-2xl">Clients</h1>
-                <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md hover:shadow-xl transition-all mx-auto">
+                <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md transition-all hover:shadow-2xl mx-auto">
                     <div class="table_container">
                         <x-table.table id="myTable3">
                             <thead

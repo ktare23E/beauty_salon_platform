@@ -126,7 +126,7 @@
             <h1 class="text-2xl font-semibold mt-3"> {{ $businessData->business_name }} Sales</h1>
             <div class="analytics mt-12 w-[90%] mx-auto pb-[100px]">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="bg-white p-4 rounded-md shadow-md">
+                    <div class="bg-white p-4 rounded-md shadow-md transition-all hover:shadow-2xl">
                         <h2 class="text-xl font-semibold">Total Daily Sales</h2>
                         @if (empty($totalTodaySales))
                             <p class="">No sales for this day yet.</p>
@@ -136,7 +136,7 @@
                             </div>
                         @endif
                     </div>
-                    <div class="bg-white p-4 rounded-md shadow-md">
+                    <div class="bg-white p-4 rounded-md shadow-md transition-all hover:shadow-2xl">
                         <h2 class="text-xl font-semibold">Total Weekly Sales</h2>
                         @if (empty($totalWeeklySales))
                             <p class="">No sales for this week yet.</p>
@@ -146,7 +146,7 @@
                             </div>
                         @endif
                     </div>
-                    <div class="bg-white p-4 rounded-md shadow-md">
+                    <div class="bg-white p-4 rounded-md shadow-md transition-all hover:shadow-2xl">
                         <h2 class="text-xl font-semibold">Total Monthly Sales</h2>
                         @if (empty($totalMonthlySales))
                             <p class="">No sales for this month yet.</p>
@@ -156,7 +156,7 @@
                             </div>
                         @endif
                     </div>
-                    <div class="bg-white p-4 rounded-md shadow-md">
+                    <div class="bg-white p-4 rounded-md shadow-md transition-all hover:shadow-2xl">
                         <h2 class="text-xl font-semibold">Total Year {{ date('Y') }} Sales</h2>
                         @if (empty($totalYearSales))
                             <p class="">No sales for this year yet.</p>
@@ -166,7 +166,7 @@
                             </div>
                         @endif
                     </div>
-                    <div class="bg-white p-4 rounded-md shadow-md">
+                    <div class="bg-white p-4 rounded-md shadow-md transition-all hover:shadow-2xl">
                         <h2 class="text-xl font-semibold">Highest Service Sales</h2>
                         @if ($highestServiceVariantSales['item'] == null)
                             <p class="">No service sales yet.</p>
@@ -177,7 +177,7 @@
                             </div>
                         @endif
                     </div>
-                    <div class="bg-white p-4 rounded-md shadow-md">
+                    <div class="bg-white p-4 rounded-md shadow-md transition-all hover:shadow-2xl">
                         <h2 class="text-xl font-semibold">Total Package Sales</h2>
                         @if ($highestPackageSales['item'] == null)
                             <p class="">No package sales yet.</p>
@@ -189,7 +189,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="w-full mt-12 bg-white px-4">
+                <div class="w-full mt-12 bg-white px-4 py-4 rounded-md transition-all hover:shadow-2xl">
                     <canvas id="salesChart" width="400" height="200"></canvas>
                 </div>
             </div>

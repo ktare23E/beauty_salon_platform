@@ -119,7 +119,7 @@
                             {{ $business->status == 'pending' ? 'disabled' : '' }}>Create Service</button>
                     </a>
                 </div>
-                <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md hover:shadow-xl transition-all mx-auto mt-10">
+                <div class="bg-[#fff] p-[2rem] border w-[97%] rounded-md transition-all hover:shadow-2xl mx-auto mt-10">
                     <div class="table_container">
                         <x-table.table id="myTable">
                             <thead
