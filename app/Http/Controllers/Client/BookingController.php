@@ -45,7 +45,7 @@ class BookingController extends Controller
         // Clear the cart
         $user->cart->items()->delete();
     
-        // return redirect()->route('booking.success', ['booking' => $booking->id]);
+        return redirect()->route('user_booking_list')->with('success', 'Booking created successfully.');
     }
 
     public function rescheduleBooking(Request $request,$id){

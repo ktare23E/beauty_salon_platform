@@ -84,9 +84,9 @@ class CartController extends Controller
 
 
         if($request->has('service_variant_id')){
-            return redirect()->route('view_service', ['service' => $item->service_id]);
+            return redirect()->route('view_service', ['service' => $item->service_id])->with('success','Item added to cart');
         }else{
-            return redirect()->route('view_salon', ['business' => $businessId]);
+            return redirect()->route('view_salon', ['business' => $businessId])->with('success','Item added to cart');
         }
     }
 

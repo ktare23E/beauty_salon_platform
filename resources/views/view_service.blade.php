@@ -309,7 +309,28 @@
             </div>
         </footer>
     </section>
+    @if(session('success'))
+        <div id="success-message" class="bg-green-500 py-2 px-4 rounded-md text-white text-center fixed bottom-4 right-4 flex gap-4">
+            <p>{{ session('success') }}</p>
+            <span class="cursor-pointer font-bold" onclick="return this.parentNode.remove()"><sup>X</sup></span>
+        </div>
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Wait for 1 second before starting the fade-out animation
+                setTimeout(function() {
+                    var message = document.getElementById('success-message');
+                    if (message) {
+                        message.classList.add('animate-fadeOut');
+                        // Remove the element from the DOM after the animation completes (1 second)
+                        message.addEventListener('animationend', function() {
+                            message.remove();
+                        });
+                    }
+                }, 1000); // 1 second delay
+            });
+        </script>
+    @endif
     <script>
 
         $(document).ready(function() {  
