@@ -139,7 +139,7 @@
                         @if ($highestPackageSales['item'] == null)
                             <p class="text-xl font-semibold">No package sales yet.</p>
                         @else
-                            <p class="text-3xl font-semibold">100</p>
+                            <p class="text-xl font-semibold">{{$highestPackageSales['item']->package_name}}</p>
                         @endif
                     </div>
                 </div>

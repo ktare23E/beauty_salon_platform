@@ -59,7 +59,6 @@ class SalesController extends Controller
         $highestServiceVariantSales = $this->getHighestSales($bookings, 'service_variant');
         $highestPackageSales = $this->getHighestSales($bookings, 'package');
 
-        // return $highestPackageSales;
 
         return view('business_admin.sales.view_sales', [
             'user' => $user,
@@ -134,7 +133,7 @@ class SalesController extends Controller
         $highestSaleAmount = $sales->max();
 
         // Determine the model class based on the item_type string
-        $itemClass = ($itemType === 'service_variant') ? ServiceVariant::class : Package::class;
+        $itemClass = ($itemType == 'service_variant') ? ServiceVariant::class : Package::class;
 
         // Return the item and its sales amount
         $item = $itemClass::find($highestSaleItemId);
