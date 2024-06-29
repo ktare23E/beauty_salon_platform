@@ -48,9 +48,8 @@
                         @endauth
                         @guest
                             <div class="space-x-1">
-                                <a href="" class="py-2 px-3 outline outline-1 hover:outline-red-400 hover:text-white rounded-sm border bg-transparent">Register</a>
-                                <a href="" class="py-[0.6rem] px-3 rounded-sm  bg-pink-400 text-white">Login</a>
-
+                                <a href="{{route('register.index')}}" class="py-2 px-3 outline outline-1 hover:outline-red-400 hover:text-white rounded-sm border bg-transparent">Register</a>
+                                <a href="{{route('login')}}" class="py-[0.6rem] px-3 rounded-sm  bg-pink-400 text-white">Login</a>
                             </div>
                             {{-- <div class="relative">
                                 <div id="userIcon" class="cursor-pointer">

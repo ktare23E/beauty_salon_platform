@@ -50,16 +50,9 @@
                             </div>
                         @endauth
                         @guest
-                            <div class="relative">
-                                <div id="userIcon" class="cursor-pointer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                    </svg>
-                                </div>
-                                <div id="userMenu" class="hidden absolute right-0 mt-3 w-32 text-start bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                                    <a href="{{route('login')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Login</a>
-                                    <a href="{{route('register.index')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Register</a>
-                                </div>
+                            <div class="space-x-1">
+                                <a href="{{route('register.index')}}" class="py-2 px-3 outline outline-1 hover:outline-red-400 hover:text-white rounded-sm border bg-transparent">Register</a>
+                                <a href="{{route('login')}}" class="py-[0.6rem] px-3 rounded-sm  bg-pink-400 text-white">Login</a>
                             </div>
                         @endguest
                     </div>
@@ -129,7 +122,17 @@
             Why Us?
         </div>
         <div class="container px-5 py-12 mx-auto">
-            <div class="flex flex-wrap text-center justify-center"
+            <div class="flex flex-wrap text-center justify-center">
+                {{-- <div class="p-4 md:w-1/4 sm:w-1/2">
+                    <div class="px-4 py-6 transform transition duration-500 hover:scale-110">
+                        <div class="flex justify-center">
+                            <img src="https://image3.jdomni.in/banner/13062021/58/97/7C/E53960D1295621EFCB5B13F335_1623567851299.png?output-format=webp"
+                                class="w-32 mb-3">
+                        </div>
+                        <h2 class="title-font font-regular text-2xl text-gray-900">Latest Milling Machinery</h2>
+                    </div>
+                </div> --}}
+
                 <div class="p-4 md:w-1/4 sm:w-1/2">
                     <div class="px-4 py-6 transform transition duration-500 hover:scale-110">
                         <div class="flex justify-center">
