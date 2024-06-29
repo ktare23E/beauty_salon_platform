@@ -16,15 +16,15 @@
                     <div class="bg-white p-4 rounded-md transition hover:shadow-2xl">
                         <h2 class="text-xl font-semibold">Business Salon's</h2>
                         @forelse ($businesses as $business)
-                            <p class="text-xl">- {{$business->business_name}}</p>
+                            <p class="text-sm pl-2">- {{$business->business_name}}</p>
                         @empty
                             <p class="text-3xl font-semibold">No business salon yet.</p>
                         @endforelse
                         <a href="{{route('business_admin.salon')}}" class="text-blue-500 text-sm hover:underline">view details</a>
                     </div>
                     <div class="bg-white p-4 rounded-md transition hover:shadow-2xl">
-                        <h2 class="text-xl font-semibold">Total Products</h2>
-                        <p class="text-3xl font-semibold">100</p>
+                        <h2 class="text-xl font-semibold">Date Started</h2>
+                        <p class="text-xl pl-2">{{ $user->created_at->format('F j, Y') }}</p>
                     </div>
                     <div class="bg-white p-4 rounded-md transition hover:shadow-2xl">
                         <h2 class="text-xl font-semibold">Total Products</h2>
