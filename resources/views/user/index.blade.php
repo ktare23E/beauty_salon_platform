@@ -80,17 +80,17 @@
                 <a href="{{route('test')}}" class="text-sm">Get Started</a>
             </div>
             <div class="bg-gray-900 p-[0.6rem] grid grid-cols-2 gap-3 rotate-6">
-                <div class="p-[0.5rem] bg-[#f6f6f6] w-64">
-                    <img src="{{asset('imgs/salon2.jpg')}}" alt="" class="bg-cover">
+                <div class="p-[0.5rem] bg-[#f6f6f6] w-64 group">
+                    <img src="{{asset('imgs/salon2.jpg')}}" alt="" class="bg-cover transform transition-transform duration-300 ease-in-out group-hover:scale-125">
                 </div>
-                <div class="p-[0.5rem] bg-[#f6f6f6] w-64">
-                    <img src="{{asset('imgs/service1.jpg')}}" alt="" class="bg-cover">
+                <div class="p-[0.5rem] bg-[#f6f6f6] w-64 group">
+                    <img src="{{asset('imgs/service1.jpg')}}" alt="" class="bg-cover transform transition-transform duration-300 ease-in-out group-hover:scale-125">
                 </div>
-                <div class="p-[0.5rem] bg-[#f6f6f6] w-64">
-                    <img src="{{asset('imgs/service2.jpg')}}" alt="" class="bg-cover">
+                <div class="p-[0.5rem] bg-[#f6f6f6] w-64 group">
+                    <img src="{{asset('imgs/service2.jpg')}}" alt="" class="bg-cover transform transition-transform duration-300 ease-in-out group-hover:scale-125">
                 </div>
-                <div class="p-[0.5rem] bg-[#f6f6f6] w-64">
-                    <img src="{{asset('imgs/service3.jpg')}}" alt="" class="bg-cover">
+                <div class="p-[0.5rem] bg-[#f6f6f6] w-64 group">
+                    <img src="{{asset('imgs/service3.jpg')}}" alt="" class="bg-cover transform transition-transform duration-300 ease-in-out group-hover:scale-125">
                 </div>
             </div>
     </div>
