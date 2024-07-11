@@ -11,6 +11,7 @@ class RequirementController extends Controller
     //
     public function index(){
         $requirements = Requirement::where('status','active')->get();
+        return $requirements;
         return view('admin.requirement.requirement_list',compact('requirements'));
     }
 
@@ -44,7 +45,7 @@ class RequirementController extends Controller
             'requirement_name' => 'required',
             'description' => 'required',
             'status' => 'required',
-        ]);
+            ]);
 
         $requirement->update($validateData);
 

@@ -13,6 +13,8 @@ class HomeController extends Controller
 
     public function displayBusiness(){
         $salons = Business::where('status','approved')->get();
+        //business or salon
+        // return $salons;
         return view('view',[
             'salons' => $salons
         ]);
@@ -36,6 +38,15 @@ class HomeController extends Controller
         $images = $business->images;
         $services = $business->services;
         
+        //business or salon, business images, services, packages
+
+        // return [    
+        //     'business' => $business,
+        //     'images' => $images,
+        //     'services' => $services,
+        //     'packages' => $packages
+        // ];
+
         return view('salon',[
             'business' => $business,
             'images' => $images,

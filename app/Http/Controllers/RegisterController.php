@@ -31,6 +31,8 @@ class RegisterController extends Controller
         $user->password = bcrypt($validatedData['password']);
         $user->user_type = $validatedData['user_type'];
         $user->save();
+
+        return $user;
     
         Auth::login($user);
     
