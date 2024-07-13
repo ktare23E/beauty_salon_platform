@@ -33,7 +33,8 @@
                                 <x-forms.input label="Confirm Password" name="password_confirmation" type="password" />
                             </div>
                         </div>
-                        
+                        <a href="{{route('login')}}" class="text-sm text-blue-600 mt-10">Login</a>
+
                         <x-forms.button>Create Account</x-forms.button>
                     </x-forms.form>
                 </div>

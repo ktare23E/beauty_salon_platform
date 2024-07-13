@@ -40,7 +40,12 @@
                     </div>
                     <div class="bg-white p-4 rounded-md shadow-md flex flex-col justify-between">
                         <h2 class="text-xl font-semibold">Latest Approved Salon</h2>
-                        <p class="text-3xl font-semibold">{{$latestBusinessApproved[0]->business_name}}</p>
+                        @if ($latestBusinessApproved->count() > 0)
+                            <p class="text-3xl font-semibold">{{$latestBusinessApproved[0]->business_name}}</p>
+
+                        @else
+                            <p class="text-md font-semibold">No approved salon yet.</p>
+                        @endif
                         <a href="{{route('admin.salon_list')}}" class="mt-2 text-blue-500 text-sm hover:underline">view details</a>
                     </div>
                 </div>

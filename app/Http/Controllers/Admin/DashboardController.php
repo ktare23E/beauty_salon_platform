@@ -25,6 +25,8 @@ class DashboardController extends Controller
         $pendingBusinessCount = Business::where('status','pending')->count();
         $latestBusinessApproved = Business::where('status','approved')->orderBy('id','desc')->limit(1)->get();
 
+        // return $latestBusinessApproved;
+
         return view('admin.index',[
             'requirements' => $requirements,
             'businessAdminCount' => $businessAdminCount,
