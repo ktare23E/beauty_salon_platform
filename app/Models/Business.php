@@ -32,4 +32,9 @@ class Business extends Model
         return $this->hasMany(BusinessImage::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(BusinessReview::class);
+    }
+
 }

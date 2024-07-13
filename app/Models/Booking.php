@@ -39,4 +39,9 @@ class Booking extends Model
     {
         return $this->hasMany(BookingItem::class);
     }
+
+    public function cancellations()
+    {
+        return $this->hasOne(BookingCancellation::class);
+    }
 }
