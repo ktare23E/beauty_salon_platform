@@ -12,7 +12,7 @@
                     <div class="bg-white p-4 rounded-md shadow-md">
                         <h2 class="text-xl font-semibold">Active Requirements</h2>
                         @forelse ($requirements as $requirement)
-                            <p class="text-xl ">{{$requirement->requirement_name}}</p>
+                            <p class="text-md ">{{$requirement->requirement_name}}</p>
                         @empty
                             <p class="text-xl ">No requirements yet.</p>
                         @endforelse

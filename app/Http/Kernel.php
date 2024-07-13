@@ -11,6 +11,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         // Other middleware entries...
         'redirectIfAuthenticatedToDashboard' => \App\Http\Middleware\RedirectIfAuthenticatedToDashboard::class,
+
     ];
 }
 

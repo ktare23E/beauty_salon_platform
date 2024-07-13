@@ -18,7 +18,7 @@ class DashboardController extends Controller
         if($user->user_type != 'admin'){
             abort('403');
         }
-        $requirements = Requirement::where('status','active')->get();
+        $requirements = Requirement::where('status','active')->limit(2)->get();
         $businessAdminCount = User::where('user_type','business_admin')->count();
         $clientCount = User::where('user_type','user')->count();
         $approvedBusinessCount = Business::where('status','approved')->count();

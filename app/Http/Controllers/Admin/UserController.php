@@ -16,6 +16,11 @@ class UserController extends Controller
         $businessAdmins = User::where('user_type', 'business_admin')->get();
         $clients = User::where('user_type', 'user')->get();
         $user = Auth::user();
+
+        return [
+            'clients' => $clients,
+            'businessAdmins' => $businessAdmins
+        ];
         if($user->user_type != 'admin'){
             abort('403');
         }

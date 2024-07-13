@@ -23,8 +23,10 @@ class RegisterController extends Controller
             'password' => ['required','confirmed', Password::min(6)],
             'user_type' => 'required'
         ]);
-    
+        
+        
         $user = new User();
+
         $user->first_name = $validatedData['first_name'];
         $user->last_name = $validatedData['last_name'];
         $user->email = $validatedData['email'];
@@ -32,8 +34,7 @@ class RegisterController extends Controller
         $user->user_type = $validatedData['user_type'];
         $user->save();
 
-        return $user;
-    
+        
         Auth::login($user);
     
         // Check the user type and redirect accordingly

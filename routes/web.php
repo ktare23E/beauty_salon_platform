@@ -19,6 +19,7 @@ use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\BookingController;
 use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\BusinessAdmin\SalesController;
+use GuzzleHttp\Psr7\Request;
 
 Route::get('/', function () {
     return view('index');
@@ -29,7 +30,7 @@ Route::get('/', function () {
 //     return view('salon');
 // })->name('salon_try');
 
-Route::get('/test',[HomeController::class,'displayBusiness'])->name('test');
+Route::get('/salons',[HomeController::class,'displayBusiness'])->name('test');
 Route::get('/view_salon/{business}',[HomeController::class,'viewSalon'])->name('view_salon');
 Route::get('/view_service/{service}',[HomeController::class,'viewService'])->name('view_service');
 
@@ -43,6 +44,11 @@ Route::get('/map', function () {
 
 Route::get('/cart_number',[CartController::class,'clientCartCount'])->name('cart_number');
 
+Route::get('/try',function(Request $request){
+    return [
+        'message'=> 'Authenticated'
+    ];
+});
 
 // Route::get('/login', [LoginController::class, 'index'])->name('login');
 

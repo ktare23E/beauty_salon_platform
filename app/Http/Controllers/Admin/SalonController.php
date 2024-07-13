@@ -17,6 +17,11 @@ class SalonController extends Controller
         $pendingSalon = Business::with('user')->where('status','pending')->get();
         $approvedSalon = Business::with('user')->where('status','approved')->get();
 
+        return [
+            'pendingSalon' => $pendingSalon,
+            'approvedSalon' => $approvedSalon
+        ];
+
         return view('admin.salon.salon_list',[
             'pendingSalon' => $pendingSalon,
             'approvedSalon' => $approvedSalon
