@@ -34,10 +34,13 @@ class RegisterController extends Controller
             'user_type' => $request->user_type,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            // 'remember_token' => 
         ]);
 
         // Generate the token
         $token = $user->createToken('auth_token')->plainTextToken;
+        // $token = $request->user()->createToken($request->token_name);
+
 
         return response()->json([
             'access_token' => $token,

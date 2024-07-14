@@ -34,5 +34,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('formatDate', function ($date) {
             return "<?php echo \Carbon\Carbon::parse($date)->format('F j, Y g:i a'); ?>";
         });
+
+        
     }
 }
