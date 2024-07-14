@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function displayBusiness(){
         $salons = Business::where('status','approved')->get();
         //business or salon
-        return $salons;
+        // return $salons;
         return view('view',[
             'salons' => $salons
         ]);
