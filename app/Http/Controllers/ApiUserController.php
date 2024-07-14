@@ -81,4 +81,11 @@ class ApiUserController extends Controller
             "data" => new UserResource($user), 
         ],200);
     }
+    
+    public function destroy(User $user){
+        $user->delete();
+        return response()->json([
+            "message" => "User Deleted",
+        ],200);
+    }
 }
