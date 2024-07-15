@@ -59,5 +59,16 @@
                 $('#password_icon').text('visibility');
             }
         });
+
+        $('#password_confirmation_icon').click(() => {
+            let passwordConfirmationInput = $('#password_confirmation');
+            if(passwordConfirmationInput.attr('type') === 'password'){
+                passwordConfirmationInput.attr('type', 'text');
+                $('#password_confirmation_icon').text('visibility_off');
+            }else{
+                passwordConfirmationInput.attr('type', 'password');
+                $('#password_confirmation_icon').text('visibility');
+            }
+        });
     </script>
 </x-layout>
