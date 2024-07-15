@@ -27,13 +27,13 @@
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-2">
-                            <div>
+                            <div class="relative">
                                 <x-forms.input label="Password" name="password" id="password" type="password" />
                                 <span id="password_icon" class="password-icon material-symbols-outlined cursor-pointer text-sm absolute top-11 right-2">
                                     visibility
                                 </span>
                             </div>
-                            <div>
+                            <div class="relative">
                                 <x-forms.input label="Confirm Password" name="password_confirmation" id="password_confirmation" type="password" />
                                 <span id="password_confirmation_icon" class="password-icon material-symbols-outlined cursor-pointer text-sm absolute top-11 right-2">
                                     visibility
@@ -49,6 +49,15 @@
         </div>
     </section>
     <script>
-
+        $('#password_icon').click(()=>{
+            let passwordInput = $('#password');
+            if(passwordInput.attr('type') === 'password'){
+                passwordInput.attr('type', 'text');
+                $('#password_icon').text('visibility_off');
+            }else{
+                passwordInput.attr('type', 'password');
+                $('#password_icon').text('visibility');
+            }
+        });
     </script>
 </x-layout>
