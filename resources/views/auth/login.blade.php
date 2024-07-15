@@ -16,7 +16,7 @@
                                 <x-forms.input label="Password" name="password" id="password-input" type="password" />
                                 <span class="password-icon material-symbols-outlined cursor-pointer text-sm absolute top-11 right-2">
                                     visibility
-                                    </span>
+                                </span>
                             </div>
                         </div>
                         <a href="{{route('register.index')}}" class="text-sm text-blue-600 mt-10">Create an account</a>
