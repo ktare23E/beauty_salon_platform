@@ -36,8 +36,9 @@
                                             {{ $submission->status }}
                                         </x-table.td>
                                         <x-table.td>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" onclick='openViewModal({{$submission->id}},"view_requirement_submission")'>view</button>                                            
-                                            <button class="py-1 px-2 bg-orange-700 text-white text-sm rounded-sm">edit</button>
+                                            <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" onclick='openViewModal({{$submission->id}},"view_requirement_submission")'>view</button>      
+                                            <button class="px-2 py-1 text-white rounded-sm bg-orange-500 text-sm font-normal" onclick='openEditModal({{$submission->id}},"{{$submission->requirement->requirement_name}}","reupload_modal")'>edit</button>                                       
+                                            {{-- <button class="py-1 px-2 bg-orange-700 text-white text-sm rounded-sm">edit</button> --}}
                                             {{-- <x-table.button-action
                                                 href="{{ route('edit_service', $service->id) }}">edit</x-table.button-action> --}}
                                         </x-table.td>
@@ -50,6 +51,7 @@
                 </div>
             </div>
             @include('components.modal.sample')
+            @include('components.modal.reupload_requirements')
         </main>
     </div>
     <script>
@@ -86,6 +88,7 @@
         }
 
         closeModal('view_requirement_submission');
+        closeModal('view_requirement_submission');
 
         function openViewModal(id,modal){
             $.ajax({
@@ -106,6 +109,36 @@
                 }
             });
             $('#' + modal).toggleClass('hidden');
+        }
+
+        function openEditModal(id,requirement,modal){
+            $('.requirement_name').html(requirement);
+
+            $('#upload').click(function(){
+                let formData = new FormData();
+                formData.append('_token', "{{ csrf_token() }}");
+                formData.append('submission_details', $('#submission_details')[0].files[0]);
+
+                    $.ajax({
+                    url: "{{ url('/update_requirement_submission') }}/" + id,
+                    type: 'POST',
+                    data:formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        if(response.message == 'success'){
+                            alert('Requirement submission updated successfully');
+                            location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+
+            $('#' + modal).toggleClass('hidden');
+
         }
 
     </script>
