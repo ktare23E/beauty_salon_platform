@@ -113,12 +113,11 @@
 
         function openEditModal(id,requirement,modal){
             $('.requirement_name').html(requirement);
-
             $('#upload').click(function(){
                 let formData = new FormData();
                 formData.append('_token', "{{ csrf_token() }}");
                 formData.append('submission_details', $('#submission_details')[0].files[0]);
-
+                formData.append('requirement', requirement);
                     $.ajax({
                     url: "{{ url('/update_requirement_submission') }}/" + id,
                     type: 'POST',
@@ -126,6 +125,7 @@
                     contentType: false,
                     processData: false,
                     success: function(response) {
+                        console.log(response);
                         if(response.message == 'success'){
                             alert('Requirement submission updated successfully');
                             location.reload();
