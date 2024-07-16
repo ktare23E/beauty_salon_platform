@@ -65,15 +65,15 @@
                                         </x-table.td>
                                         <x-table.td>
                                             <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" onclick='openViewModal({{$requirement_submission->id}},"view_requirement_submission")'>view</button>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-green-600 text-sm font-normal" onclick='updateSubmissionStatus({{$requirement_submission->id}},"approved")'>approve</button>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-red-600 text-sm font-normal" onclick='updateSubmissionStatus({{$requirement_submission->id}},"declined")'>decline</button>
+                                            <button class="update_status px-2 py-1 text-white rounded-sm bg-green-600 text-sm font-normal" data-id="{{$requirement_submission->id}}" data-status="approved">approve</button>
+                                            <button class="update_status px-2 py-1 text-white rounded-sm bg-red-600 text-sm font-normal" data-id="{{$requirement_submission->id}}" data-status="declined">decline</button>
                                         </x-table.td>
                                     </tr>
-                                    <form action="{{route('update_requirement_submission',$requirement_submission->id)}}" method="POST" id="update_requirement_submission_{{ $requirement_submission->id }}">
+                                    {{-- <form action="{{route('update_requirement_submission',$requirement_submission->id)}}" method="POST" id="update_requirement_submission_{{ $requirement_submission->id }}">
                                         @csrf
                                         @method('PATCH')
                                         <input type="hidden" name="status" id="status_{{ $requirement_submission->id }}" value="">
-                                    </form>
+                                    </form> --}}
                                 @empty
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td colspan="3" class="text-center py-3">No requirement submissions available</td>
@@ -139,10 +139,37 @@
             $('#' + modal).toggleClass('hidden');
         }
 
-        function updateSubmissionStatus(id,status){
-            $('#status_' + id).val(status);
-            $('#update_requirement_submission_' + id).submit();
-        }
+        // function updateSubmissionStatus(id,status){
+        //     $('#status_' + id).val(status);
+        //     $('#update_requirement_submission_' + id).submit();
+        // }
+
+        $('.update_status').click(function(){
+            let id = $(this).data('id');
+            let status = $(this).data('status');
+
+            $.ajax({
+                url: "{{ url('/admin_update_requirement_submission') }}/" + id,
+                type: 'POST',
+                data: {
+                    id : id,
+                    status: status,
+                    _token : "{{csrf_token()}}"
+                },
+                success: function(response) {
+                    if(response.message === 'declined'){
+                        alert('Requirement submission declined');
+                        location.reload();
+                    }else{
+                        alert('Requirement submission approved');
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        })
 
     </script>
 </x-layout>

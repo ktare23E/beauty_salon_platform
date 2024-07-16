@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\RequirementSubmission;
 use Illuminate\Http\Request;
 use App\Models\Business;
+use App\Mail\ApprovedBusinessSalonMail;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Requirement;
+use App\Mail\DeclinedRequirementSubmission;
 
 class RequirementSubmissionController extends Controller
 {
@@ -25,14 +29,35 @@ class RequirementSubmissionController extends Controller
         }
     }
 
-    public function update(RequirementSubmission $requirement_submission,Request $request){
+    public function update(Request $request,$id){
+
+        $requirement_submission = RequirementSubmission::findOrFail($id);
+
      // Step 1: Update the status of the RequirementSubmission to "approve"
-        $requirement_submission->update([
+        $update = $requirement_submission->update([
             'status' => $request->status
         ]);
 
+        $requirement = Requirement::findOrFail($requirement_submission->requirement_id);
+
         // Step 2: Get the business_id from the requirement_submission
         $business_id = $requirement_submission->business_id;
+        $business = Business::with('user')->find($business_id);
+
+        if($request->status === 'declined'){
+              // Send an email to the admin
+            $details = [
+                'title' => 'Requirement Submission Notification',
+                'body' => 'Your '.$requirement->requirement_name.' requirement submission is invalid please resubmit a valid one.',
+            ];
+    
+            Mail::to($business->user->email)->queue(new DeclinedRequirementSubmission($details));  
+            return response()->json(['message' => 'declined']);
+     
+        }
+
+
+
 
         // Step 3: Check if all requirements for the given business_id are approved
         $pendingSubmissions = RequirementSubmission::where('business_id', $business_id)
@@ -41,10 +66,18 @@ class RequirementSubmissionController extends Controller
 
         // Step 4: Update the status of the Business to "approve" if there are no pending submissions
         if ($pendingSubmissions == 0) {
-            $business = Business::find($business_id);
             $business->update([
                 'status' => 'approved'
             ]);
+
+             // Send an email to the admin
+            $details = [
+                'title' => 'Approved Business Salon',
+                'body' => 'Your business salon has now been approved you can now operate your salon.',
+            ];
+    
+            Mail::to($business->user->email)->queue(new ApprovedBusinessSalonMail($details));        
+
 
             return redirect()->route('admin.salon_list');
         }
