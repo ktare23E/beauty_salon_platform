@@ -113,7 +113,7 @@ Route::middleware(['auth'])->group(function () {
         ]);
     })->name('business_admin.index');
 
-    Route::get('/requirement_submission/{business}',[BusinessRequirementSubmissionController::class,'index'])->name('show_requirement_submission');
+    Route::get('/business_requirement_submission/{business}',[BusinessRequirementSubmissionController::class,'index'])->name('business_requirement_submission');
 
     Route::get('/salon',[BusinessAdminSalonController::class,'index'])->name('business_admin.salon');
     Route::get('/create_salon',[BusinessAdminSalonController::class,'create'])->name('business_admin.create_salon');
