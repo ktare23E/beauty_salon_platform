@@ -36,8 +36,8 @@
                                             {{ $submission->status }}
                                         </x-table.td>
                                         <x-table.td>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" onclick='openViewModal({{$submission->id}},"view_requirement_submission")'>view</button>      
-                                            <button class="px-2 py-1 text-white rounded-sm bg-orange-500 text-sm font-normal" onclick='openEditModal({{$submission->id}},"{{$submission->requirement->requirement_name}}","reupload_modal")'>edit</button>                                       
+                                            <button class="cursor-pointer px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" onclick='openViewModal({{$submission->id}},"view_requirement_submission")'>view</button>      
+                                            <button class="cursor-pointer px-2 py-1 rounded-sm  text-white text-sm font-normal {{$submission->status !== 'declined' ? 'bg-orange-300' : 'bg-orange-500 '}}" onclick='openEditModal({{$submission->id}},"{{$submission->requirement->requirement_name}}","reupload_modal")' {{$submission->status !== 'declined' ? 'disabled' : ''}} >edit</button>                                       
                                             {{-- <button class="py-1 px-2 bg-orange-700 text-white text-sm rounded-sm">edit</button> --}}
                                             {{-- <x-table.button-action
                                                 href="{{ route('edit_service', $service->id) }}">edit</x-table.button-action> --}}
