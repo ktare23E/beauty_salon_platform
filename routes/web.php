@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SalonController;
 use App\Http\Controllers\Admin\RequirementController;
 use App\Http\Controllers\Admin\RequirementSubmissionController;
 use App\Http\Controllers\BusinessAdmin\BusinessAdminSalonController;
+use App\Http\Controllers\BusinessAdmin\BusinessRequirementSubmissionController;
 use App\Http\Controllers\BusinessAdmin\PackageController;
 use App\Http\Controllers\BusinessAdmin\ServiceController;
 use App\Http\Controllers\BusinessAdmin\ServiceVariantController;
@@ -111,6 +112,8 @@ Route::middleware(['auth'])->group(function () {
             'user' => $user
         ]);
     })->name('business_admin.index');
+
+    Route::get('/requirement_submission/{business}',[BusinessRequirementSubmissionController::class,'index'])->name('show_requirement_submission');
 
     Route::get('/salon',[BusinessAdminSalonController::class,'index'])->name('business_admin.salon');
     Route::get('/create_salon',[BusinessAdminSalonController::class,'create'])->name('business_admin.create_salon');

@@ -63,7 +63,7 @@ class BusinessAdminSalonController extends Controller
     $validatedData = $request->validate([
         'business_name' => 'required',
         'address' => 'required',
-        'contact_info' => 'required',
+        // 'contact_info' => 'required',
         'business_profile' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Example validation for business profile
         'images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Example validation for business images
         'files.*.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Example validation for requirement submissions
@@ -83,7 +83,7 @@ class BusinessAdminSalonController extends Controller
     $business = Business::create([
         'business_name' => $validatedData['business_name'],
         'address' => $validatedData['address'],
-        'contact_info' => $validatedData['contact_info'],
+        // 'contact_info' => $validatedData['contact_info'],
         'user_id' => auth()->id(),
         'status' => 'pending',
         'business_profile' => isset($businessProfilePath) ? $businessProfilePath : null,
