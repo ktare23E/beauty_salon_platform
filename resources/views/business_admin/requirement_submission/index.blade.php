@@ -146,13 +146,13 @@
                                         <x-table.td>
                                             {{ $submission->requirement->requirement_name }}
                                         </x-table.td>
-                                        <x-table.td>
+                                        <x-table.td class="{{ $submission->status === 'pending' ? 'text-yellow-400' : ($submission->status === 'approved' ? 'text-green-500' : 'text-red-500' ) }}">
                                             {{ $submission->status }}
                                         </x-table.td>
                                         <x-table.td>
+                                            <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" onclick='openViewModal({{$submission->id}},"view_requirement_submission")'>view</button>                                            
+                                            <button class="py-1 px-2 bg-orange-700 text-white text-sm rounded-sm">edit</button>
                                             {{-- <x-table.button-action
-                                                href="{{ route('service_variant_list', $service->id) }}">view</x-table.button-action>
-                                            <x-table.button-action
                                                 href="{{ route('edit_service', $service->id) }}">edit</x-table.button-action> --}}
                                         </x-table.td>
                                     </tr>
@@ -163,6 +163,7 @@
                     </div>
                 </div>
             </div>
+            @include('components.modal.sample')
         </main>
     </div>
     <script>
@@ -170,6 +171,56 @@
             $('#myTable').DataTable();
         });
         
+        document.addEventListener('DOMContentLoaded', function () {
+            // Listen for click events on elements with the data-modal-toggle attribute
+            document.querySelectorAll('[data-modal-toggle]').forEach(function (toggleBtn) {
+                toggleBtn.addEventListener('click', function () {
+                    // Get the target modal ID from the data-modal-toggle attribute
+                    var target = toggleBtn.getAttribute('data-modal-toggle');
+                    var modal = document.getElementById(target);
+
+                    if (modal) {
+                        // Toggle the "hidden" class on the modal
+                        modal.classList.toggle('hidden');
+                    }
+                });
+            });
+        });
+
+        function closeModal(modalId){
+            document.addEventListener("DOMContentLoaded", function() {
+                const modal = document.getElementById(`${modalId}`);
+                modal.addEventListener('click', function(event) {
+                    const modalContent = modal.querySelector('.relative');
+                    if (!modalContent.contains(event.target)) {
+                        modal.classList.add('hidden');
+                    }
+                });
+            });
+        }
+
+        closeModal('view_requirement_submission');
+
+        function openViewModal(id,modal){
+            $.ajax({
+                url: "{{ url('/requirement_submission') }}/" + id,
+                type: 'GET',
+                success: function(response) {
+                    console.log(response);
+                    let image = response.data.submission.submission_details;
+                    let assetUrl = "{{ asset('storage/') }}"; // Retrieve asset URL from Blade template
+
+                    $('.test_data').html(response.data.submission.submission_details);
+                    $('.requirement_name').html(response.data.requirement.requirement_name);
+                    $('.img_submission').attr('src', assetUrl + '/' + image);
+
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+            $('#' + modal).toggleClass('hidden');
+        }
 
     </script>
 </x-layout>
