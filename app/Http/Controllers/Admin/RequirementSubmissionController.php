@@ -57,8 +57,6 @@ class RequirementSubmissionController extends Controller
         }
 
 
-
-
         // Step 3: Check if all requirements for the given business_id are approved
         $pendingSubmissions = RequirementSubmission::where('business_id', $business_id)
                                                 ->where('status', 'pending')

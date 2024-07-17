@@ -66,7 +66,7 @@
                                         <x-table.td>
                                             <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" onclick='openViewModal({{$requirement_submission->id}},"view_requirement_submission")'>view</button>
                                             <button class="update_status px-2 py-1 text-white rounded-sm bg-green-600 text-sm font-normal" data-id="{{$requirement_submission->id}}" data-status="approved">approve</button>
-                                            <button class="update_status px-2 py-1 text-white rounded-sm bg-red-600 text-sm font-normal" data-id="{{$requirement_submission->id}}" data-status="declined">decline</button>
+                                            <button class="update_status px-2 py-1 text-white rounded-sm  text-sm font-normal {{$requirement_submission->status === 'declined' ? 'bg-red-200' : 'bg-red-600'}}" data-id="{{$requirement_submission->id}}" data-status="declined" {{$requirement_submission->status === 'declined' ? 'disabled' : ''}}>decline</button>
                                         </x-table.td>
                                     </tr>
                                     {{-- <form action="{{route('update_requirement_submission',$requirement_submission->id)}}" method="POST" id="update_requirement_submission_{{ $requirement_submission->id }}">

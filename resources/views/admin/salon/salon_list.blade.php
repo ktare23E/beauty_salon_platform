@@ -22,9 +22,7 @@
                                     <x-table.thead>
                                         Address
                                     </x-table.thead>
-                                    <x-table.thead>
-                                        Contact Info
-                                    </x-table.thead>
+                        
                                     <x-table.thead>
                                         Status
                                     </x-table.thead>
@@ -45,9 +43,7 @@
                                     <x-table.td>
                                         {{$salon->address}}
                                     </x-table.td>
-                                    <x-table.td>
-                                        {{$salon->contact_info}}
-                                    </x-table.td>
+                          
                                     <x-table.td class="text-red-500">
                                         {{$salon->status}}
                                     </x-table.td>
@@ -77,9 +73,7 @@
                                     <x-table.thead>
                                         Address
                                     </x-table.thead>
-                                    <x-table.thead>
-                                        Contact Info
-                                    </x-table.thead>
+                                    
                                     <x-table.thead>
                                         Status
                                     </x-table.thead>
@@ -99,9 +93,6 @@
                                     </x-table.td>
                                     <x-table.td>
                                         {{$salon->address}}
-                                    </x-table.td>
-                                        <x-table.td>
-                                        {{$salon->contact_info}}
                                     </x-table.td>
                                     <x-table.td class="text-green-500">
                                         {{$salon->status}}
