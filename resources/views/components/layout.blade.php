@@ -10,6 +10,8 @@
         <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
         <link rel="icon" type="image/x-icon" href="{{asset('imgs/salon logo.jpg')}}">
 
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
 
         {{-- fonts --}}
         <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -88,7 +88,6 @@
         }
 
         closeModal('view_requirement_submission');
-        closeModal('view_requirement_submission');
 
         function openViewModal(id,modal){
             $.ajax({
