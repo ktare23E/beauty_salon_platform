@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotificaitonMail;
 use App\Mail\NotificationMail;
+use App\Mail\CreateSalonMail;
 
 use function Pest\Laravel\json;
 
@@ -119,6 +120,14 @@ class BusinessAdminSalonController extends Controller
                 ]);
             }
         }
+
+        // Send email notification to the user
+        $details = [
+            'title' => 'Mail from Salon',
+            'body' => 'Your salon has been created successfully. Please wait for 3-5 days for the approval.'
+        ];
+
+        Mail::to(auth()->user()->email)->queue(new CreateSalonMail($details));
     
         // Redirect after successful operation
         return redirect()->route('business_admin.salon');
