@@ -98,7 +98,7 @@
                                         {{$salon->status}}
                                     </x-table.td>
                                     <x-table.td>
-                                        <x-table.button-action>edit</x-table.button-action>
+                                        <x-table.button-action>view</x-table.button-action>
                                     </x-table.td>
                                 </tr>
                                 @endforeach
