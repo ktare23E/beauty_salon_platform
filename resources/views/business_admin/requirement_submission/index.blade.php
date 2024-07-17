@@ -92,7 +92,7 @@
 
         function openViewModal(id,modal){
             $.ajax({
-                url: "{{ url('/requirement_submission') }}/" + id,
+                url: "{{ url('/view_requirement_submission') }}/" + id,
                 type: 'GET',
                 success: function(response) {
                     console.log(response);

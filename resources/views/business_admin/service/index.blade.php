@@ -8,7 +8,7 @@
             <h1 class="font-bold text-2xl">{{ $business->business_name }}</h1>
             <div class="mt-24">
                 <h1 class="font-bold text-2xl">Services</h1>
-                <div class="w-full">
+                <div class="w-full flex justify-end pr-[2rem]">
                     <a href="{{ route('create_service', $business->id) }}">
                         <button
                             class="py-1 px-2  rounded-sm {{ $business->status == 'pending' ? 'bg-gray-200 text-gray-500' : 'bg-black text-white' }}"
