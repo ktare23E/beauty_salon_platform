@@ -6,7 +6,7 @@
 
         </div>
         <main class="ml-17rem w-full">
-            <h1 class="font-bold text-2xl">{{ $business->business_name }}</h1>
+            @include('components.salon_name')
             <div class="mt-24">
                 <h1 class="font-bold text-2xl">Packages</h1>
                 <div class="w-full flex justify-end pr-[2rem]">

@@ -21,6 +21,7 @@ use App\Http\Controllers\Client\BookingController;
 use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\BusinessAdmin\SalesController;
 use GuzzleHttp\Psr7\Request;
+use App\Http\Controllers\BusinessAdmin\BusinessImageController;
 
 Route::get('/', function () {
     return view('index');
@@ -125,6 +126,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/business_requirement_submission/{business}',[BusinessRequirementSubmissionController::class,'index'])->name('business_requirement_submission');
         Route::post('/update_requirement_submission/{id}',[BusinessRequirementSubmissionController::class,'updateRequirementSubmission'])->name('update_requirement_submission');
         Route::get('/view_requirement_submission/{id}',[RequirementSubmissionController::class,'show'])->name('view_requirement_submission');
+
+        Route::get('/salon_images/{business}',[BusinessImageController::class,'index'])->name('salon_images');
+
 
     
         Route::get('/salon',[BusinessAdminSalonController::class,'index'])->name('business_admin.salon');

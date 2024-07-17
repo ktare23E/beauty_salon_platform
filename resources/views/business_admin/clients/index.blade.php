@@ -6,7 +6,7 @@
 
         </div>
         <main class="ml-17rem w-full">
-            <h1 class="font-bold text-2xl">{{ $business->business_name }}</h1>
+            @include('components.salon_name')
             @include('components.modal.user_transactions')
             <div class="mt-20">
                 <h1 class="font-bold text-2xl">Clients</h1>

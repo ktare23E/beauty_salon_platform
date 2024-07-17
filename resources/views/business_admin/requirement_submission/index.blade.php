@@ -5,7 +5,7 @@
             @include('components.salon-aside')
         </div>
         <main class="ml-17rem w-full">
-            <h1 class="font-bold text-2xl">{{ $business->business_name }}</h1>
+            @include('components.salon_name')
             <div class="mt-24">
                 <h1 class="font-bold text-2xl">Requirement Submissions</h1>
                 
