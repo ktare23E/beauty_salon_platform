@@ -55,7 +55,7 @@ Route::get('/try',function(Request $request){
 
 //need to be login before can access to the user page, admin page and business_admin page
 Route::middleware(['auth'])->group(function () {
-    Route::middleware(['checkUserType:client'])->group(function(){
+    Route::middleware(['checkUserType:user'])->group(function(){
          //user
         Route::get('/user', function () {
             $user = Auth::user();
