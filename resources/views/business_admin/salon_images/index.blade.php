@@ -23,7 +23,7 @@
                                         ...
                                     </button>
                                     <div x-show="openMenu" @click.away="openMenu = false" class="mt-2 py-2 w-48 bg-white rounded-lg shadow-xl absolute right-0 z-20">
-                                        <button class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" onclick='openEditModal({{$image->id}},"edit_image_modal")'>edit</button>
+                                        <button class="block w-full px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" onclick='openEditModal({{$image->id}},"edit_image_modal")'>edit</button>
                                     </div>
                                 </div>
                             </div>
@@ -76,30 +76,28 @@
         closeModal('edit_image_modal');
 
         function openEditModal(id,modal){
-            // $('.requirement_name').html(requirement);
-            // $('#upload').click(function(){
-            //     let formData = new FormData();
-            //     formData.append('_token', "{{ csrf_token() }}");
-            //     formData.append('submission_details', $('#submission_details')[0].files[0]);
-            //     formData.append('requirement', requirement);
-            //         $.ajax({
-            //         url: "{{ url('/update_requirement_submission') }}/" + id,
-            //         type: 'POST',
-            //         data:formData,
-            //         contentType: false,
-            //         processData: false,
-            //         success: function(response) {
-            //             console.log(response);
-            //             if(response.message == 'success'){
-            //                 alert('Requirement submission updated successfully');
-            //                 location.reload();
-            //             }
-            //         },
-            //         error: function(xhr, status, error) {
-            //             console.error(xhr.responseText);
-            //         }
-            //     });
-            // });
+            $('#upload').click(function(){
+                let formData = new FormData();
+                formData.append('_token', "{{ csrf_token() }}");
+                formData.append('image_path', $('#image_path')[0].files[0]);
+                    $.ajax({
+                    url: "{{ url('/update_business_image') }}/" + id,
+                    type: 'POST',
+                    data:formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        console.log(response);
+                        if(response.message == 'success'){
+                            alert('Image updated successfully');
+                            location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
 
             $('#' + modal).toggleClass('hidden');
 

@@ -1,6 +1,6 @@
 <div id="edit_image_modal" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 w-full h-full bg-black bg-opacity-30 backdrop-blur-sm">
     <div class="flex items-center justify-center min-h-full">
-        <div class="content_container relative bg-[#fff] p-[1.8rem] rounded-md max-w-[90%] max-h-[90vh] w-[25%] h-[300px] mx-auto my-auto">
+        <div class="content_container relative bg-[#fff] p-[1.8rem] rounded-md max-w-[90%] max-h-[90vh] w-[25%] h-[200px] mx-auto my-auto">
             <div class="top flex align-center justify-between border-b border-black">
                 <h3 class="requirement_name font-bold font text-xl">Edit Image</h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="edit_image_modal">
@@ -12,10 +12,10 @@
             </div>
             <div class="student_information w-full h-full flex justify-center items-center">
                 <div class="img_container w-full h-full flex flex-col justify-center items-center my-auto">
-                    <div class="relative z-0 w-full mb-5 group">
+                    <div class="relative z-0 w-full mb-2 group">
                         <div class="max-w-xs">
                             <label for="example1" class="mb-1 block text-sm font-medium text-gray-700">Upload file</label>
-                            <input name="submission_details" id="submission_details" type="file" class="mt-2 block w-full text-sm file:mr-4 file:rounded-sm file:border-0 file:bg-teal-500 file:py-1 file:px-2 file:text-sm file:font-normal file:text-white hover:file:bg-teal-700 focus:outline-none disabled:pointer-events-none disabled:opacity-60" />
+                            <input name="image_path" id="image_path" type="file" class="mt-2 block w-full text-sm file:mr-4 file:rounded-sm file:border-0 file:bg-teal-500 file:py-1 file:px-2 file:text-sm file:font-normal file:text-white hover:file:bg-teal-700 focus:outline-none disabled:pointer-events-none disabled:opacity-60" />
                         </div>
                     </div>
                     <div>

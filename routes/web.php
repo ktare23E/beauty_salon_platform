@@ -128,6 +128,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/view_requirement_submission/{id}',[RequirementSubmissionController::class,'show'])->name('view_requirement_submission');
 
         Route::get('/salon_images/{business}',[BusinessImageController::class,'index'])->name('salon_images');
+        Route::post('/update_business_image/{id}',[BusinessImageController::class,'updateBusinessImage'])->name('update_business_image');
 
 
     
