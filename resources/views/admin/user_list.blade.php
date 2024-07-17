@@ -22,9 +22,9 @@
                                     <x-table.thead>
                                         Email
                                     </x-table.thead>
-                                    <x-table.thead>
+                                    {{-- <x-table.thead>
                                         Action
-                                    </x-table.thead>
+                                    </x-table.thead> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,9 +39,9 @@
                                     <x-table.td>
                                         {{$user->email}}
                                     </x-table.td>
-                                    <x-table.td>
+                                    {{-- <x-table.td>
                                         <x-table.button-action>edit</x-table.button-action>
-                                    </x-table.td>
+                                    </x-table.td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -65,9 +65,9 @@
                                     <x-table.thead>
                                         Email
                                     </x-table.thead>
-                                    <x-table.thead>
+                                    {{-- <x-table.thead>
                                         Action
-                                    </x-table.thead>
+                                    </x-table.thead> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,9 +82,9 @@
                                     <x-table.td>
                                         {{$user->email}}
                                     </x-table.td>
-                                    <x-table.td>
+                                    {{-- <x-table.td>
                                         <x-table.button-action>edit</x-table.button-action>
-                                    </x-table.td>
+                                    </x-table.td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>

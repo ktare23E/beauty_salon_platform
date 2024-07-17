@@ -102,6 +102,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/salon_list',[SalonController::class,'index'])->name('admin.salon_list');
         Route::get('/admin_salon/{business}',[SalonController::class,'show'])->name('admin.show_salon');
+        Route::get('/admin_view_salon/{business}',[HomeController::class,'viewSalon'])->name('admin_view_salon');
+
     });
 
 
