@@ -162,7 +162,7 @@
                         location.reload();
                     }else{
                         alert('Requirement submission approved');
-                        location.reload();
+                        location.href = "{{route('admin.salon_list')}}";
                     }
                 },
                 error: function(xhr, status, error) {
