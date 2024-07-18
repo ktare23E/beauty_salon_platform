@@ -21,7 +21,7 @@ class BusinessReview extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getDateFormatEntity()
+    public function getDateReviewEntityAttribute()
     {   
         return Carbon::parse($this->date_review)->format('d M Y');
     }

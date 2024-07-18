@@ -88,12 +88,13 @@ class HomeController extends Controller
     }
 
     public function viewRatings(Business $business){
-        $reviews = $business->reviews;
-
+        $reviews = BusinessReview::where('business_id',$business->id)->get();
+        $reviewsCount = $reviews->count();
 
         return view('ratings',[
             'business' => $business,
-            'reviews' => $reviews
+            'reviews' => $reviews,
+            'reviewsCount' => $reviewsCount
         ]);
     }
 }

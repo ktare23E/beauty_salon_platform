@@ -62,6 +62,9 @@ Route::middleware(['auth'])->group(function () {
             return view('user.index');
         })->name('user.index');
 
+        Route::post('/auth_salon_rating',[ReviewsController::class,'store'])->name('auth_salon_rating');
+
+
 
         Route::get('/user_cart', [CartController::class, 'viewCart'])->name('user_cart');
         Route::delete('/remove_cart_item/{cartItem}',[CartController::class,'removeCartItem'])->name('remove_cart_item');

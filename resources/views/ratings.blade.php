@@ -26,7 +26,7 @@
         <div class="mt-5 rounded-lg shadow-lg dark:bg-gray-900 py-0 lg:py-16 antialiased">
             <div class="w-full px-12 mt-[-3rem]">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Comments(2)</h2>
+                    <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Comments({{$reviewsCount}})</h2>
                     <h2>Total Ratings: </h2>
                 </div>
                 <form class="mb-6">
@@ -80,72 +80,33 @@
                 </form>
 
                 <div class="flex flex-col items-start justify-center gap-3">
-                    <article class="p-2 text-base bg-white rounded-lg dark:bg-gray-900 mb-2 w-[70%]">
-                        <footer class="flex justify-between items-center mb-2">
-                            <div class="flex items-center">
-                                <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img class="mr-2 w-6 h-6 rounded-full" src="{{asset('imgs/default profile.png')}}" alt="Michael Gough">Anonymous</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">July 17,2024</p>
+                    @forelse ($reviews as $review)
+                        <article class="p-2 text-base bg-white rounded-lg dark:bg-gray-900 mb-2 w-[70%]">
+                            <footer class="flex justify-between items-center mb-2">
+                                <div class="flex items-center">
+                                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img class="mr-2 w-6 h-6 rounded-full" src="{{asset('imgs/default profile.png')}}" alt="Michael Gough">Anonymous</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">{{$review->date_review_entity}}</p>
+                                </div>
+                                <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
+                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                    </svg>
+                                    <span class="sr-only">Comment settings</span>
+                                </button>
+                                <!-- Dropdown menu -->
+        
+                            </footer>
+                            <div class="flex justify-between items-center">
+                                <p class="text-gray-500 dark:text-gray-400">{{$review->review}}</p>
+                                <img src="{{ asset('imgs/ratings/rating-' . $review->rate . '0.png') }}" alt="" class="h-5">  
                             </div>
-                            <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
-                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                                    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                                </svg>
-                                <span class="sr-only">Comment settings</span>
-                            </button>
-                            <!-- Dropdown menu -->
-    
-                        </footer>
-                        <div class="flex justify-between items-center">
-                            <p class="text-gray-500 dark:text-gray-400">Lindot sya</p>
-                            <img src="{{asset('imgs/ratings/rating-50.png')}}" alt="" class="h-5">
-                        </div>
-                    </article>
-                    <article class="p-2 text-base bg-white rounded-lg dark:bg-gray-900 mb-2 w-[70%]">
-                        <footer class="flex justify-between items-center mb-2">
-                            <div class="flex items-center">
-                                <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img class="mr-2 w-6 h-6 rounded-full" src="{{asset('imgs/default profile.png')}}" alt="Michael Gough">Anonymous</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">July 17,2024</p>
-                            </div>
-                            <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
-                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                                    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                                </svg>
-                                <span class="sr-only">Comment settings</span>
-                            </button>
-                            <!-- Dropdown menu -->
-    
-                        </footer>
-                        <div class="flex justify-between items-center">
-                            <p class="text-gray-500 dark:text-gray-400">Lindot sya</p>
-                            <img src="{{asset('imgs/ratings/rating-50.png')}}" alt="" class="h-5">
-                        </div>
-
-                    </article>
-                    <article class="p-2 text-base bg-white rounded-lg dark:bg-gray-900 mb-2 w-[70%]">
-                        <footer class="flex justify-between items-center mb-2">
-                            <div class="flex items-center">
-                                <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img class="mr-2 w-6 h-6 rounded-full" src="{{asset('imgs/default profile.png')}}" alt="Michael Gough">Anonymous</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">July 17,2024</p>
-                            </div>
-                            <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
-                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                                    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                                </svg>
-                                <span class="sr-only">Comment settings</span>
-                            </button>
-                            <!-- Dropdown menu -->
-    
-                        </footer>
-                        <div class="flex justify-between items-center">
-                            <p class="text-gray-500 dark:text-gray-400">Lindot sya</p>
-                            <img src="{{asset('imgs/ratings/rating-50.png')}}" alt="" class="h-5">
-                        </div>
-
-                    </article>
+                        </article>
+                    @empty
+                        <h1 class="text-2xl font-bold text-center">No Reviews Yet.</h1>
+                    @endforelse
+                    
                 </div>
-                <div class="mt-4">
-                    <a href="" class="py-[0.6rem] px-3 rounded-sm  bg-pink-400 text-white">Rate and Review now</a>
-                </div>
+                
                 
         
 
@@ -231,20 +192,22 @@
         let salon_id = {{$business->id}};
         
         $.ajax({
-            url: "{{route('salon_rating')}}",
+            url: "{{route('auth_salon_rating')}}",
             method: 'POST',
             data: {
-                rating: rating,
-                salon_review: salon_review,
-                salon_id: salon_id,
+                rate: rating,
+                review: salon_review,
+                business_id: salon_id,
                 _token: "{{csrf_token()}}"
             },
             success: function(response) {
+
                 if (response.message === 'failed') {
                     alert('You need to login to rate');
                     location.href = @json(route('login'));
                 } else {
                     alert('Rating posted');
+                    location.reload();
                 }
             }
         });

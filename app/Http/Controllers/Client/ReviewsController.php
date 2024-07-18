@@ -12,6 +12,7 @@ class ReviewsController extends Controller
     //
 
     public function store(Request $request){
+   
         
         $user = Auth::user();
         if(!$user){
@@ -19,7 +20,7 @@ class ReviewsController extends Controller
 
         }else{
             $request->validate([
-                'rating' => 'required',
+                'rate' => 'required',
                 'review' => 'required',
                 'business_id' => 'required'
             ]);
@@ -28,7 +29,7 @@ class ReviewsController extends Controller
             $insertReview = BusinessReview::create([
                 'user_id' => $user->id,
                 'business_id' => $request->business_id,
-                'rate' => $request->rating,
+                'rate' => $request->rate,
                 'review' => $request->review,
                 'date_review' => now()
             ]); 
