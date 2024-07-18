@@ -89,6 +89,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/user_list',[UserController::class,'index'])->name('admin.user_list');
 
         Route::get('/admin_fee',[DashboardController::class,'adminFee'])->name('admin_fee');
+        Route::get('/create_admin_fee',[DashboardController::class,'create'])->name('create_admin_fee');
+        Route::post('/store_admin_fee',[DashboardController::class,'store'])->name('store_admin_fee');
+
 
         Route::get('/requirement_list',[RequirementController::class,'index'])->name('admin.requirement_list');
         Route::get('/create_requirement',[RequirementController::class,'create'])->name('admin.create_requirement');

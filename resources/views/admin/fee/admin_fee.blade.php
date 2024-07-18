@@ -14,7 +14,7 @@
                 @endif
                 <h1 class="text-2xl font-semibold mt-3">Admin Fee</h1>
                 <div class="action_buttons flex justify-end mr-12">
-                    <a href="{{route('admin.create_requirement')}}">
+                    <a href="{{route('create_admin_fee')}}">
                         <button class="flex justify-between gap-1 bg-gray-950 py-1 px-2 text-white rounded-sm mt-20">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -32,28 +32,28 @@
                                         Fee
                                     </x-table.thead>
                                     <x-table.thead>
+                                        Status
+                                    </x-table.thead>
+                                    <x-table.thead>
                                         Action
                                     </x-table.thead>
                                 </tr>
                             </thead>
-                            {{-- <tbody>
-                                @foreach ($requirements as $requirement )
+                            <tbody>
+                                @foreach ($fees as $fee )
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <x-table.td>
-                                            {{$requirement->requirement_name}}
+                                            {{$fee->fee}}
                                         </x-table.td>
                                         <x-table.td>
-                                            {{$requirement->description}}
+                                            {{$fee->status}}
                                         </x-table.td>
                                         <x-table.td>
-                                            {{$requirement->status}}
-                                        </x-table.td>
-                                        <x-table.td>
-                                            <x-table.button-action href="{{route('admin.edit_requirement',$requirement->id)}}">edit</x-table.button-action>
+                                            <x-table.button-action href="{{route('admin.edit_requirement',$fee->id)}}">edit</x-table.button-action>
                                         </x-table.td>
                                     </tr>
                                 @endforeach
-                            </tbody> --}}
+                            </tbody>
                         </x-table.table>
                     </div>
                 </div>

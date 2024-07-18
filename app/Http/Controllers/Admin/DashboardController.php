@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminFee;
 use App\Models\Business;
 use App\Models\Requirement;
 use Illuminate\Http\Request;
@@ -38,6 +39,26 @@ class DashboardController extends Controller
     }
 
     public function adminFee(){
-        return view('admin.fee.admin_fee');
+        $fees = AdminFee::all();
+
+        return view('admin.fee.admin_fee',[
+            'fees' => $fees
+        ]);
+    }
+
+    public function create(){
+        return view('admin.fee.create_fee');
+    }
+
+    public function store(Request $request){
+        $validated = $request->validate([
+            'fee' => 'required|numeric',
+            'status' => 'required|string'
+        ]);
+
+        $create = AdminFee::create($validated);
+
+        return redirect()->route('admin_fee')
+                ->with('success', 'Admin Fee created successfully');
     }
 }
