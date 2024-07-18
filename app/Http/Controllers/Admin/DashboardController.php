@@ -36,4 +36,8 @@ class DashboardController extends Controller
             'latestBusinessApproved' => $latestBusinessApproved
         ]);
     }
+
+    public function adminFee(){
+        return view('admin.fee.admin_fee');
+    }
 }
