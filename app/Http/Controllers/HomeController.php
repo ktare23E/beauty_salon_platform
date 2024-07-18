@@ -7,17 +7,22 @@ use App\Models\Business;
 use App\Models\BusinessReview;
 use App\Models\Service;
 use App\Models\Package;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     //
 
     public function displayBusiness(){
-        $salons = Business::where('status','approved')->get();
-        //business or salon
-        // return $salons;
+        $salons = Business::with(['reviews' => function($query) {
+            $query->select('business_id', DB::raw('AVG(rate) as average_rating'))
+                  ->groupBy('business_id');
+        },'user'])->where('status', 'approved')->get();
+
+    
+
         return view('view',[
-            'salons' => $salons
+            'salons' => $salons,
         ]);
     }
 
