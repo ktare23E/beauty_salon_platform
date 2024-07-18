@@ -61,4 +61,10 @@ class DashboardController extends Controller
         return redirect()->route('admin_fee')
                 ->with('success', 'Admin Fee created successfully');
     }
+
+    public function edit(AdminFee $fee){
+        return view('admin.fee.edit_fee',[
+            'fee' => $fee
+        ]);
+    }
 }

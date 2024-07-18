@@ -49,7 +49,7 @@
                                             {{$fee->status}}
                                         </x-table.td>
                                         <x-table.td>
-                                            <x-table.button-action href="{{route('admin.edit_requirement',$fee->id)}}">edit</x-table.button-action>
+                                            <x-table.button-action href="{{route('edit_fee',$fee->id)}}">edit</x-table.button-action>
                                         </x-table.td>
                                     </tr>
                                 @endforeach
