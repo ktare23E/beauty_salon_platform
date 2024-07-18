@@ -61,7 +61,7 @@ class ServiceController extends Controller
             }
         }
 
-        return redirect()->route('show_business',$business->id);
+        return redirect()->route('show_service',$business->id);
     }
 
     public function edit(Service $service){

@@ -17,12 +17,24 @@ class ClientController extends Controller
         $test = User::with(['latestBooking.items.item'])->find(auth()->id());
         $business = null;
 
-        if($test->latestBooking->items->first()->item_type == 'service_variant'){
-            $business = $test->latestBooking->items->first()->item->service->business;
+          // if($test->latestBooking->items->first()->item_type == 'service_variant'){
+        //     $business = $test->latestBooking->items->first()->item->service->business;
+        // }
+        // else{
+        //     $business = $test->latestBooking->items->first()->item->serviceVariants->first()->service->business;
+        // }
+        
+        if($test->latestBooking){
+            if($test->latestBooking->items->first()->item_type == 'service_variant'){
+                $business = $test->latestBooking->items->first()->item->service->business;
+            }
+            else{
+                $business = $test->latestBooking->items->first()->item->serviceVariants->first()->service->business;
+            }
+        }else{
+            $business = null;
         }
-        else{
-            $business = $test->latestBooking->items->first()->item->serviceVariants->first()->service->business;
-        }
+      
         
         return view('profile',[
             'user' => $test,

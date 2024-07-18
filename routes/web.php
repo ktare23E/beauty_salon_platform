@@ -141,10 +141,10 @@ Route::middleware(['auth'])->group(function () {
     
         Route::get('/sales',[SalesController::class,'index'])->name('sales');
         Route::get('/certain_sales/{business}',[SalesController::class,'viewSales'])->name('certain_sales');
-        // Route::get('/sales_report/{business}',[SalesController::class,'sales'])->name('sales_report');
+        Route::get('/sales_report/{business}',[SalesController::class,'sales'])->name('sales_report');
     
     
-        // Route::get('/salon/{business}',[BusinessAdminSalonController::class,'show'])->name('show_business');
+        Route::get('/salon/{business}',[BusinessAdminSalonController::class,'show'])->name('show_business');
         Route::get('/salon/show_service/{business}',[BusinessAdminSalonController::class,'services'])->name('show_service');
         Route::get('/user/{id}/transactions', [BusinessAdminSalonController::class, 'getUserTransactions'])->name('user.transactions');
         Route::get('/booking/{booking}', [BusinessAdminSalonController::class, 'viewBooking'])->name('client_booking');
