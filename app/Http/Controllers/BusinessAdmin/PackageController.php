@@ -55,7 +55,7 @@ class PackageController extends Controller
         $businessId = $package->serviceVariants->first()->service->business_id ?? null;
 
 
-        return redirect()->route('show_business', $businessId);
+        return redirect()->route('package_index', $businessId);
     }
 
     public function show(Package $package){
