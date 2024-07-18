@@ -38,6 +38,8 @@ class HomeController extends Controller
         
         $images = $business->images;
         $services = $business->services;
+        $reviews = $business->reviews()->limit(3)->get();
+
         
         //business or salon, business images, services, packages
 
@@ -52,7 +54,8 @@ class HomeController extends Controller
             'business' => $business,
             'images' => $images,
             'services' => $services,
-            'packages' => $packages
+            'packages' => $packages,
+            'reviews' => $reviews
         ]);
     }
 
