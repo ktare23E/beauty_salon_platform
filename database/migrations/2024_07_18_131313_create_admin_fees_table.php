@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('admin_fees', function (Blueprint $table) {
             $table->id();
+            $table->decimal('fee', 10, 2);
+            $table->string('status');
             $table->timestamps();
         });
     }
