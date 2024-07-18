@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Business;
+use App\Models\BusinessReview;
 use App\Models\Service;
 use App\Models\Package;
 
@@ -84,5 +85,15 @@ class HomeController extends Controller
         } else {
             return response()->json(['success' => false, 'message' => 'Data not found']);
         }
+    }
+
+    public function viewRatings(Business $business){
+        $reviews = $business->reviews;
+
+
+        return view('ratings',[
+            'business' => $business,
+            'reviews' => $reviews
+        ]);
     }
 }

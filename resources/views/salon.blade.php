@@ -272,7 +272,7 @@
                     </article>
                 </div>
                 <div class="mt-4">
-                    <a href="" class="py-[0.6rem] px-3 rounded-sm  bg-pink-400 text-white">Rate and Review now</a>
+                    <a href="{{route('ratings',$business->id)}}" class="py-[0.6rem] px-3 rounded-sm  bg-pink-400 text-white">Rate and Review now</a>
                 </div>
                 
         

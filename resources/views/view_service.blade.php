@@ -1,6 +1,6 @@
 <x-layout>
     <!-- nav bar section -->
-    @include('components.customer-nav')
+    @include('components.salon-nav')
     <!-- hero seciton -->
     <div class="relative w-full h-[320px]" id="home">
         <div class="absolute inset-0 opacity-70">

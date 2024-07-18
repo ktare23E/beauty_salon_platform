@@ -22,6 +22,7 @@ use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\BusinessAdmin\SalesController;
 use GuzzleHttp\Psr7\Request;
 use App\Http\Controllers\BusinessAdmin\BusinessImageController;
+use App\Http\Controllers\Client\ReviewsController;
 
 Route::get('/', function () {
     return view('index');
@@ -37,7 +38,8 @@ Route::get('/view_salon/{business}',[HomeController::class,'viewSalon'])->name('
 Route::get('/view_service/{service}',[HomeController::class,'viewService'])->name('view_service');
 
 Route::get('/package_inclusion/{package}',[HomeController::class,'viewPackage'])->name('package_inclusion');
-
+Route::get('/ratings/{business}',[HomeController::class,'viewRatings'])->name('ratings');
+Route::post('/salon_rating',[ReviewsController::class,'store'])->name('salon_rating');
 
 Route::get('/map', function () {
     return view('map');
@@ -46,13 +48,7 @@ Route::get('/map', function () {
 
 Route::get('/cart_number',[CartController::class,'clientCartCount'])->name('cart_number');
 
-Route::get('/try',function(Request $request){
-    return [
-        'message'=> 'Authenticated'
-    ];
-});
 
-// Route::get('/login', [LoginController::class, 'index'])->name('login');
 
 //need to be login before can access to the user page, admin page and business_admin page
 Route::middleware(['auth'])->group(function () {
@@ -65,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
             }
             return view('user.index');
         })->name('user.index');
+
 
         Route::get('/user_cart', [CartController::class, 'viewCart'])->name('user_cart');
         Route::delete('/remove_cart_item/{cartItem}',[CartController::class,'removeCartItem'])->name('remove_cart_item');
