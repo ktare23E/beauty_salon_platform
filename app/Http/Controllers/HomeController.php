@@ -90,11 +90,16 @@ class HomeController extends Controller
     public function viewRatings(Business $business){
         $reviews = BusinessReview::where('business_id',$business->id)->get();
         $reviewsCount = $reviews->count();
-
+        //retrieve the average rating of the business
+        $averageRating = $reviews->avg('rate');
+        //cut the average rating to 2 decimal places
+        $averageRating = number_format($averageRating, 2);
+        
         return view('ratings',[
             'business' => $business,
             'reviews' => $reviews,
-            'reviewsCount' => $reviewsCount
+            'reviewsCount' => $reviewsCount,
+            'averageRating' => $averageRating
         ]);
     }
 }

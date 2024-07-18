@@ -21,13 +21,13 @@
     {{-- ratings and reviews --}}
     <section class=" body-font bg-gray-100"  id="reviews">
         <div class="flex justify-center text-3xl font-bold text-gray-800 text-center py-10">
-            Reviews
+            Reviews and Ratings
         </div>
         <div class="mt-5 rounded-lg shadow-lg dark:bg-gray-900 py-0 lg:py-16 antialiased">
             <div class="w-full px-12 mt-[-3rem]">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Comments({{$reviewsCount}})</h2>
-                    <h2>Total Ratings: </h2>
+                    <h2>Total Ratings: {{$averageRating}} out of 5</h2>
                 </div>
                 <form class="mb-6">
                     <div class="grid grid-cols-[70%,25%] gap-5">
