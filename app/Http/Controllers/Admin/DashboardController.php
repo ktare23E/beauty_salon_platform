@@ -67,4 +67,16 @@ class DashboardController extends Controller
             'fee' => $fee
         ]);
     }
+
+    public function update(AdminFee $fee, Request $request){
+        $validated = $request->validate([
+            'fee' => 'required|numeric',
+            'status' => 'required|string'
+        ]);
+
+        $fee->update($validated);
+
+        return redirect()->route('admin_fee')
+                ->with('success', 'Admin Fee updated successfully');
+    }
 }

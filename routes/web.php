@@ -92,6 +92,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/create_admin_fee',[DashboardController::class,'create'])->name('create_admin_fee');
         Route::post('/store_admin_fee',[DashboardController::class,'store'])->name('store_admin_fee');
         Route::get('/edit_fee{fee}',[DashboardController::class,'edit'])->name('edit_fee');
+        Route::patch('/update_fee{fee}',[DashboardController::class,'update'])->name('update_fee');
 
 
         Route::get('/requirement_list',[RequirementController::class,'index'])->name('admin.requirement_list');

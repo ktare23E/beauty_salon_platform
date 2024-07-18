@@ -18,10 +18,11 @@
                 
                 <div class="bg-[#fff] p-[2rem] border w-[50%] rounded-md hover:shadow-xl transition-all mt-3 mx-auto">
                     <div class="table_container">
-                        <form class="max-w-md mx-auto" method="POST" action="{{route('store_admin_fee')}}">
+                        <form class="max-w-md mx-auto" method="POST" action="{{route('update_fee',$fee->id)}}">
                             @csrf
+                            @method('PATCH')
                             <div class="relative z-0 w-full mb-5 group">
-                                <input type="hidden" name="id" value="{{$fee->id}}">
+                                {{-- <input type="hidden" name="id" value="{{$fee->id}}"> --}}
                                 <input type="number" name="fee" id="fee" value="{{$fee->fee}}"
                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                     placeholder=" " required />
