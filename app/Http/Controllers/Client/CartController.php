@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminFee;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ServiceVariant;
@@ -20,6 +21,7 @@ class CartController extends Controller
         // return $userCart;
 
         $totalPrice = 0;
+        $admin_fee = AdminFee::all();
 
         if ($userCart) {
             // Calculate the total price of items in the cart
@@ -28,9 +30,13 @@ class CartController extends Controller
             }
         }
 
+
+        $totalPrice = ($admin_fee->first()->fee/100) * $totalPrice + $totalPrice;
+
         return view('checkout', [
             'userCart' => $userCart,
-            'totalPrice' => $totalPrice
+            'totalPrice' => $totalPrice,
+            'admin_fee' => $admin_fee
         ]);
     }
 

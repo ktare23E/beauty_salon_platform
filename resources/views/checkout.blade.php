@@ -77,6 +77,12 @@
                                         <span>₱{{ number_format($items->item->price, 2) }}</span>
                                     </div>
                                 @endforeach
+                                @if($admin_fee)
+                                    <div class="flex justify-between mb-2">
+                                        <span>Admin Fee</span>
+                                        <span>{{$admin_fee->first()->fee}}%</span>
+                                    </div>
+                                @endif
                             @else
                                 <div class="flex justify-between mb-2">
                                     <span>Subtotal</span>
