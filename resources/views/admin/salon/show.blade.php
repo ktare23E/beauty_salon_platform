@@ -129,25 +129,42 @@
         closeModal('view_requirement_submission');
 
         function openViewModal(id, modal) {
-            $.ajax({
-                url: "{{ url('/requirement_submission') }}/" + id,
-                type: 'GET',
-                success: function(response) {
-                    console.log(response);
-                    let image = response.data.submission.submission_details;
-                    let assetUrl = "{{ asset('storage/') }}"; // Retrieve asset URL from Blade template
+            // Show the modal
+            $('#' + modal).removeClass('hidden');
 
-                    $('.test_data').html(response.data.submission.submission_details);
-                    $('.requirement_name').html(response.data.requirement.requirement_name);
-                    $('.img_submission').attr('src', assetUrl + '/' + image);
+            // Show the loading animation
+            $('#loading_animation').removeClass('hidden');
+            $('.img_container').addClass('hidden');
 
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-            $('#' + modal).toggleClass('hidden');
+            // Wait for 1 second (1000 milliseconds)
+            setTimeout(function() {
+                // Make the AJAX request
+                $.ajax({
+                    url: "{{ url('/requirement_submission') }}/" + id,
+                    type: 'GET',
+                    success: function(response) {
+                        let image = response.data.submission.submission_details;
+                        let assetUrl =
+                        "{{ asset('storage/') }}"; // Retrieve asset URL from Blade template
+
+                        $('.requirement_name').html(response.data.requirement.requirement_name);
+                        $('.img_submission').attr('src', assetUrl + '/' + image);
+
+                        // Hide the loading animation
+                        $('#loading_animation').addClass('hidden');
+                        $('.img_container').removeClass('hidden');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+
+                        // Hide the loading animation
+                        $('#loading_animation').addClass('hidden');
+                    }
+                });
+            }, 500); // 1 second delay
         }
+
+
 
         // function updateSubmissionStatus(id,status){
         //     $('#status_' + id).val(status);
@@ -174,7 +191,7 @@
                     } else if (response.message === 'salon') {
                         alert('Requirement submission approved');
                         location.href = "{{ route('admin.salon_list') }}";
-                    }else {
+                    } else {
                         alert('Requirement submission declined');
                         location.reload();
                     }
@@ -186,5 +203,3 @@
         })
     </script>
 </x-layout>
-
-

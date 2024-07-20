@@ -11,6 +11,12 @@
                 </button>
             </div>
             <div class="student_information w-full h-full flex justify-center items-center">
+                <div id="loading_animation" class="flex space-x-2 justify-center items-center hidden">
+                    <span class="sr-only">Loading...</span>
+                    <div class="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                    <div class="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                    <div class="h-8 w-8 bg-black rounded-full animate-bounce"></div>
+                </div>
                 <div class="img_container w-full h-full flex justify-center items-center my-auto">
                     <img src="" class="img_submission block h-[90%] w-full object-contain rounded-md" alt="">
                 </div>
