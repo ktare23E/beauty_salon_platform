@@ -77,9 +77,11 @@ class RequirementSubmissionController extends Controller
             Mail::to($business->user->email)->queue(new ApprovedBusinessSalonMail($details));        
 
 
-            return redirect()->route('admin.salon_list');
+            // return redirect()->route('admin.salon_list')->with('success', 'Business salon has been approved');
+            return response()->json(['message' => 'salon']);
         }
 
-        return redirect()->route('admin.show_salon',$business_id);
+        // return redirect()->route('admin.show_salon',$business_id);
+        return response()->json(['message' => 'requirement']);
     }
 }

@@ -1,5 +1,5 @@
 <x-layout>
-    
+
     <div class="w-full h-full grid grid-cols-[15%,1fr] gap-2 bg-[#f6f6f9]">
         <div class=" flex h-screen rounded-tr-md">
             <x-aside>
@@ -15,11 +15,12 @@
                         <div class="flex justify-between w-full">
                             <div class="mt-10 mb-5  px-5 ">
                                 <h1><span class="font-bold ">Business Name:</span> {{ $business->business_name }}</h1>
-                                <h1><span class="font-bold ">Owner:</span>  {{ $business->user->first_name . ' ' . $business->user->last_name }}</h1>
+                                <h1><span class="font-bold ">Owner:</span>
+                                    {{ $business->user->first_name . ' ' . $business->user->last_name }}</h1>
                             </div>
                             <div class="mt-10 mb-5  px-5 ">
                                 <h1><span class="font-bold ">Address:</span> {{ $business->address }}</h1>
-                                <h1><span class="font-bold ">Contact:</span> {{ $business->contact_info}}</h1>
+                                <h1><span class="font-bold ">Contact:</span> {{ $business->contact_info }}</h1>
                             </div>
                         </div>
                         <div class="flex justify-center px-5 ">
@@ -60,13 +61,22 @@
                                         <x-table.td>
                                             {{ $requirement_submission->requirement->requirement_name }}
                                         </x-table.td>
-                                        <x-table.td class="{{ $requirement_submission->status == 'declined' ? 'text-red-500':'text-yellow-500'}}">
+                                        <x-table.td
+                                            class="{{ $requirement_submission->status == 'declined' ? 'text-red-500' : 'text-yellow-500' }}">
                                             {{ $requirement_submission->status }}
                                         </x-table.td>
                                         <x-table.td>
-                                            <button class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal" onclick='openViewModal({{$requirement_submission->id}},"view_requirement_submission")'>view</button>
-                                            <button class="update_status px-2 py-1 text-white rounded-sm bg-green-600 text-sm font-normal" data-id="{{$requirement_submission->id}}" data-status="approved">approve</button>
-                                            <button class="update_status px-2 py-1 text-white rounded-sm  text-sm font-normal {{$requirement_submission->status === 'declined' ? 'bg-red-200' : 'bg-red-600'}}" data-id="{{$requirement_submission->id}}" data-status="declined" {{$requirement_submission->status === 'declined' ? 'disabled' : ''}}>decline</button>
+                                            <button
+                                                class="px-2 py-1 text-white rounded-sm bg-yellow-500 text-sm font-normal"
+                                                onclick='openViewModal({{ $requirement_submission->id }},"view_requirement_submission")'>view</button>
+                                            <button
+                                                class="update_status px-2 py-1 text-white rounded-sm bg-green-600 text-sm font-normal"
+                                                data-id="{{ $requirement_submission->id }}"
+                                                data-status="approved">approve</button>
+                                            <button
+                                                class="update_status px-2 py-1 text-white rounded-sm  text-sm font-normal {{ $requirement_submission->status === 'declined' ? 'bg-red-200' : 'bg-red-600' }}"
+                                                data-id="{{ $requirement_submission->id }}" data-status="declined"
+                                                {{ $requirement_submission->status === 'declined' ? 'disabled' : '' }}>decline</button>
                                         </x-table.td>
                                     </tr>
                                     {{-- <form action="{{route('update_requirement_submission',$requirement_submission->id)}}" method="POST" id="update_requirement_submission_{{ $requirement_submission->id }}">
@@ -75,23 +85,23 @@
                                         <input type="hidden" name="status" id="status_{{ $requirement_submission->id }}" value="">
                                     </form> --}}
                                 @empty
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td colspan="3" class="text-center py-3">No requirement submissions available</td>
-                                </tr>
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <td colspan="3" class="text-center py-3">No requirement submissions available
+                                        </td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </x-table.table>
                     </div>
                 </div>
             </div>
-    
         </main>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // Listen for click events on elements with the data-modal-toggle attribute
-            document.querySelectorAll('[data-modal-toggle]').forEach(function (toggleBtn) {
-                toggleBtn.addEventListener('click', function () {
+            document.querySelectorAll('[data-modal-toggle]').forEach(function(toggleBtn) {
+                toggleBtn.addEventListener('click', function() {
                     // Get the target modal ID from the data-modal-toggle attribute
                     var target = toggleBtn.getAttribute('data-modal-toggle');
                     var modal = document.getElementById(target);
@@ -104,7 +114,7 @@
             });
         });
 
-        function closeModal(modalId){
+        function closeModal(modalId) {
             document.addEventListener("DOMContentLoaded", function() {
                 const modal = document.getElementById(`${modalId}`);
                 modal.addEventListener('click', function(event) {
@@ -118,7 +128,7 @@
 
         closeModal('view_requirement_submission');
 
-        function openViewModal(id,modal){
+        function openViewModal(id, modal) {
             $.ajax({
                 url: "{{ url('/requirement_submission') }}/" + id,
                 type: 'GET',
@@ -144,7 +154,7 @@
         //     $('#update_requirement_submission_' + id).submit();
         // }
 
-        $('.update_status').click(function(){
+        $('.update_status').click(function() {
             let id = $(this).data('id');
             let status = $(this).data('status');
 
@@ -152,17 +162,21 @@
                 url: "{{ url('/admin_update_requirement_submission') }}/" + id,
                 type: 'POST',
                 data: {
-                    id : id,
+                    id: id,
                     status: status,
-                    _token : "{{csrf_token()}}"
+                    _token: "{{ csrf_token() }}"
                 },
                 success: function(response) {
-                    if(response.message === 'declined'){
+                    if (response.message === 'requirement') {
+                        alert('Requirement submission approved');
+
+                        location.reload();
+                    } else if (response.message === 'salon') {
+                        alert('Requirement submission approved');
+                        location.href = "{{ route('admin.salon_list') }}";
+                    }else {
                         alert('Requirement submission declined');
                         location.reload();
-                    }else{
-                        alert('Requirement submission approved');
-                        location.href = "{{route('admin.salon_list')}}";
                     }
                 },
                 error: function(xhr, status, error) {
@@ -170,6 +184,7 @@
                 }
             });
         })
-
     </script>
 </x-layout>
+
+
